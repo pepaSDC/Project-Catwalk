@@ -2,23 +2,24 @@
 Project Catwalk is a client-facing retail web-portal.
 
 JSON.package Dependencies:
-- axios 
+- axios
 - linter (eslint)
 - react
-- react-dom 
-- babel (webpack)
+- react-dom
+- babel
+- webpack
 
 
-Git Workflow Steps:::: 
+Git Workflow Steps::::
 https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
 
 -----------------------------------------
-1. Each Morning! Start with Main Branch: 
+1. Each Morning! Start with Main Branch:
 First command switches to main branch. Second command pulls the latest commits. Then the third resets the local copy of main to match the latest version.
 
-git checkout main 
-git fetch origin  
-git reset --hard origin/main 
+git checkout main
+git fetch origin
+git reset --hard origin/main
 
 -------------------------
 2. Create a new-branch:
@@ -35,11 +36,11 @@ git commit
 
 ----------------------------------
 4. Push feature branch to remote
-This allows you to push to the remote branch without merging. 
+This allows you to push to the remote branch without merging.
 
 git push -u origin [branch-name]
-    
+
 ----------------------------------
-5. Resolve feedback (CODE REVIEW) 
+5. Resolve feedback (CODE REVIEW)
 ----------------------------------
-7. Merge pull requests 
+7. Merge pull requests
