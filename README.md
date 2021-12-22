@@ -1,6 +1,13 @@
 # Project-Catwalk
 Project Catwalk is a client-facing retail web-portal.
 
+JSON.package Dependencies:
+- axios 
+- linter (eslint)
+- react
+- react-dom 
+- babel (webpack)
+
 
 Git Workflow Steps:::: 
 https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
