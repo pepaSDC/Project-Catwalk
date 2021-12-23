@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { GlobalProvider } from './context/GlobalState';
-import { ProductDetail } from './ProductDetail.jsx'
+
+import { Routes } from './Routes.jsx'
 
 const App = () => {
 
   return (
     <GlobalProvider>
-      <ProductDetail/>
+      <Routes/>
     </GlobalProvider>
   );
 }
