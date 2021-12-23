@@ -1,17 +1,15 @@
-import React from 'react';
-import api from './api.js';
+import React, {useState, useEffect, useContext} from 'react';
+import { GlobalProvider } from './context/GlobalState';
 
-const App = (props) => {
+import { Routes } from './Routes.jsx'
 
-  api.getAllProducts((results) => {
-    console.log(results);
-  });
+const App = () => {
 
   return (
-    <div>Hello React</div>
+    <GlobalProvider>
+      <Routes/>
+    </GlobalProvider>
   );
-
 }
-
 
 export default App;
