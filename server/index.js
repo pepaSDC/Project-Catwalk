@@ -2,10 +2,11 @@ const express = require('express');
 
 const app = express();
 
-app.get('/products', (req, res) => {
-  res.send('hello');
-});
+app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.send('Hello from server');
+});
 
 let port = 3000;
 app.listen(port, () => {
