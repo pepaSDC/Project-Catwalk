@@ -11,7 +11,7 @@ query: {
 }
 */
 
-cont exampleReviews = {
+const exampleReviews = {
   "product": "40344",
   "page": 0,
   "count": 5,
