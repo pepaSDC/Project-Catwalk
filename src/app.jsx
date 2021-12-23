@@ -1,15 +1,17 @@
 import React from 'react';
+import api from './api.js'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const App = (props) => {
 
-  render() {
-    return (
-      <div>Hello React</div>
-    );
-  }
+  api.getAllProducts((results) => {
+    console.log(results);
+  });
+
+  return (
+    <div>Hello React</div>
+  );
+
 }
+
 
 export default App;
