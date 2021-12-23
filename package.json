@@ -4,6 +4,7 @@
   "description": "Project Catwalk is a client-facing retail web-portal.",
   "main": "index.js",
   "scripts": {
+    "start:server": "nodemon ./server/index.js",
     "build": "webpack",
     "dev": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,6 +26,7 @@
     "@babel/preset-react": "^7.16.5",
     "axios": "^0.24.0",
     "babel-loader": "^8.2.3",
+    "express": "^4.17.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "webpack": "^5.65.0",
