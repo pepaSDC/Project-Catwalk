@@ -5,6 +5,11 @@ export default (state, action) => {
         ...state,
         allProducts: action.payload
       }
+    case 'UPDATE_CURRENT_ID':
+      return {
+        ...state,
+        currentProductId: action.payload
+      }
       default:
         return state;
   }

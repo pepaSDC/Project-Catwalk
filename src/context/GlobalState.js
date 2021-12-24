@@ -4,7 +4,8 @@ import api from '../api.js';
 
 //Initial state
 const initialState = {
-  allProducts: []
+  allProducts: [],
+  currentProductId:1
 }
 
 //create context
@@ -25,11 +26,19 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function updateCurrentProductId(id) {
+    dispatch({
+      type: 'UPDATE_CURRENT_ID',
+      payload: id
+    });
+  }
 
 
   return(<GlobalContext.Provider value={{
     allProducts: state.allProducts,
-    getAllProducts
+    currentProductId: state.currentProductId,
+    getAllProducts,
+    updateCurrentProductId
   }}>
     {children}
   </GlobalContext.Provider>)

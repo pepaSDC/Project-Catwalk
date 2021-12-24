@@ -2,11 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalState.js'
 
 export const RelatedProducts = () => {
-  const { getAllProducts, allProducts } = useContext(GlobalContext);
-  console.log('all products:::',allProducts);
-  useEffect(() => {
-    getAllProducts();
-  },[]);
+  const { currentProductId } = useContext(GlobalContext);
+  console.log('current p id from related products', currentProductId)
   return (
     <div>
       <div className="app">Hello From RelatedProducts</div>

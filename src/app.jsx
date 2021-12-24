@@ -1,13 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { GlobalProvider } from './context/GlobalState';
 
-import { Routes } from './Routes.jsx'
+import Routing from './Routing.jsx'
 
 const App = () => {
 
   return (
     <GlobalProvider>
-      <Routes/>
+      <Routing/>
     </GlobalProvider>
   );
 }
