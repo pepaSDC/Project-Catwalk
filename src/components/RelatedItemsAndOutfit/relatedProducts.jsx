@@ -3,7 +3,7 @@ import { GlobalContext } from '../../context/GlobalState.js'
 
 export const RelatedProducts = () => {
   const { getAllProducts, allProducts } = useContext(GlobalContext);
-  console.log('all products:::',allProducts);
+  // console.log('all products:::',allProducts);
   useEffect(() => {
     getAllProducts();
   },[]);

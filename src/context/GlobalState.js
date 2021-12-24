@@ -25,8 +25,6 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
-
-
   return(<GlobalContext.Provider value={{
     allProducts: state.allProducts,
     getAllProducts
