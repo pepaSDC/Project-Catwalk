@@ -52,7 +52,7 @@ app.get('/products/:id/related', (req, res) => {
 
 app.use('/reviews', reviews);
 
-app.use('/qa/questions', QA);
+app.use('/qa', QA);
 
 
 let port = 3000;

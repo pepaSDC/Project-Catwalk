@@ -4,6 +4,7 @@ const axios = require('axios');
 const api = {
     address: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp',
 
+    // Products Info
     getAllProducts: (store) => {
       axios.get(`${api.address}/products`, {
         headers: {
@@ -48,6 +49,7 @@ const api = {
         .catch( (err) => callback(err) );
     },
 
+    // Reviews Info
     getReviews: (id, sortBy, callback) => {
       axios.get(`${api.address}/reviews`, {
         headers: {
@@ -64,6 +66,7 @@ const api = {
         .catch( (err) => callback(err) );
     },
 
+    // Questions and Answers Info
     getQuestions: (pge, cnt, id, callback) => {
       axios.get(`${api.address}/qa/questions`, {
         headers: {
@@ -128,6 +131,27 @@ const api = {
         .catch( (err) => callback(err) );
     },
 
+    markQuestion: (type, id, callback) => {
+      axios.put(`${api.address}/qa/questions/${id}/${type}`, '', {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    markAnswer: (type, id, callback) => {
+      axios.put(`${api.address}/qa/answers/${id}/${type}`, '', {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    // Cart Info
     postCart: () => {},
     getCart: () => {}
 
