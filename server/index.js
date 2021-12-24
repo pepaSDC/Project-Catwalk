@@ -49,18 +49,7 @@ app.get('/products/:id/related', (req, res) => {
   });
 });
 
-app.get('/reviews', (req, res) => {
-  const product_id = parseInt(req.query.products_id);
-  const sort = req.query.sort;
-
-  api.getReviews(product_id, sort, (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      res.send(result.data);
-    }
-  });
-});
+app.use('/reviews', reviews);
 
 
 let port = 3000;
