@@ -1,5 +1,6 @@
 const express = require('express');
 const reviews = require('./router/reviews.js');
+const QA = require('./router/QAs.js');
 const api = require('../src/api.js');
 
 
@@ -50,6 +51,8 @@ app.get('/products/:id/related', (req, res) => {
 });
 
 app.use('/reviews', reviews);
+
+app.use('/qa/questions', QA);
 
 
 let port = 3000;

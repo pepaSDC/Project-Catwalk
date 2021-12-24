@@ -63,7 +63,71 @@ const api = {
         .then( (data) => callback(null, data) )
         .catch( (err) => callback(err) );
     },
-    getQA: () => {},
+
+    getQuestions: (pge, cnt, id, callback) => {
+      axios.get(`${api.address}/qa/questions`, {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          page: pge || 1,
+          count: cnt || 5,
+          product_id: id
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
+
+    getAnswers: (pge, cnt, id, callback) => {
+      axios.get(`${api.address}/qa/questions/${id}/answers`, {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          question_id: id
+        },
+        query: {
+          page: pge,
+          count: cnt
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
+
+    addQuestion: (bodyText, nameText, emailText, id, callback) => {
+      let data = {
+        body: bodyText,
+        name: nameText,
+        email: emailText,
+        product_id: id
+      };
+      axios.post(`${api.address}/qa/questions`, data, {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    addAnswer: (bodyText, nameText, emailText, photoLinks, id, callback) => {
+      let data = {
+        body: bodyText,
+        name: nameText,
+        email: emailText,
+        photos: photoLinks
+      };
+      axios.post(`${api.address}/qa/questions/${id}/answers`, data, {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
     postCart: () => {},
     getCart: () => {}
 
