@@ -18,11 +18,15 @@ export const GlobalProvider = ({ children }) => {
 
   //actions/functions
   function getAllProducts() {
-    api.getAllProducts((productsPayload) => {
-      dispatch({
-        type: 'GET_ALL_PRODUCTS',
-        payload: productsPayload
-      });
+    api.getAllProducts((err, productsPayload) => {
+      if (err) {
+        console.error(err);
+      } else {
+        dispatch({
+          type: 'GET_ALL_PRODUCTS',
+          payload: productsPayload
+        });
+      }
     });
   }
 
