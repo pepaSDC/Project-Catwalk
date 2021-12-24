@@ -6,11 +6,6 @@ import { BrowserRouter as Router, Routes,  Route,  useParams, Navigate } from 'r
 
 const Routing = () => {
   const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // console.log('all products from pro det:::',allProducts);
-
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, [])
 
   return (
     <Router>
