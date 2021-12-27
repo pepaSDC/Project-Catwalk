@@ -15,6 +15,10 @@ export const RatingsAndReviews = (props) => {
     display: 'flex',
     flexDirection: 'column'
   }
+
+
+
+
   return (
     <div style={{margin: '0 30px'}}>
       RATINGS AND REVIEWS
