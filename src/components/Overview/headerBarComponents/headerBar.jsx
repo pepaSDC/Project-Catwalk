@@ -8,10 +8,10 @@ const headerStyle = {
 }
 
 export const HeaderBar = () => {
-  const { getAllProducts, allProducts } = useContext(GlobalContext);
-  useEffect(() => {
-    getAllProducts();
-  }, []);
+  // const { getAllProducts, allProducts } = useContext(GlobalContext);
+  // useEffect(() => {
+  //   getAllProducts();
+  // }, []);
   return (
     <div
       style={headerStyle}>

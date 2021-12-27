@@ -9,7 +9,7 @@ import { Overview } from './components/Overview/Overview.jsx'
 
 const ProductDetail = () => {
   let { id } = useParams();
-  console.log('product id from url params', id)
+  // console.log('product id from url params', id)
   const { updateCurrentProductId, currentProductId } = useContext(GlobalContext);
 
   useEffect(() =>{

@@ -27,8 +27,8 @@ const shareButtonStyle = {
 }
 
 export const AddToCart = () => {
-  const { getAllProducts, allProducts } = useContext(GlobalContext);
-  useEffect(() => {getAllProducts()}, []);
+  // const { getAllProducts, allProducts } = useContext(GlobalContext);
+  // useEffect(() => {getAllProducts()}, []);
   return (
     <div
       style={addToCartStyle}

@@ -11,8 +11,8 @@ const styleThumbnailStyle = {
 }
 
 export const StyleThumbnail = () => {
-  const { getAllProducts, allProducts } = useContext(GlobalContext);
-  useEffect(() => {getAllProducts()}, []);
+  // const { getAllProducts, allProducts } = useContext(GlobalContext);
+  // useEffect(() => {getAllProducts()}, []);
   return (
     <div
       className="styleThumbnail"
