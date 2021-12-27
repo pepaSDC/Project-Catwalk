@@ -30,6 +30,7 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+<<<<<<< HEAD
   function updateCurrentProductId(id) {
     dispatch({
       type: 'UPDATE_CURRENT_ID',
@@ -38,6 +39,8 @@ export const GlobalProvider = ({ children }) => {
   }
 
 
+=======
+>>>>>>> c12af21 (added some components to overview)
   return(<GlobalContext.Provider value={{
     allProducts: state.allProducts,
     currentProductId: state.currentProductId,

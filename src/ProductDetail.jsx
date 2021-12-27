@@ -3,6 +3,7 @@ import { GlobalContext } from './context/GlobalState.js'
 import {  useParams, useLocation } from 'react-router-dom';
 
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
+import { Overview } from './components/Overview/overview.jsx'
 
 
 const ProductDetail = () => {
@@ -21,8 +22,18 @@ const ProductDetail = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       <div className="app">Hello from product detail</div>
      <RelatedProducts />
+=======
+      {/* <div className="app">Hello from product detail</div> */}
+      <div>
+        <Overview />
+      </div>
+      <div>
+        <RelatedProducts/>
+      </div>
+>>>>>>> c12af21 (added some components to overview)
     </div>
   );
 }
