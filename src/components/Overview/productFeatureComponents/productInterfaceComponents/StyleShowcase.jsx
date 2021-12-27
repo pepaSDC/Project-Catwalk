@@ -13,8 +13,8 @@ const styleShowcaseRowStyle = {
 }
 
 export const StyleShowcase = () => {
-  const { getAllProducts, allProducts } = useContext(GlobalContext);
-  useEffect(() => {getAllProducts()}, []);
+  // const { getAllProducts, allProducts } = useContext(GlobalContext);
+  // useEffect(() => {getAllProducts()}, []);
   return (
     <div
       style={StyleShowcaseStyle}

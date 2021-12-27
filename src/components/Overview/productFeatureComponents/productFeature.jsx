@@ -10,8 +10,8 @@ const productFeatureStyle = {
 }
 
 export const ProductFeature = () => {
-  const { getAllProducts, allProducts } = useContext(GlobalContext);
-  useEffect(() => {getAllProducts()}, []);
+  // const { getAllProducts, allProducts } = useContext(GlobalContext);
+  // useEffect(() => {getAllProducts()}, []);
   return (
     <div
       className="productFeature"
