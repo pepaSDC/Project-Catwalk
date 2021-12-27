@@ -3,6 +3,8 @@ import { GlobalContext } from './context/GlobalState.js'
 import {  useParams, useLocation } from 'react-router-dom';
 
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
+import { Overview } from './components/Overview/Overview.jsx'
+
 
 
 const ProductDetail = () => {
@@ -22,7 +24,8 @@ const ProductDetail = () => {
   return (
     <div>
       <div className="app">Hello from product detail</div>
-     <RelatedProducts />
+      <Overview />
+      <RelatedProducts />
     </div>
   );
 }
