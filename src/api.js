@@ -4,6 +4,7 @@ const axios = require('axios');
 const api = {
     address: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp',
 
+    // Products Info
     getAllProducts: (store) => {
       axios.get(`${api.address}/products`, {
         headers: {
@@ -48,6 +49,7 @@ const api = {
         .catch( (err) => callback(err) );
     },
 
+    // Reviews Info
     getReviews: (id, sortBy, callback) => {
       axios.get(`${api.address}/reviews`, {
         headers: {
@@ -63,7 +65,93 @@ const api = {
         .then( (data) => callback(null, data) )
         .catch( (err) => callback(err) );
     },
-    getQA: () => {},
+
+    // Questions and Answers Info
+    getQuestions: (pge, cnt, id, callback) => {
+      axios.get(`${api.address}/qa/questions`, {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          page: pge || 1,
+          count: cnt || 5,
+          product_id: id
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
+
+    getAnswers: (pge, cnt, id, callback) => {
+      axios.get(`${api.address}/qa/questions/${id}/answers`, {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          question_id: id
+        },
+        query: {
+          page: pge,
+          count: cnt
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
+
+    addQuestion: (bodyText, nameText, emailText, id, callback) => {
+      let data = {
+        body: bodyText,
+        name: nameText,
+        email: emailText,
+        product_id: id
+      };
+      axios.post(`${api.address}/qa/questions`, data, {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    addAnswer: (bodyText, nameText, emailText, photoLinks, id, callback) => {
+      let data = {
+        body: bodyText,
+        name: nameText,
+        email: emailText,
+        photos: photoLinks
+      };
+      axios.post(`${api.address}/qa/questions/${id}/answers`, data, {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    markQuestion: (type, id, callback) => {
+      axios.put(`${api.address}/qa/questions/${id}/${type}`, '', {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    markAnswer: (type, id, callback) => {
+      axios.put(`${api.address}/qa/answers/${id}/${type}`, '', {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
+
+    // Cart Info
     postCart: () => {},
     getCart: () => {}
 
