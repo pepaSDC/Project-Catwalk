@@ -3,7 +3,7 @@ import { PrettyDate } from './PrettyDate.jsx';
 
 export const Review = ({ review }) => {
   return (
-    <div>
+    <div className="reviewTile">
       <div className="reviewHeader" style={{display: 'flex', justifyContent: 'space-between'}}>
         <span>&#9734;&#9734;&#9734;&#9734;&#9734; stars component</span>
         <div>
@@ -11,10 +11,13 @@ export const Review = ({ review }) => {
           <PrettyDate date={review.date}/>
         </div>
       </div>
-      <h2>Review title with word-break truncation to prevent wrapping onto the next...</h2>
-      <p>...line if necessary</p>
-      <p>Donut gummi bears gingerbread gummies chocolate. Ice cream apple pie tiramisu fruitcake chupa chups icing apple pie. Lemon drops cake pudding pudding.</p>
-      <div>Helpful? Yes 10 | Report </div>
+      <h2>{review.summary}</h2>
+      <p>{review.body}</p>
+      {review.photos.length > 0 ? review.photos.map((photo) => <img src={photo.url} key={photo.id} style={{width: '50px'}}></img>) : null }
+      {review.recommend ? <div>&#10003; I recommended this product </div> : null}
+      {review.response ? <div>Response from seller: {review.response}</div> : null}
+      <div>Was this review helpful? Yes ({review.helpfulness}) | Report </div>
     </div>
   )
 }
+

@@ -2,7 +2,6 @@ import React from 'react';
 
 export const PrettyDate = (props) => {
   const date = props.date ? new Date(props.date) : null;
-  console.log(date);
   const months = {
     0: 'January',
     1: 'February',
@@ -22,3 +21,4 @@ export const PrettyDate = (props) => {
     <span>{months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}</span>
   );
 }
+
