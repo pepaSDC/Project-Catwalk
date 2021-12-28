@@ -7,7 +7,7 @@ const axios = require('axios');
 //Initial state
 const initialState = {
   allProducts: [],
-  currentProductId:1
+  currentProductId: 40344
 }
 
 //create context

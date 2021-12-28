@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../context/GlobalState.js'
-const axios = require('axios');
+import api from '../../../../server/api.js';
 
 let productGalleryStyle = {
   display: 'flex',
@@ -9,14 +9,6 @@ let productGalleryStyle = {
 
 export const ProductGallery = () => {
   const { currentProductId } = useContext(GlobalContext);
-
-  axios.get(`localhost:3000/products/${currentProductId}/styles`)
-  .then((productStyles) => {
-    console.log('current product styles: ', productStyles);
-  })
-  .catch((error) => {
-    console.error(error);
-  })
 
   return (
     <div
