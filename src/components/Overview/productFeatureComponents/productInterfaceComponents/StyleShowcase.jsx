@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { StyleThumbnail } from './styleThumbnail.jsx'
 
-const StyleShowcaseStyle = {
+let StyleShowcaseStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
 
-const styleShowcaseRowStyle = {
+let styleShowcaseRowStyle = {
   display: 'flex',
   flexDirection: 'row'
 }

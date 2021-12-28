@@ -6,10 +6,9 @@ import { HeaderBar } from './headerBarComponents/headerBar.jsx'
 import { ProductFeature } from './productFeatureComponents/productFeature.jsx'
 import { ProductDescription } from './productDescriptionComponents/productDescription.jsx'
 
-const divStyle = {
+let divStyle = {
   padding: '10px',
-  margin: '10px',
-  border: 'solid'
+  // margin: '10px',
 }
 
 export const Overview = () => {

@@ -16,16 +16,16 @@ const ProductDetail = () => {
   useEffect(() =>{
     updateCurrentProductId(id);
     getAllProducts();
-    console.log('===> get into the useEffect to update product id')
+    // console.log('===> get into the useEffect to update product id')
   },[id])
 
-  console.log('current product id at global state', currentProductId);
+  // console.log('current product id at global state', currentProductId);
 
 
 
   return (
     <div>
-      <div className="app">Hello from product detail</div>
+      {/* <div className="app">Hello from product detail</div> */}
 
       <Overview />
       <RelatedProducts />

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 
-const priceAndStyleSelectorStyle = {
+let priceAndStyleSelectorStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
 
-const styleSelectorStyle = {
+let styleSelectorStyle = {
   display: 'flex',
   flexDirection: 'row'
 }
