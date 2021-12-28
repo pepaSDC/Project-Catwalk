@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
+import { OverviewContext } from '../../../../context/OverviewState.js'
 
 let priceAndStyleSelectorStyle = {
   display: 'flex',
@@ -14,6 +15,16 @@ let styleSelectorStyle = {
 
 export const PriceAndStyle = () => {
   const { currentProductId } = useContext(GlobalContext);
+  const { getProductStyles, productStyles } = useContext(OverviewContext);
+  let id = currentProductId;
+
+  useEffect(() => {
+    getProductStyles(id)
+  }, [id])
+
+  const productPrice = productStyles.data ? productStyles.data.results[0].original_price : {}
+
+  console.log('line 25: ', productPrice);
 
   return (
     <div

@@ -43,10 +43,6 @@ export const GlobalProvider = ({ children }) => {
     .catch((error) => {
       console.error(error);
     })
-    // dispatch({
-    //   type: 'UPDATE_CURRENT_ID',
-    //   payload: id
-    // });
   }
 
 

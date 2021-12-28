@@ -7,11 +7,10 @@ import { OverviewContext } from '../../../context/OverviewState.js'
 
 export const ProductDescription = (props) => {
   const { currentProductId } = useContext(GlobalContext);
-  const { getProductStyles, getProductInfo, productStyles, productInfo } = useContext(OverviewContext);
+  const { getProductInfo, productInfo } = useContext(OverviewContext);
   let id = currentProductId;
 
   useEffect(() => {
-    console.log(id);
     getProductInfo(id)
   }, [id])
 

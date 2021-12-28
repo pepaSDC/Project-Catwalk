@@ -5,6 +5,7 @@ const axios = require('axios');
 const initialOverviewState = {
   productInfo: {},
   productStyles: [],
+  featuredStyle: {}
 }
 
 export const OverviewContext = createContext(initialOverviewState);
@@ -27,11 +28,8 @@ export const OverviewProvider = ({ children }) => {
   }
 
   function getProductStyles(id) {
-    return axios.get(`http://localhost:3000/products/${id}/styles`)
+    axios.get(`http://localhost:3000/products/${id}/styles`)
       .then((productStylesPayload) => {
-
-        // console.log(productStylesPayload);
-
         overviewDispatch({
           type: 'GET_PRODUCT_STYLES',
           payload: productStylesPayload
