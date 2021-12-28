@@ -30,16 +30,6 @@ export const GlobalProvider = ({ children }) => {
       .catch((error) => {
         console.error(error);
       })
-    // api.getAllProducts((err, productsPayload) => {
-    //   if (err) {
-    //     console.error(err);
-    //   } else {
-    //     dispatch({
-    //       type: 'GET_ALL_PRODUCTS',
-    //       payload: productsPayload
-    //     });
-    //   }
-    // });
   }
 
   function updateCurrentProductId(id) {

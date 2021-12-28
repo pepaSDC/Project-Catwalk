@@ -5,6 +5,8 @@ import {  useParams, useLocation } from 'react-router-dom';
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
 import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx'
 import { Overview } from './components/Overview/Overview.jsx'
+import { OverviewProvider } from './context/OverviewState.js';
+
 
 
 
@@ -25,9 +27,11 @@ const ProductDetail = () => {
 
   return (
     <div>
-      {/* <div className="app">Hello from product detail</div> */}
+      {/* <div className="app">Hello from product detail</d iv> */}
+      <OverviewProvider>
+        <Overview />
+      </OverviewProvider>
 
-      <Overview />
       <RelatedProducts />
       <RatingsAndReviews />
     </div>
