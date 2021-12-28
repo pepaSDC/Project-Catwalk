@@ -1,11 +1,18 @@
 import React from 'react';
 import { PrettyDate } from './PrettyDate.jsx';
+import { StarRating } from './StarRating.jsx';
 
 export const Review = ({ review }) => {
+  const style = {
+    margin: '10px',
+    padding: '10px',
+    borderBottom: '1px solid black'
+  }
+
   return (
-    <div className="reviewTile">
+    <div className="reviewTile" style={style}>
       <div className="reviewHeader" style={{display: 'flex', justifyContent: 'space-between'}}>
-        <span>&#9734;&#9734;&#9734;&#9734;&#9734; stars component</span>
+        <span><StarRating rating={review.rating}/></span>
         <div>
           <span>{review.reviewer_name.length === 0 ? "Anonymous" : review.reviewer_name }</span>
           <PrettyDate date={review.date}/>
