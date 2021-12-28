@@ -2,32 +2,31 @@ import React, { useState, useEffect, useContext } from 'react'
 import {  useParams, useLocation } from 'react-router-dom';
 
 import { GlobalContext } from '../../../context/GlobalState.js'
-import api from '../../../../server/api.js';
+import { OverviewContext } from '../../../context/OverviewState.js'
 
 
 export const ProductDescription = (props) => {
   const { currentProductId } = useContext(GlobalContext);
+  const { getProductStyles, getProductInfo, productStyles, productInfo } = useContext(OverviewContext);
+  let id = currentProductId;
 
-  const [description, setDescription] = useState();
-  const [slogan, setSlogan] = useState();
+  useEffect(() => {
+    console.log(id);
+    getProductInfo(id)
+  }, [id])
 
-  api.getProductInfo(currentProductId, (error, results) => {
-    if (error) {
-      console.log(error)
-    } else {
-      setDescription(results.data.description);
-      setSlogan(results.data.slogan);
-    }
-  })
+  const productSlogan = productInfo.data ? productInfo.data.slogan : ''
+  const productDescription = productInfo.data ? productInfo.data.description : ''
 
   return (
     <div>
       <div>
-        {slogan}
+        {productSlogan}
       </div>
       <div>
-        {description}
+        {productDescription}
       </div>
     </div>
   );
 }
+

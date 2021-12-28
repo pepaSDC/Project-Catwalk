@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const initialOverviewState = {
   productInfo: {},
-  productStyles: []
+  productStyles: [],
 }
 
 export const OverviewContext = createContext(initialOverviewState);
@@ -16,7 +16,7 @@ export const OverviewProvider = ({ children }) => {
   function getProductInfo(id) {
     axios.get(`http://localhost:3000/products/${id}`)
       .then((productInfoPayload) => {
-        dispatch({
+        overviewDispatch({
           type: 'GET_PRODUCT_INFO',
           payload: productInfoPayload
         });
@@ -27,10 +27,13 @@ export const OverviewProvider = ({ children }) => {
   }
 
   function getProductStyles(id) {
-    axios.get(`http://localhost:3000/products/${id}/styles`)
+    return axios.get(`http://localhost:3000/products/${id}/styles`)
       .then((productStylesPayload) => {
-        dispatch({
-          type: 'GET_PRODUCT_INFO',
+
+        // console.log(productStylesPayload);
+
+        overviewDispatch({
+          type: 'GET_PRODUCT_STYLES',
           payload: productStylesPayload
         });
       })
@@ -39,10 +42,9 @@ export const OverviewProvider = ({ children }) => {
       })
   }
 
-
   return(<OverviewContext.Provider value={{
-    allProducts: state.productInfo,
-    productStyles: state.productStyles,
+    productInfo: overviewState.productInfo,
+    productStyles: overviewState.productStyles,
     getProductInfo,
     getProductStyles
   }}>

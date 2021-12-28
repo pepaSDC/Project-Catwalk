@@ -3,12 +3,12 @@ export default (state, action) => {
     case 'GET_PRODUCT_INFO':
       return {
         ...state,
-        productInfoPayload: action.payload
+        productInfo: action.payload
       }
     case 'GET_PRODUCT_STYLES':
       return {
         ...state,
-        productStylesPayload: action.payload
+        productStyles: action.payload
       }
       default:
         return state;
