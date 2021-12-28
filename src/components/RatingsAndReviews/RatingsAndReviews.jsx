@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalState.js'
 import {ReviewList} from './ReviewList.jsx';
 import {RatingBreakdown} from './RatingBreakdown.jsx';
 import {ProductBreakdown} from './ProductBreakdown.jsx';
+
+import axios from 'axios';
 
 export const RatingsAndReviews = (props) => {
   let styleReviews = {
@@ -16,7 +19,22 @@ export const RatingsAndReviews = (props) => {
     flexDirection: 'column'
   }
 
+  //establish local state
+  const [reviews, setReviews] = useState([]);
+  const {currentProductId} = useContext(GlobalContext);
+  console.log('this is the current product id in reviews', currentProductId);
 
+  // useEffect(() => {
+  //   // axios.get('http://localhost:3000/reviews/?product_id=40344&sort=newest')
+  //   //   .then((results) => {
+  //   //     setReviews(results.data)
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(err)
+  //   //   });
+  // })
+
+  //update state before render
 
 
   return (
