@@ -13,10 +13,8 @@ const divStyle = {
 }
 
 export const Overview = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
     className="overview">

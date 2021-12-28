@@ -2,11 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../context/GlobalState.js'
 
 export const ProductDescription = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // // console.log(allProducts);
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
+  const { currentProductId } = useContext(GlobalContext);
+  console.log('productDescription: ', currentProductId);
   return (
     <div>
       Product Description

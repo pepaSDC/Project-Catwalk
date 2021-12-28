@@ -7,8 +7,8 @@ const productGalleryStyle = {
 }
 
 export const ProductGallery = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {getAllProducts()}, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       className="productGallery"

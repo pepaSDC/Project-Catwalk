@@ -15,8 +15,8 @@ const productInterfaceStyle = {
 }
 
 export const ProductInterface = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {getAllProducts()}, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       style={productInterfaceStyle}

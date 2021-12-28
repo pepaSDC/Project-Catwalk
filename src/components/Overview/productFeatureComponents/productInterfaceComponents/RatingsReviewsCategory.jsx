@@ -12,8 +12,8 @@ const ratingsReviewsStyle = {
 }
 
 export const RatingsReviewsCategory = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {getAllProducts()}, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       style={ratingsReviewsCategoryStyle}

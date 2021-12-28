@@ -13,10 +13,8 @@ const styleSelectorStyle = {
 
 
 export const PriceAndStyle = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       className="priceAndStyleSelector"
