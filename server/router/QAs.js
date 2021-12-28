@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const api = require('../../src/api.js');
+const api = require('../api.js');
 
 router.get('/questions', (req, res) => {
   const page = parseInt(req.query.page);
