@@ -24,15 +24,15 @@ export const RatingsAndReviews = (props) => {
   const {currentProductId} = useContext(GlobalContext);
   console.log('this is the current product id in reviews', currentProductId);
 
-  // useEffect(() => {
-  //   // axios.get('http://localhost:3000/reviews/?product_id=40344&sort=newest')
-  //   //   .then((results) => {
-  //   //     setReviews(results.data)
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.log(err)
-  //   //   });
-  // })
+  useEffect(() => {
+    axios.get(`http://localhost:3000/reviews/?product_id=${currentProductId}&sort=newest`)
+      .then((results) => {
+        setReviews(results.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }, [currentProductId])
 
   //update state before render
 
@@ -45,7 +45,7 @@ export const RatingsAndReviews = (props) => {
           <RatingBreakdown/>
           <ProductBreakdown/>
         </div>
-        <ReviewList />
+        <ReviewList state={reviews.results}/>
       </div>
 
     </div>
