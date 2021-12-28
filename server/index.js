@@ -1,5 +1,5 @@
 const express = require('express');
-const api = require('../src/api.js');
+const api = require('./api.js');
 
 const reviews = require('./router/reviews.js');
 const QA = require('./router/QAs.js');

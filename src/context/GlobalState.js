@@ -1,6 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer.js';
-import api from '../api.js';
+// import api from '../api.js';
+
+const axios = require('axios');
 
 //Initial state
 const initialState = {
@@ -18,23 +20,43 @@ export const GlobalProvider = ({ children }) => {
 
   //actions/functions
   function getAllProducts() {
-    api.getAllProducts((err, productsPayload) => {
-      if (err) {
-        console.error(err);
-      } else {
+    axios.get('http://localhost:3000/products')
+      .then((productsPayload) => {
         dispatch({
           type: 'GET_ALL_PRODUCTS',
           payload: productsPayload
         });
-      }
-    });
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+    // api.getAllProducts((err, productsPayload) => {
+    //   if (err) {
+    //     console.error(err);
+    //   } else {
+    //     dispatch({
+    //       type: 'GET_ALL_PRODUCTS',
+    //       payload: productsPayload
+    //     });
+    //   }
+    // });
   }
 
   function updateCurrentProductId(id) {
-    dispatch({
-      type: 'UPDATE_CURRENT_ID',
-      payload: id
-    });
+    axios.get(`http://localhost:3000/products/${id}`)
+    .then((currentProductPayload) => {
+      dispatch({
+        type: 'UPDATE_CURRENT_ID',
+        payload: id
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    // dispatch({
+    //   type: 'UPDATE_CURRENT_ID',
+    //   payload: id
+    // });
   }
 
 
