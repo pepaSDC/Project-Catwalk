@@ -1,11 +1,15 @@
 import React from 'react';
+import { PrettyDate } from './PrettyDate.jsx';
 
-export const Review = (props) => {
+export const Review = ({ review }) => {
   return (
     <div>
-      <div>
-        <span>&#9734;&#9734;&#9734;&#9734;&#9734;</span>
-        <span>O User 12345, January 1, 2019</span>
+      <div className="reviewHeader" style={{display: 'flex', justifyContent: 'space-between'}}>
+        <span>&#9734;&#9734;&#9734;&#9734;&#9734; stars component</span>
+        <div>
+          <span>{review.reviewer_name.length === 0 ? "Anonymous" : review.reviewer_name }</span>
+          <PrettyDate date={review.date}/>
+        </div>
       </div>
       <h2>Review title with word-break truncation to prevent wrapping onto the next...</h2>
       <p>...line if necessary</p>
