@@ -11,7 +11,7 @@ export const RatingsAndReviews = (props) => {
   let styleReviews = {
     width: 'auto',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     margin: '0 20px'
   }
   let styleAside = {

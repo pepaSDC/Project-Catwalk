@@ -6,7 +6,7 @@ import {NewReview} from './NewReview.jsx';
 export const ReviewList = (props) => {
   const reviews = props.state ? props.state.slice(0,42) : [];
   return (
-    <div>
+    <div style={{width: '66%'}}>
       <SortOptions/>
       {reviews.map((review) => <Review key={review.review_id} review={review}/> )}
       <div>
