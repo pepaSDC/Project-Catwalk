@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { StyleThumbnail } from './styleThumbnail.jsx'
+import { OverviewContext } from '../../../../context/OverviewState.js'
 
 let StyleShowcaseStyle = {
   display: 'flex',
@@ -14,6 +15,19 @@ let styleShowcaseRowStyle = {
 
 export const StyleShowcase = () => {
   const { currentProductId } = useContext(GlobalContext);
+  const {
+    getProductStyles, productStyles, getProductInfo, productInfo, featuredStyleIndex
+  } = useContext(OverviewContext);
+
+  let id = currentProductId;
+
+  useEffect(() => {
+    getProductStyles(id);
+  }, [id])
+
+  let productStylesArray = productStyles.data ? productStyles.data.results : []
+
+  // console.log('line 30 in styleShowcase: ', productStylesArray);
 
   return (
     <div
@@ -23,19 +37,22 @@ export const StyleShowcase = () => {
       <div
         style={styleShowcaseRowStyle}
         className="styleShowcaseRow1">
-          <StyleThumbnail />
-          <StyleThumbnail />
-          <StyleThumbnail />
-          <StyleThumbnail />
+          {productStylesArray.map(
+            (styleOption) =>
+              <StyleThumbnail
+                thumbnail={styleOption.photos[1].thumbnail_url}
+                key={styleOption.style_id}
+                />
+          )}
       </div>
-      <div
+      {/* <div
         style={styleShowcaseRowStyle}
         className="styleShowcaseRow2">
           <StyleThumbnail />
           <StyleThumbnail />
           <StyleThumbnail />
           <StyleThumbnail />
-      </div>
+      </div> */}
     </div>
   );
 }

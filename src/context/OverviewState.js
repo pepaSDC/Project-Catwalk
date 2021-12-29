@@ -6,6 +6,7 @@ const initialOverviewState = {
   productInfo: {},
   productStyles: [],
   featuredStyleIndex: 0,
+  featuredProductImageIndex: 1,
 }
 
 export const OverviewContext = createContext(initialOverviewState);
@@ -44,6 +45,7 @@ export const OverviewProvider = ({ children }) => {
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,
     featuredStyleIndex: overviewState.featuredStyleIndex,
+    featuredProductImageIndex: overviewState.featuredProductImageIndex,
     getProductInfo,
     getProductStyles
   }}>

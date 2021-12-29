@@ -36,9 +36,9 @@ export const PriceAndStyle = () => {
   const productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
 
 
-  const productStylesArray = productStyles.data ? productStyles.data.results : []
+  let productStylesArray = productStyles.data ? productStyles.data.results : []
 
-  console.log('line 41 in priceAndStyle: ', productStylesArray);
+  // console.log('line 41 in priceAndStyle: ', productStylesArray);
 
   return (
     <div
@@ -60,7 +60,11 @@ export const PriceAndStyle = () => {
           className="styleSelectorDropdown">
           {productStylesArray.map(
             (styleOption) =>
-            <option value={styleOption.name}>{styleOption.name}</option>
+            <option
+              value={styleOption.style_id}
+              key={styleOption.style_id}>
+                {styleOption.name}
+            </option>
           )}
         </select>
       </div>
