@@ -19,9 +19,6 @@ const Answers = (props) => {
         </div>;
       })}
     </div>
-    // <div>A: {props.answers.map(ans => {
-    //   return <span style={styles} key={ans.answer_id}>{ans.answer_body}</span>
-    // })}</div>
   );
 }
 
