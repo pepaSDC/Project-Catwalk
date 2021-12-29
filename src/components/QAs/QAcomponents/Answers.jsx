@@ -9,12 +9,18 @@ const styles = {
 
 const Answers = (props) => {
   const [count, setCount] = useState(2);
+  const [answers, setAnswers] = useState( () => {
+    return props.answers.slice(0, count);
+  });
   return (
     <div>
-      {JSON.stringify(props.answer)}
+      {answers.map( ans => {
+        return <div key={ans.answer_id}>A: <span style={styles}>{ans.body}</span>
+        </div>;
+      })}
     </div>
-    // <div>A: {answers.map(answer => {
-    //   return <span style={styles} key={answer.answer_id}>{answer.answer_body}</span>
+    // <div>A: {props.answers.map(ans => {
+    //   return <span style={styles} key={ans.answer_id}>{ans.answer_body}</span>
     // })}</div>
   );
 }
