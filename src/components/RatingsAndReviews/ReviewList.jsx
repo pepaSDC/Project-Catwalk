@@ -4,7 +4,7 @@ import {Review} from './Review.jsx';
 import {NewReview} from './NewReview.jsx';
 
 export const ReviewList = (props) => {
-  const reviews = props.state ? props.state.slice(0,2) : [];
+  const reviews = props.state ? props.state.slice(0,42) : [];
   return (
     <div>
       <SortOptions/>
