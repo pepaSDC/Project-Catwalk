@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 
-const ratingsReviewsCategoryStyle = {
+let ratingsReviewsCategoryStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
 
-const ratingsReviewsStyle = {
+let ratingsReviewsStyle = {
   display: 'flex',
   flexDirection: 'row'
 }
 
 export const RatingsReviewsCategory = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {getAllProducts()}, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       style={ratingsReviewsCategoryStyle}

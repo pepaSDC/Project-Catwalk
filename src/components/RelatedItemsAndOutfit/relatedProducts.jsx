@@ -7,6 +7,7 @@ import RelatedProductsCardCarousel from './RelatedProductsCardCarousel.jsx';
 export const RelatedProducts = () => {
   //global state import
   const { currentProductId } = useContext(GlobalContext);
+
   //local state
   const [relatedProductArray, setRelatedProductArray] = useState([]);
   //axios call to get products information by id

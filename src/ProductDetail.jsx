@@ -4,7 +4,10 @@ import {  useParams, useLocation } from 'react-router-dom';
 
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
 import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx'
+
 import { Overview } from './components/Overview/Overview.jsx'
+import { OverviewProvider } from './context/OverviewState.js';
+
 
 import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
 
@@ -22,9 +25,10 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <div className="app">Hello from product detail</div>
+      <OverviewProvider>
+        <Overview />
+      </OverviewProvider>
 
-      <Overview />
       <RelatedProducts />
       <RatingsAndReviewsProvider>
         <RatingsAndReviews />

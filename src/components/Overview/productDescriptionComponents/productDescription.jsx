@@ -1,15 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { GlobalContext } from '../../../context/GlobalState.js'
+import {  useParams, useLocation } from 'react-router-dom';
 
-export const ProductDescription = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // // console.log(allProducts);
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
+import { GlobalContext } from '../../../context/GlobalState.js'
+import { OverviewContext } from '../../../context/OverviewState.js'
+
+
+export const ProductDescription = (props) => {
+  const { currentProductId } = useContext(GlobalContext);
+  const { getProductInfo, productInfo } = useContext(OverviewContext);
+  let id = currentProductId;
+
+  useEffect(() => {
+    getProductInfo(id)
+  }, [id])
+
+  const productSlogan = productInfo.data ? productInfo.data.slogan : ''
+  const productDescription = productInfo.data ? productInfo.data.description : ''
+
   return (
     <div>
-      Product Description
+      <div>
+        {productSlogan}
+      </div>
+      <div>
+        {productDescription}
+      </div>
     </div>
   );
 }
+
