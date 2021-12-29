@@ -11,7 +11,7 @@ import { OverviewProvider } from './context/OverviewState.js';
 
 import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
 
-import { QA } from './components/QAs/q&a.jsx';
+import { QA } from './components/QAs/QnA.jsx';
 
 
 
