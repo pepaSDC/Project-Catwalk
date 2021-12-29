@@ -2,6 +2,7 @@ import React from 'react';
 
 export const StarRating = (props) => {
   const starRating = {
+    unicodeBidi: 'bidi-override',
     color: '#ccc',
     position: 'relative',
     margin: '0',
@@ -20,7 +21,8 @@ export const StarRating = (props) => {
   }
 
   const span = {
-    display: 'inline-block'
+    display: 'inline-block',
+
   }
 
   const emptyRating = {

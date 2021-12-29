@@ -1,10 +1,14 @@
 import React from 'react';
+import {StarRating} from './StarRating.jsx';
 
-export const RatingBreakdown = (props) => {
+export const RatingBreakdown = ({meta, averageRating, totalRatings}) => {
   return (
     <div>
-      <h2>3.5 &#9734;&#9734;&#9734;&#9734;&#9734;</h2>
-      <p>100% of reviews recommend this product</p>
+      <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <span>{averageRating}</span>
+        <StarRating rating={averageRating}/>
+      </div>
+      {meta.recommended ? <p>{Math.round(Number(meta.recommended.true)/totalRatings * 100)}% of reviews recommend this product</p> : null}
       <p> 5 stars bar here</p>
       <p> 4 stars bar here</p>
       <p> 3 stars bar here</p>

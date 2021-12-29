@@ -22,7 +22,7 @@ export const RatingsAndReviews = (props) => {
 
   //establish local state
   const {currentProductId} = useContext(GlobalContext);
-  const {allReviews, getAllReviews, getMetaReviews} = useContext(RatingsAndReviewsContext);
+  const {allReviews, meta, averageRating, totalRatings, getAllReviews, getMetaReviews} = useContext(RatingsAndReviewsContext);
 
   useEffect(() => {
     getAllReviews(currentProductId);
@@ -34,7 +34,7 @@ export const RatingsAndReviews = (props) => {
       RATINGS AND REVIEWS
       <div className="reviewsModule" style={styleReviews}>
         <div className="reviewsAside" style={styleAside}>
-          <RatingBreakdown/>
+          <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
           <ProductBreakdown/>
         </div>
         <ReviewList state={allReviews}/>
