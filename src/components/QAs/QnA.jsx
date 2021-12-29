@@ -58,7 +58,10 @@ export const QA = () => {
     <div style={container}>
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search />
-      <Questions questions={questions} answers={answers}/>
+      {questions.length > 0
+        ? <Questions questions={questions} answers={answers}/>
+        : <div>No Questions Yet</div>
+      }
     </div>
   );
 }
