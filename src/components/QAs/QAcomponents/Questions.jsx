@@ -6,9 +6,14 @@ import axios from 'axios';
 import Answers from './Answers.jsx';
 
 const Questions = (props) => {
+  const [count, setCount] = useState(2);
+  const [questions, setQuestions] = useState( () => {
+    return props.questions.slice(0, count);
+  });
+  console.log('PROPS QUESTIONS', props.questions)
   return (
     <div>
-      {props.questions.map( (question) => {
+      {questions.map( (question) => {
         return (
           <div key={question.question_id}>
             Q: {question.question_body}
