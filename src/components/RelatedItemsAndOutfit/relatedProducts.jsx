@@ -59,7 +59,7 @@ export const RelatedProducts = () => {
     })
 
   },[currentProductId]);
-  console.log('Related Product Array in State:::' , relatedProductArray);
+  console.log('line 62 in relatedProducts' , relatedProductArray);
   return (
     <div>
       <div className="app">Hello From RelatedProducts</div>

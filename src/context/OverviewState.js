@@ -5,7 +5,7 @@ const axios = require('axios');
 const initialOverviewState = {
   productInfo: {},
   productStyles: [],
-  featuredStyle: {}
+  featuredStyleIndex: 0,
 }
 
 export const OverviewContext = createContext(initialOverviewState);
@@ -43,6 +43,7 @@ export const OverviewProvider = ({ children }) => {
   return(<OverviewContext.Provider value={{
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,
+    featuredStyleIndex: overviewState.featuredStyleIndex,
     getProductInfo,
     getProductStyles
   }}>
