@@ -8,23 +8,10 @@ const styles = {
 };
 
 const Answers = (props) => {
-  const [answers, setAnswers] = useState([]);
-
-  useEffect( () => {
-    axios.get(`/qa/questions/${props.question_id}/answers`)
-      .then(response => {
-        setAnswers(response.data.results);
-      })
-      .catch(err => console.log(err));
-  }, []);
-
-  console.log(answers);
-
+  const [count, setCount] = useState(2);
   return (
     <div>
-      {answers.map(answer => {
-        return <div key={answer.answer_id}>{answer.answer_body}</div>
-      })}
+      {JSON.stringify(props.answer)}
     </div>
     // <div>A: {answers.map(answer => {
     //   return <span style={styles} key={answer.answer_id}>{answer.answer_body}</span>
