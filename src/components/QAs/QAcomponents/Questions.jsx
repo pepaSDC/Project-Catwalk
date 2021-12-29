@@ -1,18 +1,23 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
-import { GlobalContext } from '../../../context/GlobalState.js';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Answers from './Answers.jsx';
 
+const styles = {
+  fontWeight: '900'
+};
+
 const Questions = (props) => {
   const [count, setCount] = useState(2);
-  const [questions, setQuestions] = useState( () => {
-    return props.questions.slice(0, count);
-  });
-  console.log('PROPS QUESTIONS', props.questions)
+  const [questions, setQuestions] = useState([]);
+  useEffect( () => {
+    setQuestions( () => {
+      return props.questions.slice(0, count);
+    })
+  }, [count]);
   return (
-    <div>
+    <div style={styles}>
       {questions.map( (question) => {
         return (
           <div key={question.question_id}>
