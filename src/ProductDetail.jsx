@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { GlobalContext } from './context/GlobalState.js'
+import { GlobalContext } from './context/GlobalState.js';
 import {  useParams, useLocation } from 'react-router-dom';
 
+<<<<<<< HEAD
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
 import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx'
 
@@ -10,6 +11,11 @@ import { OverviewProvider } from './context/OverviewState.js';
 
 
 import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
+=======
+import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx';
+import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx';
+import { Overview } from './components/Overview/Overview.jsx';
+>>>>>>> dc8d816 (added other components)
 
 
 
@@ -30,10 +36,15 @@ const ProductDetail = () => {
       </OverviewProvider>
 
       <RelatedProducts />
+<<<<<<< HEAD
       <RatingsAndReviewsProvider>
         <RatingsAndReviews />
       </RatingsAndReviewsProvider>
 
+=======
+      <RatingsAndReviews />
+      <
+>>>>>>> dc8d816 (added other components)
     </div>
   );
 }
