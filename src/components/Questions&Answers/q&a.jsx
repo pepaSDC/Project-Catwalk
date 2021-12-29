@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from './QAcomponents/Search.jsx';
+import Questions from './QAcomponents/Questions.jsx';
 
 const container = {
   border: '1px solid green',
@@ -18,6 +19,7 @@ const QA = () => {
     <div style={container}>
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search />
+      <Questions />
     </div>
   );
 };
