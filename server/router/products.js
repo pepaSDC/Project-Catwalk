@@ -17,7 +17,6 @@ router.get('/:id', (req, res) => {
     if (err) {
       console.error(err);
     } else {
-      console.log('backend:::',result.data)
       res.send(result.data);
     }
   });
