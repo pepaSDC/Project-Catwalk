@@ -11,6 +11,8 @@ import { OverviewProvider } from './context/OverviewState.js';
 
 import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
 
+import { QA } from './components/Questions&Answers/q&a.jsx';
+
 
 
 const ProductDetail = () => {
@@ -28,8 +30,8 @@ const ProductDetail = () => {
       <OverviewProvider>
         <Overview />
       </OverviewProvider>
-
       <RelatedProducts />
+      <QA />
       <RatingsAndReviewsProvider>
         <RatingsAndReviews />
       </RatingsAndReviewsProvider>
