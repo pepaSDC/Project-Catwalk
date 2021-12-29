@@ -1,34 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 
-const addToCartStyle = {
+let addToCartStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
 
-const sizeAndQuantityDropdownStyles = {
+let sizeAndQuantityDropdownStyles = {
   display: 'flex',
   flexDirection: 'row'
 }
 
-const addToBagOrShareStyle = {
+let addToBagOrShareStyle = {
   display: 'flex',
   flexDirection: 'row'
 }
 
-const addToBagButtonStyle = {
+let addToBagButtonStyle = {
   display: 'flex',
   flexGrow: 2
 }
 
-const shareButtonStyle = {
+let shareButtonStyle = {
   display: 'flex',
   flexGrow: 1
 }
 
 export const AddToCart = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {getAllProducts()}, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       style={addToCartStyle}

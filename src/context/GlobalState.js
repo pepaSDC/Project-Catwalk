@@ -7,7 +7,7 @@ const axios = require('axios');
 //Initial state
 const initialState = {
   allProducts: [],
-  currentProductId:1
+  currentProductId: 40344
 }
 
 //create context
@@ -30,16 +30,6 @@ export const GlobalProvider = ({ children }) => {
       .catch((error) => {
         console.error(error);
       })
-    // api.getAllProducts((err, productsPayload) => {
-    //   if (err) {
-    //     console.error(err);
-    //   } else {
-    //     dispatch({
-    //       type: 'GET_ALL_PRODUCTS',
-    //       payload: productsPayload
-    //     });
-    //   }
-    // });
   }
 
   function updateCurrentProductId(id) {
@@ -53,10 +43,6 @@ export const GlobalProvider = ({ children }) => {
     .catch((error) => {
       console.error(error);
     })
-    // dispatch({
-    //   type: 'UPDATE_CURRENT_ID',
-    //   payload: id
-    // });
   }
 
 

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../context/GlobalState.js'
+import api from '../../../../server/api.js';
 
-const productGalleryStyle = {
+let productGalleryStyle = {
   display: 'flex',
-  flexGrow: 8
+  flexGrow: 8,
 }
 
 export const ProductGallery = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {getAllProducts()}, []);
+  const { currentProductId } = useContext(GlobalContext);
+
   return (
     <div
       className="productGallery"

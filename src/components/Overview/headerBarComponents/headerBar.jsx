@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../context/GlobalState.js'
 
-const headerStyle = {
+let headerStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-  border: 'solid'
 }
 
 export const HeaderBar = () => {
-  // const { getAllProducts, allProducts } = useContext(GlobalContext);
-  // useEffect(() => {
-  //   getAllProducts();
-  // }, []);
   return (
     <div
       style={headerStyle}>
