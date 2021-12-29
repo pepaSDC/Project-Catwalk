@@ -16,4 +16,15 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/meta', (req, res) => {
+  const product_id = parseInt(req.query.product_id);
+  api.getMetaReviews( product_id, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result.data);
+    }
+  });
+});
+
 module.exports = router;

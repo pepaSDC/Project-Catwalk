@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState.js'
+import { RatingsAndReviewsContext } from '../../context/RatingsAndReviewsState.js'
 import {ReviewList} from './ReviewList.jsx';
 import {RatingBreakdown} from './RatingBreakdown.jsx';
 import {ProductBreakdown} from './ProductBreakdown.jsx';
@@ -20,22 +21,13 @@ export const RatingsAndReviews = (props) => {
   }
 
   //establish local state
-  const [reviews, setReviews] = useState([]);
   const {currentProductId} = useContext(GlobalContext);
-  console.log('this is the current product id in reviews', currentProductId);
+  const {allReviews, getAllReviews, getMetaReviews} = useContext(RatingsAndReviewsContext);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/reviews/?product_id=${currentProductId}&sort=newest`)
-      .then((results) => {
-        setReviews(results.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+    getAllReviews(currentProductId);
+    getMetaReviews(currentProductId);
   }, [currentProductId])
-
-  //update state before render
-
 
   return (
     <div style={{margin: '0 30px'}}>
@@ -45,7 +37,7 @@ export const RatingsAndReviews = (props) => {
           <RatingBreakdown/>
           <ProductBreakdown/>
         </div>
-        <ReviewList state={reviews.results}/>
+        <ReviewList state={allReviews}/>
       </div>
 
     </div>

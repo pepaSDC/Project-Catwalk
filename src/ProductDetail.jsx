@@ -6,6 +6,8 @@ import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProdu
 import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx'
 import { Overview } from './components/Overview/Overview.jsx'
 
+import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
+
 
 
 const ProductDetail = () => {
@@ -29,7 +31,10 @@ const ProductDetail = () => {
 
       <Overview />
       <RelatedProducts />
-      <RatingsAndReviews />
+      <RatingsAndReviewsProvider>
+        <RatingsAndReviews />
+      </RatingsAndReviewsProvider>
+
     </div>
   );
 }

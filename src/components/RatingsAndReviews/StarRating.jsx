@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const StarRating = (props) => {
-  console.log(props.rating/5 * 100);
   const starRating = {
     unicodeBidi: 'bidi-override',
     color: '#ccc',

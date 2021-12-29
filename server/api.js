@@ -66,6 +66,19 @@ const api = {
         .catch( (err) => callback(err) );
     },
 
+    //Reviews Meta
+    getMetaReviews: (id, callback) => {
+      axios.get(`${api.address}/reviews/meta`, {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          product_id: id
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
     // Questions and Answers Info
     getQuestions: (pge, cnt, id, callback) => {
       axios.get(`${api.address}/qa/questions`, {
