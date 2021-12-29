@@ -11,7 +11,7 @@ import { AddToCart } from './productInterfaceComponents/AddToCart.jsx'
 const productInterfaceStyle = {
   display: 'flex',
   flexDirection: 'column',
-  flexGrow: 4
+  flexGrow: 1
 }
 
 export const ProductInterface = () => {

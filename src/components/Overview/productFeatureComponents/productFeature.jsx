@@ -1,12 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../context/GlobalState.js'
 
-import { ProductGallery } from './productGallery.jsx'
+import { ProductGalleryMainPhoto } from './productGalleryComponents/ProductGalleryMainPhoto.jsx'
+import { ProductGalleryThumbnails } from './productGalleryComponents/ProductGalleryThumbnails.jsx'
+
 import { ProductInterface } from './productInterface.jsx'
 
 const productFeatureStyle = {
   display: 'flex',
   flexDirection: 'row',
+}
+
+const productGalleryStyle = {
+  display: 'flex',
+  height: '100%',
+  width: '50%',
+}
+
+const productInterfaceStyle = {
+  display: 'flex',
+  height: '100%',
+  width: '50%'
 }
 
 export const ProductFeature = () => {
@@ -16,8 +30,16 @@ export const ProductFeature = () => {
     <div
       className="productFeature"
       style={productFeatureStyle}>
-        <ProductGallery />
+      <div
+      className="productGalleryOuter"
+      style={productGalleryStyle}>
+        <ProductGalleryMainPhoto />
+    </div>
+      <div
+      className="productInterface"
+      style={productInterfaceStyle}>
         <ProductInterface />
+      </div>
     </div>
   );
 }

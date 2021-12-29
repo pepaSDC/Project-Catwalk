@@ -55,18 +55,11 @@ export const PriceAndStyle = () => {
           className="currentProductStyle">
           Style >
         </div>
-        <select
+        <div
           name="Style"
-          className="styleSelectorDropdown">
-          {productStylesArray.map(
-            (styleOption) =>
-            <option
-              value={styleOption.style_id}
-              key={styleOption.style_id}>
-                {styleOption.name}
-            </option>
-          )}
-        </select>
+          className="styleSelected">
+            {productStyleName}
+        </div>
       </div>
     </div>
   );

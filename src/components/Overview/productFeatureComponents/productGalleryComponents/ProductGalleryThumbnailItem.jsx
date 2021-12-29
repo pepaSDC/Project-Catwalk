@@ -3,18 +3,17 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 
 
-export const StyleThumbnail = (props) => {
+export const ProductGalleryThumbnailItem = (props) => {
   const { currentProductId } = useContext(GlobalContext);
 
   return (
     <div
-      className="styleThumbnail"
-      style = {{
-        borderRadius: '50%',
+      className="productGalleryThumbnailItem"
+        style = {{
         backgroundImage: `url(${props.thumbnail})`,
         backgroundSize: 'cover',
-        height: '40px',
-        width: '40px',
+        height: '50px',
+        width: '50px',
         marginRight: '3px',
         marginBottom: '3px'
       }}>

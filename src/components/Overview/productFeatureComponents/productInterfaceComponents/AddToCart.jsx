@@ -18,7 +18,7 @@ let addToBagOrShareStyle = {
 
 let addToBagButtonStyle = {
   display: 'flex',
-  flexGrow: 2
+  flexGrow: 1
 }
 
 let shareButtonStyle = {

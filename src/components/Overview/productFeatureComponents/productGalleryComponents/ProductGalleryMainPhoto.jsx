@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { GlobalContext } from '../../../context/GlobalState.js'
-import { OverviewContext } from '../../../context/OverviewState.js'
+import { GlobalContext } from '../../../../context/GlobalState.js'
+import { OverviewContext } from '../../../../context/OverviewState.js'
+import { ProductGalleryThumbnails } from './ProductGalleryThumbnails.jsx'
 
 // let productGalleryStyle = {
 //   display: 'flex',
@@ -8,12 +9,10 @@ import { OverviewContext } from '../../../context/OverviewState.js'
 // }
 
 
-
-export const ProductGallery = () => {
+export const ProductGalleryMainPhoto = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
     getProductStyles, productStyles,
-    getProductInfo, productInfo,
     featuredStyleIndex, featuredProductImageIndex
   } = useContext(OverviewContext);
 
@@ -26,21 +25,23 @@ export const ProductGallery = () => {
   let productStylesArray = productStyles.data ? productStyles.data.results : []
   let featuredProductPhoto = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos[featuredProductImageIndex].url : ''
 
-  console.log('line 27 in productGallery: ', productStylesArray);
-  console.log('line 28 in productGallery: ', featuredProductPhoto);
+  // console.log('line 27 in productGallery: ', productStylesArray);
+  // console.log('line 28 in productGallery: ', featuredProductPhoto);
 
   return (
     <div
-      className="productGallery"
+      className="productGalleryPhoto"
       style={{
         display: 'flex',
-        width: '50vw',
-        height: '50vh',
+        width: '30vw',
+        height: '40vh',
         backgroundImage: `url(${featuredProductPhoto})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
-        flexGrow: 8,
+        backgroundPosition: 'center',
+        flexGrow: 4,
       }}>
+        <ProductGalleryThumbnails />
     </div>
   );
 }
