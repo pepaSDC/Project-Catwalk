@@ -13,7 +13,7 @@ const textStyle = {
   paddingBottom: '10px'
 }
 
-const QA = () => {
+export const QA = () => {
 
   return (
     <div style={container}>
@@ -23,5 +23,3 @@ const QA = () => {
     </div>
   );
 };
-
-export default QA;

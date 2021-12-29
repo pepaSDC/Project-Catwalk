@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import { GlobalContext } from './context/GlobalState.js';
 import {  useParams, useLocation } from 'react-router-dom';
 
+<<<<<<< HEAD
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
 import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx'
 
@@ -10,6 +11,12 @@ import { OverviewProvider } from './context/OverviewState.js';
 
 
 import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
+=======
+import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx';
+import { RatingsAndReviews } from './components/RatingsAndReviews/RatingsAndReviews.jsx';
+import { Overview } from './components/Overview/Overview.jsx';
+import { QA } from './components/Questions&Answers/q&a.jsx';
+>>>>>>> 9bd5de6 (added QA component to product details)
 
 
 
