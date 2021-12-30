@@ -12,9 +12,24 @@ const Question = (props) => {
     };
   });
 
-  const [view, setView] = useState ( () => {
+  const [view, setView] = useState( () => {
     return false;
   });
+
+  const [orderedAns, setOrderedAns] = useState( () => {
+    let seller = [];
+    let nonSeller = [];
+    props.answers.forEach( ans => {
+      if (ans.answerer_name === 'Seller') {
+        seller.push(ans);
+      } else {
+        nonSeller.push(ans);
+      }
+    });
+    return [...seller, ...nonSeller];
+  });
+
+  console.log('ORDERED ANS', orderedAns);
 
   const handleHelpful = (event) => {
     if (!helpful.clicked) {
@@ -82,8 +97,7 @@ const Question = (props) => {
           </div>
         : <div></div>
       }
-      {props.answers
-        && <Answers answers={props.answers} />}
+      <Answers answers={orderedAns} />
     </div>
   );
 };
