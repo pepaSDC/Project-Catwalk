@@ -11,6 +11,10 @@ const Question = (props) => {
     };
   });
 
+  const [view, setView] = useState ( () => {
+    return false;
+  });
+
   const handleHelpful = (event) => {
     if (!helpful.clicked) {
       axios.put(`/qa/questions/${event.target.id}/helpful`)
@@ -26,7 +30,12 @@ const Question = (props) => {
           console.log(error);
         });
     }
-  }
+  };
+
+  const handleAddAnswer = (event) => {
+    event.preventDefault();
+    setView( (currState) => { return !currState; });
+  };
 
   return (
     <div className='question'>
@@ -39,9 +48,21 @@ const Question = (props) => {
           <span className='helpful'>
             Helpful? <span className='yes' id={props.question.question_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
           </span>
-          <span className='addAnswer'>Add Answer</span>
+          <span className='addAnswer' onClick={handleAddAnswer}>Add Answer</span>
         </div>
       </div>
+      {view
+        ? <div className='answerForm'>
+            <form className='form'>
+              <label>Username</label>
+              <input type='text'></input>
+              <labael>Answer</labael>
+              <textarea rows='4' cols='10'></textarea>
+              <div><input type='submit' value='Answer'></input></div>
+            </form>
+          </div>
+        : <div></div>
+      }
     </div>
   );
 };
