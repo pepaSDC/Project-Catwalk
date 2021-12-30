@@ -10,14 +10,31 @@ export const ProductBar = (props) => {
 
   const marker = {
     position: 'absolute',
-    left: '50%',
+    left: `${props.breakdown.value/5 * 100}%`,
     color: 'gray'
   }
+
   let min, max;
   switch(props.type) {
+    case 'Fit':
+      min = 'Tight Fit';
+      max = 'Loose Fit';
+      break;
+    case 'Comfort':
+      min = 'Soft';
+      max = 'Rough';
+      break;
+    case 'Quality':
+      min = 'Low';
+      max = 'High';
+      break;
     case 'Size':
-      min = 'Too Small';
-      max = 'Too Large';
+      min = 'Runs Small';
+      max = 'Runs Large';
+      break;
+    case 'Length':
+      min = 'Short';
+      max = 'Long';
       break;
     default:
       min = 'Too Small';
