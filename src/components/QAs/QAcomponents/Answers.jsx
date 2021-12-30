@@ -11,11 +11,21 @@ const Answers = (props) => {
       return props.answers.slice(0, count);
     })
   }, [count]);
+
+  const handleLoadMore = (event) => {
+    setCount( (curCount) => {
+      return curCount + 2;
+    });
+  };
+
   return (
     <div>
       {answers.map( ans => {
         return <Answer key={ans.answer_id} answer={ans}/>;
       })}
+      {props.answers.length > answers.length
+        && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
+      }
     </div>
   );
 }
