@@ -19,10 +19,12 @@ const Questions = (props) => {
   }, [count]);
   return (
     <div style={styles}>
-      {questions.map( (question) => {
+      {props.questions.length > 0 && questions.map( (question) => {
         return (
           <div key={question.question_id} className='oneQ'>
-            <Question question={question} answers={props.answers[question.question_id]}/>
+            {props.answers[question.question_id]
+              && <Question question={question} answers={props.answers[question.question_id]}/>
+            }
           </div>
         );
       })}
