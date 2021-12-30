@@ -3,7 +3,8 @@ import React from 'react';
 const formStyle = {
   display: 'flex',
   alignItems: 'center',
-  width: '99.1%'
+  justifyContents: 'center',
+  paddingBottom: '5px'
 };
 
 const iconStyle = {
