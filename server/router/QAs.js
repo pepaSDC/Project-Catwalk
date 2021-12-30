@@ -3,8 +3,8 @@ const router = express.Router();
 const api = require('../api.js');
 
 router.get('/questions', (req, res) => {
-  const page = parseInt(req.query.page);
-  const count = parseInt(req.query.count);
+  const page = parseInt(req.query.page) || 1;
+  const count = parseInt(req.query.count) || 5;
   const id = parseInt(req.query.product_id);
   api.getQuestions(page, count, id, (err, result) => {
     if (err) {
