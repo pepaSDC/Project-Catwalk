@@ -14,7 +14,7 @@ const iconStyle = {
 
 const inputStyles = {
   minWidth: '100%',
-  minHeight: '6vh'
+  minHeight: '30px'
 };
 
 const Search = () => {
