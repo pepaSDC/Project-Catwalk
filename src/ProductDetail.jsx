@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { GlobalContext } from './context/GlobalState.js'
+import { GlobalContext } from './context/GlobalState.js';
 import {  useParams, useLocation } from 'react-router-dom';
 
 import { RelatedProducts } from './components/RelatedItemsAndOutfit/RelatedProducts.jsx'
@@ -10,6 +10,8 @@ import { OverviewProvider } from './context/OverviewState.js';
 
 
 import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsState.js';
+
+import { QA } from './components/QAs/QnA.jsx';
 
 
 
@@ -28,8 +30,8 @@ const ProductDetail = () => {
       <OverviewProvider>
         <Overview />
       </OverviewProvider>
-
       <RelatedProducts />
+      <QA />
       <RatingsAndReviewsProvider>
         <RatingsAndReviews />
       </RatingsAndReviewsProvider>
