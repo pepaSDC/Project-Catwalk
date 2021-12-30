@@ -35,7 +35,7 @@ export const RatingsAndReviews = (props) => {
       <div className="reviewsModule" style={styleReviews}>
         <div className="reviewsAside" style={styleAside}>
           <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
-          <ProductBreakdown/>
+          <ProductBreakdown characteristics={meta.characteristics}/>
         </div>
         <ReviewList state={allReviews}/>
       </div>
