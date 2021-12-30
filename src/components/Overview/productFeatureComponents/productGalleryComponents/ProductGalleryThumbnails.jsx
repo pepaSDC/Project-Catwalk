@@ -17,9 +17,15 @@ export const ProductGalleryThumbnails = () => {
     getProductStyles(id);
   }, [id])
 
-  let featuredProductThumbnailsArray = productStyles.data ? productStyles.data.results[featuredProductImageIndex].photos : []
+  const handleClick = (event) => {
+    console.log(event.target.id)
+  }
 
-  console.log('line 22 in ProductGalleryThumbnails: ', featuredProductThumbnailsArray);
+
+  let featuredProductThumbnailsArray = productStyles.data ? productStyles.data.results[featuredProductImageIndex].photos : []
+  let featuredProduct = productStyles.data ? productStyles.data.results[featuredProductImageIndex] : []
+
+  console.log('line 22 in ProductGalleryThumbnails: ', featuredProduct);
 
   return (
     <div>
@@ -27,7 +33,8 @@ export const ProductGalleryThumbnails = () => {
         (thumbnailItem, index) =>
           <ProductGalleryThumbnailItem
             thumbnail={thumbnailItem.thumbnail_url}
-            key={index}/>
+            key={index}
+            id={featuredProduct.style_id}/>
       )}
     </div>
   );
