@@ -5,23 +5,34 @@ import './answerStyles.css';
 
 const Answer = (props) => {
   const [helpful, setHelpful] = useState( () => {
-    return props.answer.helpfulness;
+    return {
+      clicked: false,
+      amount: props.answer.helpfulness
+    };
   });
   const [report, setReport] = useState( () => {
     return false;
   });
+
   let date = new Date(props.answer.date);
   let dateFormat = {month: 'short', day: 'numeric', year: 'numeric'};
   date = date.toLocaleDateString('en-US', dateFormat);
 
   const handleHelpful = (event) => {
-    axios.put(`/qa/answers/${event.target.id}/helpful`)
-      .then(response => {
-        setHelpful( (currState) => {return currState + 1;} );
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    if (!helpful.clicked) {
+      axios.put(`/qa/answers/${event.target.id}/helpful`)
+        .then(response => {
+          setHelpful( (currState) => {
+            return {
+              clicked: true,
+              amount: currState.amount + 1
+            }
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   };
 
   const handleReport = (event) => {
@@ -35,12 +46,12 @@ const Answer = (props) => {
   };
 
   return (
-    <div>
+    <div className='answer'>
       {!report
       ? <div className='container'>
         <span>A:</span>
         <div className='answerBody'>
-          <div className='answer'>
+          <div className='answerText'>
             {props.answer.body}
           </div>
           <div>
@@ -48,7 +59,7 @@ const Answer = (props) => {
               by {props.answer.answerer_name}, {date}
             </span>
             <span className='helpful'>
-              Helpful? <span className='yes' id={props.answer.answer_id} onClick={handleHelpful}>Yes</span> ({helpful})
+              Helpful? <span className='yes' id={props.answer.answer_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
             </span>
             <span className='report' id={props.answer.answer_id} onClick={handleReport}>
               Report
