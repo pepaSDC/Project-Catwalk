@@ -22,10 +22,7 @@ const Questions = (props) => {
       {questions.map( (question) => {
         return (
           <div key={question.question_id} className='oneQ'>
-            <Question question={question} />
-            {props.answers[question.question_id]
-                ? <Answers answers={props.answers[question.question_id]} />
-                : 'does not exist'}
+            <Question question={question} answers={props.answers[question.question_id]}/>
           </div>
         );
       })}

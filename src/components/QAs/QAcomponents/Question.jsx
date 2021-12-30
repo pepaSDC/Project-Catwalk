@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './questionStyles.css';
+import Answers from './Answers.jsx';
 
 const Question = (props) => {
   const [helpful, setHelpful] = useState( () => {
@@ -81,6 +82,8 @@ const Question = (props) => {
           </div>
         : <div></div>
       }
+      {props.answers
+        && <Answers answers={props.answers} />}
     </div>
   );
 };
