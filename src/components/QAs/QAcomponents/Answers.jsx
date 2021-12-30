@@ -19,13 +19,16 @@ const Answers = (props) => {
   };
 
   return (
-    <div>
-      {answers.map( ans => {
-        return <Answer key={ans.answer_id} answer={ans}/>;
-      })}
-      {props.answers.length > answers.length
-        && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
-      }
+    <div className='individualAns'>
+      <span>A:</span>
+      <div>
+        {answers.map( ans => {
+          return <Answer key={ans.answer_id} answer={ans}/>;
+        })}
+        {props.answers.length > answers.length
+          && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
+        }
+      </div>
     </div>
   );
 }
