@@ -48,16 +48,18 @@ const Answer = (props) => {
   return (
     <div className='answer'>
       {!report
-      ? <div className='container'>
-        <span>A:</span>
+      ? <div className='ansContainer'>
         <div className='answerBody'>
           <div className='answerText'>
             {props.answer.body}
           </div>
           <div>
             <span className='user'>
-              by {props.answer.answerer_name}, {date}
+              by {props.answer.answerer_name},
             </span>
+            {props.answer.answerer_name === 'Seller'
+              && <span className='user'> - <span className='userSeller'>Seller,</span></span>}
+            <span className='userDate'> {date}</span>
             <span className='helpful'>
               Helpful? <span className='yes' id={props.answer.answer_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
             </span>
