@@ -45,7 +45,7 @@ export const RatingsReviewsCategory = () => {
           <StarRating rating={averageRating}/>
         </div>
         <div>
-          <a>See All Reviews</a>
+          <a href="review_section">See All Reviews</a>
         </div>
       </div>
       <div>
