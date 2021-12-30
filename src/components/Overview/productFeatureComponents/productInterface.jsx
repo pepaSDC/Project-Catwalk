@@ -8,6 +8,8 @@ import { PriceAndStyle } from './productInterfaceComponents/PriceAndStyle.jsx'
 import { StyleShowcase } from './productInterfaceComponents/StyleShowcase.jsx'
 import { AddToCart } from './productInterfaceComponents/AddToCart.jsx'
 
+import { RatingsAndReviewsProvider } from '../../../context/RatingsAndReviewsState.js';
+
 const productInterfaceStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -21,7 +23,9 @@ export const ProductInterface = () => {
     <div
       style={productInterfaceStyle}
       className="productInterface">
-        <RatingsReviewsCategory />
+        <RatingsAndReviewsProvider>
+          <RatingsReviewsCategory />
+        </RatingsAndReviewsProvider>
         <ProductName />
         <PriceAndStyle />
         <StyleShowcase />

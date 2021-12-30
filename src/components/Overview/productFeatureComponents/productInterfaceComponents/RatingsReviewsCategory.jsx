@@ -4,6 +4,7 @@ import { OverviewContext } from '../../../../context/OverviewState.js'
 
 import {StarRating} from '../../../RatingsAndReviews/StarRating.jsx';
 import { RatingsAndReviewsContext } from '../../../../context/RatingsAndReviewsState.js'
+// import { RatingsAndReviewsProvider } from '../../../../context/RatingsAndReviewsState.js';
 
 
 let ratingsReviewsCategoryStyle = {
@@ -18,7 +19,7 @@ let ratingsReviewsStyle = {
 
 export const RatingsReviewsCategory = () => {
   const { currentProductId } = useContext(GlobalContext);
-  const { averageRating } = useContext(RatingsAndReviewsContext);
+  const { totalRatings, averageRating, getMetaReviews } = useContext(RatingsAndReviewsContext);
 
   const {
     getProductInfo, productInfo, featuredStyleIndex
@@ -27,12 +28,12 @@ export const RatingsReviewsCategory = () => {
   let id = currentProductId;
 
   useEffect(() => {
-    getProductInfo(id);
+    getProductInfo(id)
+    getMetaReviews(id)
   }, [id])
 
-    // console.log('line 27 in productInfoData: ', productInfo);
-
     const productCategory = productInfo.data ? productInfo.data.category: ''
+    console.log('average rating', averageRating)
 
   return (
     <div
@@ -42,10 +43,13 @@ export const RatingsReviewsCategory = () => {
       style={ratingsReviewsStyle}
       className="ratingsReviewsCategory">
         <div>
+        {/* <RatingsAndReviewsProvider> */}
           <StarRating rating={averageRating}/>
+        {/* </RatingsAndReviewsProvider> */}
+
         </div>
         <div>
-          <a href="review_section">See All Reviews</a>
+          <a href="#ratingsAndReviews">See All Reviews</a>
         </div>
       </div>
       <div>

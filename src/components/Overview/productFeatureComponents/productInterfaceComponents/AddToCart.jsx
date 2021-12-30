@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
+import { SizeAndQuantity } from './SizeAndQuantity.jsx'
 
 let addToCartStyle = {
   display: 'flex',
@@ -33,7 +34,7 @@ export const AddToCart = () => {
     <div
       style={addToCartStyle}
       className="addToCart">
-        <div
+        {/* <div
           className="cartDropdowns"
           style={sizeAndQuantityDropdownStyles}>
             <div>
@@ -42,7 +43,8 @@ export const AddToCart = () => {
             <div>
               Quantity
             </div>
-        </div>
+        </div> */}
+        <SizeAndQuantity />
         <div
           className="addToBagOrShare"
           style={addToBagOrShareStyle}>
