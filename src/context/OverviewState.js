@@ -5,7 +5,8 @@ const axios = require('axios');
 const initialOverviewState = {
   productInfo: {},
   productStyles: [],
-  featuredStyle: {}
+  featuredStyleIndex: 0,
+  featuredProductImageIndex: 0,
 }
 
 export const OverviewContext = createContext(initialOverviewState);
@@ -40,11 +41,29 @@ export const OverviewProvider = ({ children }) => {
       })
   }
 
+  function updateCurrentStyle (id) {
+    overviewDispatch({
+      type: 'UPDATE_CURRENT_STYLE',
+      payload: id
+    })
+  }
+
+  function updateFeaturedPhoto (id) {
+    overviewDispatch({
+      type: 'UPDATE_FEATURED_PHOTO',
+      payload: id
+    })
+  }
+
   return(<OverviewContext.Provider value={{
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,
+    featuredStyleIndex: overviewState.featuredStyleIndex,
+    featuredProductImageIndex: overviewState.featuredProductImageIndex,
     getProductInfo,
-    getProductStyles
+    getProductStyles,
+    updateCurrentStyle,
+    updateFeaturedPhoto
   }}>
     {children}
   </OverviewContext.Provider>)

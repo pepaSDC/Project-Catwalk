@@ -11,6 +11,10 @@ let divStyle = {
   // margin: '10px',
 }
 
+let featureStyle = {
+  padding: '10px',
+}
+
 export const Overview = () => {
   const { currentProductId } = useContext(GlobalContext);
 
@@ -32,7 +36,7 @@ export const Overview = () => {
       </div>
 
       <div
-        style={divStyle}
+        style={featureStyle}
         className="productFeature">
         <ProductFeature />
       </div>

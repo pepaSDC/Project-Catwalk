@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
+import { OverviewContext } from '../../../../context/OverviewState.js'
 
 let ratingsReviewsCategoryStyle = {
   display: 'flex',
@@ -13,6 +14,19 @@ let ratingsReviewsStyle = {
 
 export const RatingsReviewsCategory = () => {
   const { currentProductId } = useContext(GlobalContext);
+  const {
+    getProductInfo, productInfo, featuredStyleIndex
+  } = useContext(OverviewContext);
+
+  let id = currentProductId;
+
+  useEffect(() => {
+    getProductInfo(id);
+  }, [id])
+
+    // console.log('line 27 in productInfoData: ', productInfo);
+
+    const productCategory = productInfo.data ? productInfo.data.category: ''
 
   return (
     <div
@@ -29,7 +43,7 @@ export const RatingsReviewsCategory = () => {
         </div>
       </div>
       <div>
-        Category
+        {productCategory}
       </div>
     </div>
   );
