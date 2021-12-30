@@ -44,3 +44,9 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.loadMore {
+  font-size: 9px;
+  padding-left: 22px;
+  padding-top: 5px;
+}
