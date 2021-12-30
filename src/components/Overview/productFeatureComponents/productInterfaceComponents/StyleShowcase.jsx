@@ -38,10 +38,11 @@ export const StyleShowcase = () => {
         style={styleShowcaseRowStyle}
         className="styleShowcaseRow1">
           {productStylesArray.map(
-            (styleOption) =>
+            (styleOption, index) =>
               <StyleThumbnail
                 thumbnail={styleOption.photos[1].thumbnail_url}
                 key={styleOption.style_id}
+                index={index}
                 />
           )}
       </div>
