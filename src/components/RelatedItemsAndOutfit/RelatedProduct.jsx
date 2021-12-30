@@ -19,13 +19,15 @@ import React from 'react';
 //information[0].name
 
 const RelatedProduct = (props) => {
+  if (props.information[1] === null) {
+    props.information[1] = "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+  }
   return(
-   <div>
-    <div>Individual card</div>
-    <div>{props.information[1]}</div>
+   <div className={`container-card${props.itemNum}`}>
+    <img className="card-image" src={props.information[1]}/>
     <div>{props.information[0].category}</div>
     <div>{props.information[0].name}</div>
-    <div>reviews</div>
+    <div>reviews ******</div>
   </div>
   )
 

@@ -1,0 +1,42 @@
+
+
+.container {
+  display: flex; /* or inline-flex */
+  border-style: groove;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+}
+
+.container-card0 {
+  flex-direction: column;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(70, 248, 176);
+}
+.container-card1 {
+  flex-direction: column;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+  background-color: blue;
+}
+.container-card2 {
+  flex-direction: column;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+  background-color: cadetblue;
+}
+.container-card3 {
+  flex-direction: column;
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0);
+  background-color: crimson;
+}
+
+.arrowLeft {
+  background-color: crimson;
+}
