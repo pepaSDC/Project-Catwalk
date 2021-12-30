@@ -17,24 +17,21 @@ export const ProductGalleryThumbnails = () => {
     getProductStyles(id);
   }, [id])
 
-  const handleClick = (event) => {
-    console.log(event.target.id)
-  }
 
+  let featuredProductThumbnailsArray = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos : []
+  let featuredProduct = productStyles.data ? productStyles.data.results[featuredStyleIndex] : []
 
-  let featuredProductThumbnailsArray = productStyles.data ? productStyles.data.results[featuredProductImageIndex].photos : []
-  let featuredProduct = productStyles.data ? productStyles.data.results[featuredProductImageIndex] : []
-
-  console.log('line 22 in ProductGalleryThumbnails: ', featuredProduct);
+  // console.log('line 22 in ProductGalleryThumbnails: ', featuredProductThumbnailsArray);
 
   return (
     <div>
       {featuredProductThumbnailsArray.map(
-        (thumbnailItem, index) =>
+        (listItem, index) =>
           <ProductGalleryThumbnailItem
-            thumbnail={thumbnailItem.thumbnail_url}
+            item={listItem}
             key={index}
-            id={featuredProduct.style_id}/>
+            index={index}
+            style_id={featuredProduct.style_id}/>
       )}
     </div>
   );
