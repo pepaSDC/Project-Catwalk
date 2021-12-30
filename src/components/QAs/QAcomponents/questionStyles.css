@@ -1,0 +1,63 @@
+.oneQ {
+  padding-bottom: 5px;
+}
+
+.question .container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.question .helpContainer {
+  position: absolute;
+  right: 1%;
+}
+
+.questionBody {
+  padding-left: 5px;
+  width: 50%;
+}
+
+.question .helpful {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 1px solid gray;
+  font-size: 10px;
+  font-weight: 100;
+  color: rgb(92, 92, 92);
+}
+
+.question .yes {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.question .addAnswer {
+  padding-left: 10px;
+  font-size: 10px;
+  font-weight: 100;
+  color: rgb(92, 92, 92);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.answerForm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-size: 5rem;
+}
+
+.answerForm .form {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}

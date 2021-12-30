@@ -1,0 +1,52 @@
+.answer .container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.answerBody {
+  padding-left: 5px;
+}
+
+.answerText {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(66, 66, 66);
+}
+
+.user {
+  border-right: 1px solid gray;
+  padding-right: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  color: gray;
+}
+
+.answer .helpful {
+  padding-left: 10px;
+  border-right: 1px solid gray;
+  padding-right: 10px;
+  font-size: 10px;
+  font-weight: 100;
+  color: rgb(92, 92, 92);
+}
+
+.answer .yes {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.answer .report {
+  padding-left: 10px;
+  font-size: 10px;
+  font-weight: 100;
+  color: rgb(92, 92, 92);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.loadMore {
+  font-size: 9px;
+  padding-left: 22px;
+  padding-top: 5px;
+}

@@ -12,8 +12,8 @@ export const StarRating = (props) => {
     color: '#e7711b',
     padding: '0',
     position: 'absolute',
-    zIndex: '1',
     display: 'block',
+    zIndex: '1',
     top: '0',
     left: '0',
     overflow: 'hidden',
@@ -21,7 +21,8 @@ export const StarRating = (props) => {
   }
 
   const span = {
-    display: 'inline-block'
+    display: 'inline-block',
+
   }
 
   const emptyRating = {

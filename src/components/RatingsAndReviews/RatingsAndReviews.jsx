@@ -11,7 +11,7 @@ export const RatingsAndReviews = (props) => {
   let styleReviews = {
     width: 'auto',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     margin: '0 20px'
   }
   let styleAside = {
@@ -22,7 +22,7 @@ export const RatingsAndReviews = (props) => {
 
   //establish local state
   const {currentProductId} = useContext(GlobalContext);
-  const {allReviews, getAllReviews, getMetaReviews} = useContext(RatingsAndReviewsContext);
+  const {allReviews, meta, averageRating, totalRatings, getAllReviews, getMetaReviews} = useContext(RatingsAndReviewsContext);
 
   useEffect(() => {
     getAllReviews(currentProductId);
@@ -34,8 +34,8 @@ export const RatingsAndReviews = (props) => {
       RATINGS AND REVIEWS
       <div className="reviewsModule" style={styleReviews}>
         <div className="reviewsAside" style={styleAside}>
-          <RatingBreakdown/>
-          <ProductBreakdown/>
+          <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
+          <ProductBreakdown characteristics={meta.characteristics}/>
         </div>
         <ReviewList state={allReviews}/>
       </div>
