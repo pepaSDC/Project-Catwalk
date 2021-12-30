@@ -48,7 +48,7 @@ const Answer = (props) => {
   return (
     <div className='answer'>
       {!report
-      ? <div className='ansContainer'>
+      ? <div>
         <div className='answerBody'>
           <div className='answerText'>
             {props.answer.body}
