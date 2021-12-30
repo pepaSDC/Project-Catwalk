@@ -6,7 +6,8 @@ const axios = require('axios');
 const initialState = {
   allReviews: [],
   meta: [],
-  averageRating: [],
+  averageRating: 0,
+  totalRatings: 0
 }
 
 //create context
@@ -36,46 +37,38 @@ export const RatingsAndReviewsProvider = ({ children }) => {
   function getMetaReviews(id) {
     axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
       .then((results) => {
-        console.log('butts',results.data);
+
         dispatch({
           type: 'GET_METADATA',
-          payloud: results.data
+          payload: results.data
         })
+
+        let absolutetotal = 0;
+        let totalratings = 0;
+        for (var key in results.data.ratings) {
+          totalratings += Number(results.data.ratings[key])
+          absolutetotal += (Number(results.data.ratings[key]) * Number(key));
+        }
+        let average = Math.round((absolutetotal/totalratings) * 4) / 4;
+
+        dispatch({
+          type: 'UPDATE_AVERAGE_TOTAL_RATING',
+          average: average,
+          total: totalratings
+        })
+
+        return average;
       })
+      .catch(err => {
+        console.log(err)
+      });
   }
-  //actions/functions
-  // function getAllReviews() {
-  //   axios.get('http://localhost:3000/reviews')
-  //     .then((productsPayload) => {
-  //       dispatch({
-  //         type: 'GET_ALL_PRODUCTS',
-  //         payload: productsPayload
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     })
-  // }
-
-  // function updateCurrentProductId(id) {
-  //   axios.get(`http://localhost:3000/products/${id}`)
-  //   .then((currentProductPayload) => {
-  //     dispatch({
-  //       type: 'UPDATE_CURRENT_ID',
-  //       payload: id
-  //     })
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   })
-
-  // }
-
 
   return(<RatingsAndReviewsContext.Provider value={{
     allReviews: state.allReviews,
     meta: state.meta,
     averageRating: state.averageRating,
+    totalRatings: state.totalRatings,
     getAllReviews,
     getMetaReviews
   }}>
