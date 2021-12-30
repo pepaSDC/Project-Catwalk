@@ -2,7 +2,7 @@
   padding-bottom: 5px;
 }
 
-.question .container {
+.question .qContainer {
   display: flex;
   flex-direction: row;
   align-items: baseline;

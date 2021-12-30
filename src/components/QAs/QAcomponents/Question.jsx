@@ -55,7 +55,7 @@ const Question = (props) => {
 
   return (
     <div className='question'>
-      <div className='container'>
+      <div className='qContainer'>
         <span>Q:</span>
         <div className='questionBody'>
           {props.question.question_body}
