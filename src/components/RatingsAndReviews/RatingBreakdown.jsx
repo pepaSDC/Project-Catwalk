@@ -5,7 +5,7 @@ export const RatingBreakdown = ({meta, averageRating, totalRatings}) => {
   return (
     <div>
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
-        <span>{averageRating}</span>
+        <span style={{fontSize: '58px'}}>{averageRating}</span>
         <StarRating rating={averageRating}/>
       </div>
       {meta.recommended ? <p>{Math.round(Number(meta.recommended.true)/totalRatings * 100)}% of reviews recommend this product</p> : null}

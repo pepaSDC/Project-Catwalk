@@ -3,7 +3,8 @@ import { ProductBar } from './ProductBar.jsx';
 
 export const ProductBreakdown = (props) => {
   let style = {
-    padding: '0'
+    padding: '0',
+    margin: '20px 0'
   }
   return (
     <div className="productBreakdown" style={style}>
