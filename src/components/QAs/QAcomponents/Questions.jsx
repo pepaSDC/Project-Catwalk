@@ -10,7 +10,7 @@ const styles = {
 };
 
 const Questions = (props) => {
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(4);
   const [questions, setQuestions] = useState([]);
   useEffect( () => {
     setQuestions( () => {
