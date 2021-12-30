@@ -10,6 +10,16 @@ export default (state, action) => {
         ...state,
         productStyles: action.payload
       }
+    case 'UPDATE_CURRENT_STYLE':
+      return {
+        ...state,
+        featuredStyleIndex: action.payload
+      }
+    case 'UPDATE_FEATURED_PHOTO':
+      return {
+        ...state,
+        featuredProductImageIndex: action.payload
+      }
       default:
         return state;
   }

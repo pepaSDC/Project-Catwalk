@@ -5,10 +5,11 @@ export default (state, action) => {
         ...state,
         allReviews: action.payload
       }
-    case 'UPDATE_AVERAGE_RATING':
+    case 'UPDATE_AVERAGE_TOTAL_RATING':
       return {
         ...state,
-        averageRating: action.payload
+        averageRating: action.average,
+        totalRatings: action.total
       }
     case 'GET_METADATA':
       return {

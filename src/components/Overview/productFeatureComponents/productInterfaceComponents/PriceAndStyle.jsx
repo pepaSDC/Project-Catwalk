@@ -15,7 +15,10 @@ let styleSelectorStyle = {
 
 export const PriceAndStyle = () => {
   const { currentProductId } = useContext(GlobalContext);
-  const { getProductStyles, productStyles, getProductInfo, productInfo } = useContext(OverviewContext);
+  const {
+    getProductStyles, productStyles, getProductInfo, productInfo, featuredStyleIndex
+  } = useContext(OverviewContext);
+
   let id = currentProductId;
 
   useEffect(() => {
@@ -29,10 +32,13 @@ export const PriceAndStyle = () => {
   // console.log('productStylesData: ', productStylesData);
   // console.log('productInfoData: ', productInfoData);
 
-  let currentStyleIndex = 3;
+  const productPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
+  const productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
 
-  const productPrice = productStyles.data ? productStyles.data.results[currentStyleIndex].original_price : ''
-  const productStyleName = productStyles.data ? productStyles.data.results[currentStyleIndex].name : ''
+
+  let productStylesArray = productStyles.data ? productStyles.data.results : []
+
+  // console.log('line 41 in priceAndStyle: ', productStylesArray);
 
   return (
     <div
@@ -50,8 +56,9 @@ export const PriceAndStyle = () => {
           Style >
         </div>
         <div
-          className="styleSelectorDropdown">
-          {productStyleName}
+          name="Style"
+          className="styleSelected">
+            {productStyleName}
         </div>
       </div>
     </div>

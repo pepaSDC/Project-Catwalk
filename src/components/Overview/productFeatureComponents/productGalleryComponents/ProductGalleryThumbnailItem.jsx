@@ -3,28 +3,26 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
 
-
-export const StyleThumbnail = (props) => {
+export const ProductGalleryThumbnailItem = (props) => {
   const { currentProductId } = useContext(GlobalContext);
   const {
     getProductStyles, productStyles,
-    updateCurrentStyle, featuredStyleIndex
+    updateFeaturedPhoto, featuredProductImageIndex
   } = useContext(OverviewContext);
 
-  const changeStyle = (event) => {
-    updateCurrentStyle(props.index)
+  const changeFeaturedPhoto = (event) => {
+    updateFeaturedPhoto(props.index)
   }
 
   return (
     <div
-      className="styleThumbnail"
-      onClick={changeStyle}
-      style = {{
-        borderRadius: '50%',
-        backgroundImage: `url(${props.thumbnail})`,
+      className="productGalleryThumbnailItem"
+      onClick={changeFeaturedPhoto}
+        style = {{
+        backgroundImage: `url(${props.item.thumbnail_url})`,
         backgroundSize: 'cover',
-        height: '40px',
-        width: '40px',
+        height: '50px',
+        width: '50px',
         marginRight: '3px',
         marginBottom: '3px'
       }}>
