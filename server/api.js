@@ -86,8 +86,8 @@ const api = {
           Authorization: API_Token
         },
         params: {
-          page: pge || 1,
-          count: cnt || 5,
+          page: pge,
+          count: cnt,
           product_id: id
         }
       })
@@ -96,16 +96,9 @@ const api = {
     },
 
     getAnswers: (pge, cnt, id, callback) => {
-      axios.get(`${api.address}/qa/questions/${id}/answers`, {
+      axios.get(`${api.address}/qa/questions/${id}/answers?page=${pge}&count=${cnt}`, {
         headers: {
           Authorization: API_Token
-        },
-        params: {
-          question_id: id
-        },
-        query: {
-          page: pge,
-          count: cnt
         }
       })
         .then( (data) => callback(null, data) )
