@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Question from './Question.jsx';
 import Answers from './Answers.jsx';
 
 const styles = {
@@ -20,8 +21,8 @@ const Questions = (props) => {
     <div style={styles}>
       {questions.map( (question) => {
         return (
-          <div key={question.question_id}>
-            Q: {question.question_body}
+          <div key={question.question_id} className='oneQ'>
+            <Question question={question} />
             {props.answers[question.question_id]
                 ? <Answers answers={props.answers[question.question_id]} />
                 : 'does not exist'}
