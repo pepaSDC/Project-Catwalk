@@ -12,7 +12,7 @@ export const ReviewList = (props) => {
 
   }
   return (
-    <div style={{width: '66%'}}>
+    <div style={{width: '66%', height: '90vh', overflowY: 'auto', overflowX: 'hidden'}}>
       <SortOptions/>
       {reviews.map((review) => <Review key={review.review_id} review={review}/> )}
       <div>
