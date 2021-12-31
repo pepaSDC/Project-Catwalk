@@ -60,9 +60,10 @@ export const RelatedProducts = () => {
 
   },[currentProductId]);
   // console.log('line 62 in relatedProducts' , relatedProductArray);
+
   return (
     <div>
-      <div className="app">Hello From RelatedProducts</div>
+      <div className="app"></div>
       <RelatedProductsCardCarousel relatedProductArray={relatedProductArray}/>
     </div>
   );

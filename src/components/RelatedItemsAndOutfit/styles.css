@@ -1,90 +1,82 @@
 
-
-.container {
-  display: flex; /* or inline-flex */
-  border-style: groove;
-  border-width: 0px;
-  border-radius: 5px;
-  border-color: rgb(0, 0, 0);
+.card-container {
+display: flex;
+justify-content: space-evenly;
+position: relative;
+align-self: center;
+box-shadow: inset 0px 1px 10px -3px #000000;
+padding:10px 3px;
 }
 
-.container-card0 {
+.activeCard {
   flex-direction: column;
-  border-width: 3px;
-  border-radius: 5px;
-  border-color: rgb(0, 0, 0);
-  background-color: rgb(70, 248, 176);
-}
-.container-card1 {
-  flex-direction: column;
-  border-width: 3px;
-  border-radius: 5px;
-  border-color: rgb(0, 0, 0);
-  background-color: blue;
-}
-.container-card2 {
-  flex-direction: column;
-  border-width: 3px;
-  border-radius: 5px;
-  border-color: rgb(0, 0, 0);
-  background-color: cadetblue;
-}
-.container-card3 {
-  flex-direction: column;
-  border-width: 3px;
-  border-radius: 5px;
-  border-color: rgb(0, 0, 0);
-  background-color: crimson;
+  left: 50%;
+  box-shadow: 0px 1px 10px -3px #000000;
+  align-self: flex-start;
+
 }
 
-/* .arrowLeft {
-  background-color: crimson;
-} */
+.card-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 370px;
+  width: 250px;
+  object-fit: cover;
+}
 
 .arrowLeft {
-	box-shadow:inset 0px 1px 10px -3px #000000;
 	background-color:transparent;
 	border-radius:27px;
-	border:1px solid #ffffff;
+	border:0px solid #ffffff;
 	display:inline-block;
 	cursor:pointer;
-	color:#000000;
+	color:#00a2ff;
 	font-family:Arial;
 	font-size:20px;
-	padding:32px 6px;
+	padding:10px 3px;
 	text-decoration:none;
-	text-shadow:0px 5px 0px #2f6627;
+	text-shadow:0px 14px 0px #00a2ff;
+
+  position: absolute;
+  left: 0%;
+  width: 10rem;
+  height: 22rem;
 }
 .arrowLeft:hover {
 	background-color:transparent;
-  color:#777777;
+  color:#9fcfff;
+  text-shadow:0px 14px 0px #9fcfff;
 }
 .arrowLeft:active {
-	position:relative;
+	position: absolute;
 	top:1px;
-  background-color:#b1cfff;
 }
 
 .arrowRight {
-	box-shadow:inset 0px 1px 10px -3px #000000;
 	background-color:transparent;
 	border-radius:27px;
-	border:1px solid #ffffff;
+	border:0px solid #ffffff;
 	display:inline-block;
 	cursor:pointer;
-	color:#000000;
+	color:#00a2ff;
 	font-family:Arial;
 	font-size:20px;
-	padding:32px 6px;
+	padding:10px 3px;
 	text-decoration:none;
-	text-shadow:0px 5px 0px #2f6627;
+	text-shadow:0px 14px 0px #00a2ff;
+
+  position: absolute;
+  right: 0%;
+  width: 10rem;
+  height: 22rem;
 }
 .arrowRight:hover {
 	background-color:transparent;
-  color:#777777;
+  color:#9fcfff;
+  text-shadow:0px 14px 0px #9fcfff;
 }
 .arrowRight:active {
-	position:relative;
+	position: absolute;
 	top:1px;
-  background-color:#b1cfff;
 }
