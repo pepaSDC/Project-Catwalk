@@ -52,7 +52,9 @@ const Question = (props) => {
 
   const handleAddAnswerView = (event) => {
     event.preventDefault();
-    setView( (currState) => { return !currState; });
+    if (event.target.className === 'addAnswer' || event.target.className === 'answerForm') {
+      setView( (currState) => { return !currState; });
+    };
   };
 
   const handleAnswerSubmit = (event) => {
@@ -92,7 +94,7 @@ const Question = (props) => {
         </div>
       </div>
       {view
-        ? <div className='answerForm'>
+        && <div className='answerForm' onClick={handleAddAnswerView}>
             <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
               <label>Username</label>
               <input type='text' name='username'></input>
@@ -103,7 +105,6 @@ const Question = (props) => {
               <input type='submit' value='Answer'></input>
             </form>
           </div>
-        : <div></div>
       }
       <Answers answers={orderedAns} />
     </div>
