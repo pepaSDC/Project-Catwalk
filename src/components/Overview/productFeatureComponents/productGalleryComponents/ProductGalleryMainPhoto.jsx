@@ -7,14 +7,20 @@ import { ProductGalleryThumbnails } from './ProductGalleryThumbnails.jsx'
 export const ProductGalleryMainPhoto = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles,
-    featuredStyleIndex, featuredProductImageIndex
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex,
+    featuredProductImageIndex
   } = useContext(OverviewContext);
 
   let id = currentProductId;
 
   useEffect(() => {
-    getProductStyles(id);
+    getProductStyles(id)
+    return (() => {
+      resetProductValue([])
+    })
   }, [id])
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
@@ -33,7 +39,9 @@ export const ProductGalleryMainPhoto = () => {
         backgroundPosition: 'center',
         flexGrow: 4,
       }}>
-        <ProductGalleryThumbnails />
+        <ProductGalleryThumbnails
+          currentStyleIndex={productStyles}
+          currentProductStyle={productStyles}/>
     </div>
   );
 }

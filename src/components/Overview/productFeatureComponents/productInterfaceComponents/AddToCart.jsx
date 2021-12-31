@@ -30,12 +30,21 @@ let shareButtonStyle = {
 
 export const AddToCart = () => {
   const { currentProductId } = useContext(GlobalContext);
-  const { getProductStyles, productStyles, featuredStyleIndex, selectedItemSkuNumber} = useContext(OverviewContext);
+  const {
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex,
+    selectedItemSkuNumber,
+  } = useContext(OverviewContext);
 
   let id = currentProductId;
 
   useEffect(() => {
     getProductStyles(id)
+    return (() => {
+      resetProductValue([])
+    })
   }, [id])
 
   const skuObject = productStyles.data ? productStyles.data.results[featuredStyleIndex].skus : {}

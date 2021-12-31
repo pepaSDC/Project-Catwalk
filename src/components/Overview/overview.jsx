@@ -50,11 +50,8 @@ export const Overview = () => {
         style={divStyle}
         className="productDescription">
         <ProductDescription
-          // currentID={currentProductId}
-          // currentProduct={productInfo}
           />
       </div>
-
     </div>
   );
 }

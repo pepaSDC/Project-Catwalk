@@ -25,6 +25,11 @@ export default (state, action) => {
       ...state,
       selectedItemSkuNumber: action.payload
       }
+    case 'RESET_PRODUCT_VALUE':
+      return {
+        ...state,
+        productStyles: action.payload
+      }
     default:
         return state;
   }

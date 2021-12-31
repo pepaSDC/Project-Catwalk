@@ -43,7 +43,7 @@ export const RatingsReviewsCategory = (props) => {
       style={ratingsReviewsStyle}
       className="ratingsReviewsCategory">
         <div>
-          <StarRating rating={props.starRating}/>
+          <StarRating rating={averageRating}/>
         </div>
         <div>
           <a href="#ratingsAndReviews">See All Reviews</a>
