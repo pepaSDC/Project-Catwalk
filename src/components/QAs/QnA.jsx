@@ -21,6 +21,7 @@ export const QA = () => {
   const [answers, setAnswers] = useState({});
 
   useEffect( () => {
+    let unmounted = false;
     axios.get(`/qa/questions?product_id=${currentProductId}`)
       .then(response => {
         setQuestions(response.data.results);
@@ -52,6 +53,7 @@ export const QA = () => {
         setAnswers(answerState);
       })
       .catch(err => console.log(err));
+    return () => { unmounted = true};
   }, [currentProductId]);
 
   return (
