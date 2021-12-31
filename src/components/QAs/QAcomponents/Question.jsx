@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './questionStyles.css';
 import Answers from './Answers.jsx';
+import Modal from './Modal.jsx';
 
 const Question = (props) => {
   const [helpful, setHelpful] = useState( () => {
@@ -52,9 +53,7 @@ const Question = (props) => {
 
   const handleAddAnswerView = (event) => {
     event.preventDefault();
-    if (event.target.className === 'addAnswer' || event.target.className === 'answerForm') {
-      setView( (currState) => { return !currState; });
-    };
+    setView( (currState) => { return !currState; });
   };
 
   const handleAnswerSubmit = (event) => {
@@ -93,19 +92,17 @@ const Question = (props) => {
           <span className='addAnswer' onClick={handleAddAnswerView}>Add Answer</span>
         </div>
       </div>
-      {view
-        && <div className='answerForm' onClick={handleAddAnswerView}>
-            <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
-              <label>Username</label>
-              <input type='text' name='username'></input>
-              <label>Email</label>
-              <input type='email' name='email'></input>
-              <label>Answer</label>
-              <textarea name='body' rows='4' cols='10'></textarea>
-              <input type='submit' value='Answer'></input>
-            </form>
-          </div>
-      }
+      <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body}>
+        <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
+          <label>Your Answer</label>
+          <textarea name='body' rows='8'></textarea>
+          <label>What is your nickname</label>
+          <input className='username' type='text' name='username' placeholder='Example: jack543'></input>
+          <label>Your Email</label>
+          <input className='email' type='email' name='email' placeholder='Example: jack@email.com'></input>
+          <input className='submit' type='submit' value='Answer'></input>
+        </form>
+      </Modal>
       <Answers answers={orderedAns} />
     </div>
   );
