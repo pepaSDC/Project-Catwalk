@@ -43,28 +43,16 @@ export const AddToCart = () => {
 
   const itemQuantities = skuObject[selectedItemSkuNumber] ? skuObject[selectedItemSkuNumber].quantity : 0
   const itemQuantitiesArray = skuObject[selectedItemSkuNumber] ? Array.from({length: itemQuantities}, (value, key) => key + 1) : []
-  // const itemQuantities = skuObject[selectedItemSkuNumber]
   console.log('line 44 in AddtoCart: ', itemQuantitiesArray);
 
   return (
     <div
       style={addToCartStyle}
       className="addToCart">
-        {/* <div
-          className="cartDropdowns"
-          style={sizeAndQuantityDropdownStyles}>
-            <div>
-              Select Size
-            </div>
-            <div>
-              Quantity
-            </div>
-        </div> */}
         <SizeAndQuantity
           skuArray={skuNumberArray}
           skuObject={skuObject}
           itemQuantities={itemQuantitiesArray}
-          // itemQuantities={itemQuantities}
           />
         <div
           className="addToBagOrShare"
