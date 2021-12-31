@@ -8,7 +8,6 @@ export const ReviewList = (props) => {
   const reviews = props.state ? props.state.slice(0,tiles) : [];
 
   const clickHandler = (event) => {
-    console.log('clicked');
     setTiles(tiles + 2);
 
   }

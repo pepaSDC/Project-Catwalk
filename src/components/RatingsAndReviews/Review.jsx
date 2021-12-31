@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { PrettyDate } from './PrettyDate.jsx';
 import { StarRating } from './StarRating.jsx';
 
@@ -9,6 +9,16 @@ export const Review = ({ review }) => {
     borderBottom: '1px solid black'
   }
 
+  const [helpful, setHelpful] = useState( () => {
+    return ({
+      clicked: false,
+      amount: review.helpfulness
+    })
+  })
+
+  const clickHandler = (event) => {
+    console.log(review.review_id)
+  }
   return (
     <div className="reviewTile" style={style}>
       <div className="reviewHeader" style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -23,7 +33,9 @@ export const Review = ({ review }) => {
       {review.photos.length > 0 ? review.photos.map((photo) => <img src={photo.url} key={photo.id} style={{width: '50px'}}></img>) : null }
       {review.recommend ? <div>&#10003; I recommended this product </div> : null}
       {review.response ? <div>Response from seller: {review.response}</div> : null}
-      <div>Was this review helpful? Yes ({review.helpfulness}) | Report </div>
+      <div>Was this review helpful?
+        <a onClick={clickHandler}> Yes ({review.helpfulness}) </a>
+          | Report </div>
     </div>
   )
 }

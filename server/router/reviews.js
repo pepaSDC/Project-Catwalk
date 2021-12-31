@@ -27,4 +27,27 @@ router.get('/meta', (req, res) => {
   });
 });
 
+router.put('/:review_id/helpful', (req, res) => {
+  const review_id = Number(req.params.review_id);
+  api.updateHelpfulness( review_id, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result.data);
+    }
+  });
+});
+
+router.put('/:review_id/report', (req, res) => {
+  const review_id = Number(req.params.review_id);
+  api.updateReport( review_id, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result.data);
+    }
+  });
+});
+
+
 module.exports = router;

@@ -30,7 +30,7 @@ export const RatingsAndReviews = (props) => {
   }, [currentProductId])
 
   return (
-    <div style={{margin: '0 30px'}}>
+    <div id="ratingsAndReviews" style={{margin: '0 30px'}}>
       RATINGS AND REVIEWS
       <div className="reviewsModule" style={styleReviews}>
         <div className="reviewsAside" style={styleAside}>
