@@ -29,8 +29,8 @@ const ProductDetail = () => {
       <OverviewProvider>
         <Overview />
       </OverviewProvider>
-      <QA />
       <RelatedProducts/>
+      <QA />
       <RatingsAndReviewsProvider>
         <RatingsAndReviews />
       </RatingsAndReviewsProvider>

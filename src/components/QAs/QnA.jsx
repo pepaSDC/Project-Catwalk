@@ -20,7 +20,7 @@ export const QA = () => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
 
-  useEffect( () => {
+  const getQAs = () => {
     axios.get(`/qa/questions?product_id=${currentProductId}`)
       .then(response => {
         setQuestions(response.data.results);
@@ -52,6 +52,14 @@ export const QA = () => {
         setAnswers(answerState);
       })
       .catch(err => console.log(err));
+  };
+
+  useEffect( () => {
+    getQAs();
+    return () => {
+      setQuestions([]);
+      setAnswers({});
+    };
   }, [currentProductId]);
 
   return (
