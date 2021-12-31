@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
+import { Pricing } from './Pricing.jsx'
 
 let priceAndStyleSelectorStyle = {
   display: 'flex',
@@ -12,28 +13,24 @@ let styleSelectorStyle = {
   flexDirection: 'row'
 }
 
-
 export const PriceAndStyle = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles, getProductInfo, productInfo, featuredStyleIndex
+    getProductStyles, productStyles, featuredStyleIndex
   } = useContext(OverviewContext);
 
   let id = currentProductId;
 
   useEffect(() => {
     getProductStyles(id)
-    getProductInfo(id)
   }, [id])
 
-  // const productStylesData = productStyles.data ? productStyles.data : ''
-  // const productInfoData = productInfo.data ? productInfo.data : ''
+  let productPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
+  let salePrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].sale_price : ''
 
-  // console.log('productStylesData: ', productStylesData);
-  // console.log('productInfoData: ', productInfoData);
+  let displayedPrice = salePrice ? (productPrice + ' ' + salePrice) : productPrice
 
-  const productPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
-  const productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
+  let productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
 
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
@@ -46,7 +43,7 @@ export const PriceAndStyle = () => {
       style={priceAndStyleSelectorStyle}>
       <div
         className="price">
-          {productPrice}
+          <Pricing />
       </div>
       <div
         className="styleSelectorAndDropDown"

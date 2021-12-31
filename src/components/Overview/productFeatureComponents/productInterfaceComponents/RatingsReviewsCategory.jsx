@@ -2,6 +2,11 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
 
+import {StarRating} from '../../../RatingsAndReviews/StarRating.jsx';
+import { RatingsAndReviewsContext } from '../../../../context/RatingsAndReviewsState.js'
+// import { RatingsAndReviewsProvider } from '../../../../context/RatingsAndReviewsState.js';
+
+
 let ratingsReviewsCategoryStyle = {
   display: 'flex',
   flexDirection: 'column'
@@ -14,6 +19,8 @@ let ratingsReviewsStyle = {
 
 export const RatingsReviewsCategory = () => {
   const { currentProductId } = useContext(GlobalContext);
+  const { totalRatings, averageRating, getMetaReviews } = useContext(RatingsAndReviewsContext);
+
   const {
     getProductInfo, productInfo, featuredStyleIndex
   } = useContext(OverviewContext);
@@ -21,25 +28,25 @@ export const RatingsReviewsCategory = () => {
   let id = currentProductId;
 
   useEffect(() => {
-    getProductInfo(id);
+    getProductInfo(id)
+    getMetaReviews(id)
   }, [id])
 
-    // console.log('line 27 in productInfoData: ', productInfo);
-
     const productCategory = productInfo.data ? productInfo.data.category: ''
+    console.log('average rating', averageRating)
 
   return (
     <div
       style={ratingsReviewsCategoryStyle}
       className="ratingsReviewsCategory">
-      <div
-        style={ratingsReviewsStyle}
-        className="ratingsReviewsCategory">
+    <div
+      style={ratingsReviewsStyle}
+      className="ratingsReviewsCategory">
         <div>
-          Ratings
+          <StarRating rating={averageRating}/>
         </div>
         <div>
-          Reviews
+          <a href="#ratingsAndReviews">See All Reviews</a>
         </div>
       </div>
       <div>
