@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -20,11 +21,13 @@ import React from 'react';
 
 const RelatedProduct = (props) => {
   if (props.information[1] === null) {
-    props.information[1] = "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+    props.information[1] = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg"
   }
+  //props.information[0].id
   return(
-   <div className={`container-card${props.itemNum}`}>
-    <img className="card-image" src={props.information[1]}/>
+   <div className={`card ${props.cardStyle}`} onMouseDown={props.handleMouseDown}>
+     <Link to={`/items/${props.information[0].id}`}><img className="card-image" src={props.information[1]}/></Link>
+
     <div>{props.information[0].category}</div>
     <div>{props.information[0].name}</div>
     <div>reviews ******</div>

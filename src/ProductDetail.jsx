@@ -22,7 +22,6 @@ const ProductDetail = () => {
 
   useEffect(() =>{
     updateCurrentProductId(id);
-    getAllProducts();
   },[id])
 
   return (
@@ -30,8 +29,8 @@ const ProductDetail = () => {
       <OverviewProvider>
         <Overview />
       </OverviewProvider>
-      <RelatedProducts />
       <QA />
+      <RelatedProducts/>
       <RatingsAndReviewsProvider>
         <RatingsAndReviews />
       </RatingsAndReviewsProvider>
