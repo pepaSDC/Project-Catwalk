@@ -21,8 +21,9 @@ export const RatingsAndReviewsProvider = ({ children }) => {
 
   //functions
 
-  function getAllReviews(id) {
-    axios.get(`http://localhost:3000/reviews/?product_id=${id}&sort=newest`)
+  function getAllReviews(id, sortBy) {
+    sortBy = sortBy || 'relevant'
+    axios.get(`http://localhost:3000/reviews/?product_id=${id}&sort=${sortBy}`)
       .then((results) => {
         dispatch({
           type: 'GET_ALL_REVIEWS',

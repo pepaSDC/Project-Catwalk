@@ -6,6 +6,7 @@ const initialOverviewState = {
   productInfo: {},
   productStyles: [],
   featuredStyleIndex: 0,
+  selectedItemSkuNumber: 0,
   featuredProductImageIndex: 0,
 }
 
@@ -55,15 +56,24 @@ export const OverviewProvider = ({ children }) => {
     })
   }
 
+  function updateSelectedItemSku (id) {
+    overviewDispatch({
+      type: 'UPDATE_SELECTED_ITEM_SKU',
+      payload: id
+    })
+  }
+
   return(<OverviewContext.Provider value={{
-    productInfo: overviewState.productInfo,
-    productStyles: overviewState.productStyles,
-    featuredStyleIndex: overviewState.featuredStyleIndex,
-    featuredProductImageIndex: overviewState.featuredProductImageIndex,
     getProductInfo,
     getProductStyles,
     updateCurrentStyle,
-    updateFeaturedPhoto
+    updateFeaturedPhoto,
+    updateSelectedItemSku,
+    productInfo: overviewState.productInfo,
+    productStyles: overviewState.productStyles,
+    featuredStyleIndex: overviewState.featuredStyleIndex,
+    selectedItemSkuNumber: overviewState.selectedItemSkuNumber,
+    featuredProductImageIndex: overviewState.featuredProductImageIndex,
   }}>
     {children}
   </OverviewContext.Provider>)

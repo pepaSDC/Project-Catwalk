@@ -18,7 +18,7 @@ router.get('/questions', (req, res) => {
 
 router.get('/questions/:question_id/answers', (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const count = parseInt(req.query.count) || 5;
+  const count = parseInt(req.query.count) || 100;
   const id = parseInt(req.params.question_id);
   api.getAnswers(page, count, id, (err, result) => {
     if (err) {

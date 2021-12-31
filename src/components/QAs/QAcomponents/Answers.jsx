@@ -4,27 +4,37 @@ import axios from 'axios';
 import Answer from './Answer.jsx';
 
 const Answers = (props) => {
-  const [count, setCount] = useState(2);
-  const [answers, setAnswers] = useState([]);
-  useEffect( () => {
-    setAnswers( () => {
-      return props.answers.slice(0, count);
-    })
-  }, [count]);
+  const [view, setView] = useState('collapsed');
+  const defaultAns = props.answers.slice(0, 2);
 
   const handleLoadMore = (event) => {
-    setCount( (curCount) => {
-      return curCount + 2;
+    setView( (curView) => {
+      if (curView === 'collapsed') {
+        return 'all'
+      } else {
+        return 'collapsed'
+      };
     });
   };
 
   return (
-    <div>
-      {answers.map( ans => {
-        return <Answer key={ans.answer_id} answer={ans}/>;
-      })}
-      {props.answers.length > answers.length
-        && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
+    <div className='individualAns'>
+      <span>A:</span>
+      {view === 'all'
+      ? <div>
+          {props.answers.map( ans => {
+            return <Answer key={ans.answer_id} answer={ans}/>;
+          })}
+          <div className='loadMore' onClick={handleLoadMore}>LOAD LESS ANSWERS</div>
+        </div>
+      : <div>
+          {defaultAns.map( ans => {
+            return <Answer key={ans.answer_id} answer={ans}/>;
+          })}
+          {props.answers.length > defaultAns.length
+            && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
+          }
+        </div>
       }
     </div>
   );

@@ -79,6 +79,46 @@ const api = {
         .then( (data) => callback(null, data) )
         .catch( (err) => callback(err) );
     },
+
+    //Add a review
+    // addReview: (id, callback) => {
+    //   axios.get(`${api.address}/reviews`, {
+    //     headers: {
+    //       Authorization: API_Token
+    //     },
+    //     params: {
+    //       product_id: id
+    //     }
+    //   })
+    //     .then( (data) => callback(null, data) )
+    //     .catch( (err) => callback(err) );
+    // },
+    //Reviews Meta
+    updateHelpfulness: (id, callback) => {
+      axios.put(`${api.address}/reviews/${id}/helpful`,'', {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          review_id: id
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
+    //
+    updateReport: (id, callback) => {
+      axios.put(`${api.address}/reviews/${id}/report`,'', {
+        headers: {
+          Authorization: API_Token
+        },
+        params: {
+          review_id: id
+        }
+      })
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
     // Questions and Answers Info
     getQuestions: (pge, cnt, id, callback) => {
       axios.get(`${api.address}/qa/questions`, {

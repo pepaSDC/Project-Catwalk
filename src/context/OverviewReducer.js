@@ -20,7 +20,12 @@ export default (state, action) => {
         ...state,
         featuredProductImageIndex: action.payload
       }
-      default:
+    case 'UPDATE_SELECTED_ITEM_SKU':
+      return {
+      ...state,
+      selectedItemSkuNumber: action.payload
+      }
+    default:
         return state;
   }
 }
