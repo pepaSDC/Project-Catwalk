@@ -5,7 +5,7 @@ const api = require('../api.js');
 
 router.get('/', (req, res) => {
   const product_id = parseInt(req.query.product_id);
-  const sort = req.query.sort || 'newest';
+  const sort = req.query.sort || 'relevant';
 
   api.getReviews(product_id, sort, (err, result) => {
     if (err) {
