@@ -16,10 +16,10 @@ const Question = (props) => {
     return false;
   });
 
-  const [orderedAns, setOrderedAns] = useState( () => {
+  const sellerFirst = (answers) => {
     let seller = [];
     let nonSeller = [];
-    props.answers.forEach( ans => {
+    answers.forEach( ans => {
       if (ans.answerer_name === 'Seller') {
         seller.push(ans);
       } else {
@@ -27,9 +27,11 @@ const Question = (props) => {
       }
     });
     return [...seller, ...nonSeller];
-  });
+  };
 
-  console.log('ORDERED ANS', orderedAns);
+  const [orderedAns, setOrderedAns] = useState( () => {
+    return sellerFirst(props.answers);
+  });
 
   const handleHelpful = (event) => {
     if (!helpful.clicked) {
@@ -48,7 +50,7 @@ const Question = (props) => {
     }
   };
 
-  const handleAddAnswer = (event) => {
+  const handleAddAnswerView = (event) => {
     event.preventDefault();
     setView( (currState) => { return !currState; });
   };
@@ -62,7 +64,13 @@ const Question = (props) => {
     };
     axios.post(`/qa/questions/${event.target.id}/answers`, answer)
       .then(response => {
+        return axios.get(`/qa/questions/${event.target.id}/answers`);
+      })
+      .then(newData => {
         setView( (currState) => { return !currState; });
+        setOrderedAns( (curState) => {
+          return sellerFirst(newData.data.results);
+        });
       })
       .catch(error => {
         console.log(error.message);
@@ -80,7 +88,7 @@ const Question = (props) => {
           <span className='helpful'>
             Helpful? <span className='yes' id={props.question.question_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
           </span>
-          <span className='addAnswer' onClick={handleAddAnswer}>Add Answer</span>
+          <span className='addAnswer' onClick={handleAddAnswerView}>Add Answer</span>
         </div>
       </div>
       {view
