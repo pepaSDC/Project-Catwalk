@@ -16,7 +16,7 @@ let styleShowcaseRowStyle = {
 export const StyleShowcase = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles, getProductInfo, productInfo, featuredStyleIndex
+    getProductStyles, productStyles, featuredStyleIndex
   } = useContext(OverviewContext);
 
   let id = currentProductId;

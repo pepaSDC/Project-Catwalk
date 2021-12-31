@@ -1,18 +1,20 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react'
-import {  useParams, useLocation } from 'react-router-dom';
+// import React from 'react'
+// import {  useParams, useLocation } from 'react-router-dom';
 
-import { GlobalContext } from '../../../context/GlobalState.js'
+// import { GlobalContext } from '../../../context/GlobalState.js'
 import { OverviewContext } from '../../../context/OverviewState.js'
 
 
 export const ProductDescription = (props) => {
-  const { currentProductId } = useContext(GlobalContext);
+  // const { currentProductId } = useContext(GlobalContext);
   const { getProductInfo, productInfo } = useContext(OverviewContext);
-  let id = currentProductId;
+  // let id = currentProductId;
 
-  useEffect(() => {
-    getProductInfo(id)
-  }, [id])
+  // useEffect(() => {
+  //   getProductInfo(id)
+  // }, [id])
 
   const productSlogan = productInfo.data ? productInfo.data.slogan : ''
   const productDescription = productInfo.data ? productInfo.data.description : ''

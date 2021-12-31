@@ -5,11 +5,12 @@ import { OverviewContext } from '../../../../context/OverviewState.js'
 
 
 export const StyleThumbnail = (props) => {
-  const { currentProductId } = useContext(GlobalContext);
-  const {
-    getProductStyles, productStyles,
-    updateCurrentStyle, featuredStyleIndex
-  } = useContext(OverviewContext);
+  // const { currentProductId } = useContext(GlobalContext);
+  // const {
+  //   getProductStyles, productStyles,
+  //   updateCurrentStyle, featuredStyleIndex
+  // } = useContext(OverviewContext);
+    const { updateCurrentStyle } = useContext(OverviewContext);
 
   const changeStyle = (event) => {
     updateCurrentStyle(props.index)
