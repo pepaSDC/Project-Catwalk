@@ -4,6 +4,7 @@ import axios from 'axios';
 import './questionStyles.css';
 import Answers from './Answers.jsx';
 import Modal from './Modal.jsx';
+import UploadPhotos from './UploadPhotos.jsx';
 
 const Question = (props) => {
   const [helpful, setHelpful] = useState( () => {
@@ -15,6 +16,12 @@ const Question = (props) => {
 
   const [view, setView] = useState( () => {
     return false;
+  });
+
+  const [errors, setErrors] = useState({
+    body: true,
+    name: true,
+    email: true
   });
 
   const sellerFirst = (answers) => {
@@ -54,28 +61,45 @@ const Question = (props) => {
   const handleAddAnswerView = (event) => {
     event.preventDefault();
     setView( (currState) => { return !currState; });
+    setErrors( (curState) => ({body: true, name: true, email: true}));
   };
 
   const handleAnswerSubmit = (event) => {
     event.preventDefault();
+    let error = false;
     let answer = {
-      body: event.target.body.value,
-      name: event.target.username.value,
-      email: event.target.email.value
+      body: event.target.body.value || undefined,
+      name: event.target.username.value || undefined,
+      email: event.target.email.value || undefined
     };
-    axios.post(`/qa/questions/${event.target.id}/answers`, answer)
-      .then(response => {
-        return axios.get(`/qa/questions/${event.target.id}/answers`);
-      })
-      .then(newData => {
-        setView( (currState) => { return !currState; });
-        setOrderedAns( (curState) => {
-          return sellerFirst(newData.data.results);
+    for (var val in answer) {
+      if (answer[val] === undefined) {
+        error = true;
+      };
+    };
+    if (error) {
+      if (answer.email) {
+        if (!answer.email.includes('@') || !answer.email.includes('.com')) {
+          answer.email = 'wrong';
+        };
+      };
+      setErrors(answer);
+    } else {
+      axios.post(`/qa/questions/${event.target.id}/answers`, answer)
+        .then(response => {
+          return axios.get(`/qa/questions/${event.target.id}/answers`);
+        })
+        .then(newData => {
+          setView( (curState) => { return !curState; });
+          setOrderedAns( (curState) => {
+            return sellerFirst(newData.data.results);
+          });
+          setErrors( (curState) => ({body: true, name: true, email: true}));
+        })
+        .catch(error => {
+          console.log(error.message);
         });
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
+    };
   };
 
   return (
@@ -95,11 +119,16 @@ const Question = (props) => {
       <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body}>
         <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
           <label>Your Answer</label>
-          <textarea name='body' rows='8'></textarea>
+          <textarea name='body' maxLength='1000' rows='8'></textarea>
+          {!errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
           <label>What is your nickname</label>
-          <input className='username' type='text' name='username' placeholder='Example: jack543'></input>
+          <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jack543'></input>
+          {!errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
           <label>Your Email</label>
-          <input className='email' type='email' name='email' placeholder='Example: jack@email.com'></input>
+          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
+          {!errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
+          <label>Upload your photos</label>
+          <UploadPhotos />
           <input className='submit' type='submit' value='Answer'></input>
         </form>
       </Modal>
