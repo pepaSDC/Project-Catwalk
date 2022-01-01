@@ -3,18 +3,10 @@ export default (state, action) => {
     case 'GET_ALL_REVIEWS':
       return {
         ...state,
-        allReviews: action.payload
-      }
-    case 'UPDATE_AVERAGE_TOTAL_RATING':
-      return {
-        ...state,
+        allReviews: action.all,
         averageRating: action.average,
-        totalRatings: action.total
-      }
-    case 'GET_METADATA':
-      return {
-        ...state,
-        meta: action.payload
+        totalRatings: action.total,
+        meta: action.meta
       }
     default:
       return state;

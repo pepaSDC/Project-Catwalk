@@ -19,20 +19,37 @@ export const RatingsAndReviewsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
 
-  //functions
+  function get(id, sortBy) {
+    sortBy = sortBy || 'relevant';
+    return axios.get(`http://localhost:3000/reviews/?product_id=${id}&sort=${sortBy}`)
+  }
 
-  function getAllReviews(id, sortBy) {
-    sortBy = sortBy || 'relevant'
-    axios.get(`http://localhost:3000/reviews/?product_id=${id}&sort=${sortBy}`)
+  function meta(id) {
+    return axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
+  }
+
+  function updateReviewsState(id) {
+    Promise.all([get(id), meta(id)])
       .then((results) => {
+        console.log('these are the reuslts', results)
+
+        let absolutetotal = 0;
+        let totalratings = 0;
+        for (var key in results[1].data.ratings) {
+          totalratings += Number(results[1].data.ratings[key])
+          absolutetotal += (Number(results[1].data.ratings[key]) * Number(key));
+        }
+        let average = (absolutetotal/totalratings);
         dispatch({
           type: 'GET_ALL_REVIEWS',
-          payload: results.data.results
+          all: results[0].data.results,
+          average: average,
+          total: totalratings,
+          meta: results[1].data
         })
+        console.log(state)
       })
-      .catch((err) => {
-        console.log(err)
-      });
+      .catch(err => console.log('THIS IS AN ERROR', err))
   }
 
   function getMetaReviews(id) {
@@ -70,7 +87,8 @@ export const RatingsAndReviewsProvider = ({ children }) => {
     meta: state.meta,
     averageRating: state.averageRating,
     totalRatings: state.totalRatings,
-    getAllReviews,
+    updateReviewsState,
+
     getMetaReviews
   }}>
     {children}
