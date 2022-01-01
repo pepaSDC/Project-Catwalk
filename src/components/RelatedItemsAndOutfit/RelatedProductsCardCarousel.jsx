@@ -37,15 +37,21 @@ const RelatedProductsCardCarousel = (props) => {
 
       {productArr.map((ele, idx) => {
         let position = "activeCard";
-      return <RelatedProduct handleMouseDown={handleMouseDown}
-              information={ele} key={idx} itemNum={idx} cardStyle={position}/>
-    })}
+        return <RelatedProduct handleMouseDown={handleMouseDown}
+          information={ele}
+          key={idx}
+          itemNum={idx}
+          cardStyle={position}
+          currentProductInfo={props.currentProductInfo}
+          currentProductName={props.currentProductName}
+        />
+      })}
     {index === props.relatedProductArray.length - itemDisplayAmount
         ?<div></div>
         :<button className="arrowRight" onClick={slideRight}>&#8649;</button>
       }
 
-  </div>
+    </div>
   </div>
   )
 }
