@@ -27,7 +27,6 @@ export const RatingsAndReviews = (props) => {
   useEffect(() => {
     let isAPISubsribed = true;
     updateReviewsState(currentProductId, sortBy);
-
     return () => {
       isAPISubsribed = false;
     }
@@ -41,7 +40,7 @@ export const RatingsAndReviews = (props) => {
           <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
           <ProductBreakdown characteristics={meta.characteristics}/>
         </div>
-        <ReviewList state={allReviews}/>
+        <ReviewList state={allReviews} meta={meta}/>
       </div>
 
     </div>
