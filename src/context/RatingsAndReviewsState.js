@@ -7,7 +7,8 @@ const initialState = {
   allReviews: [],
   meta: [],
   averageRating: 0,
-  totalRatings: 0
+  totalRatings: 0,
+  sortBy: 'relevant'
 }
 
 //create context
@@ -18,9 +19,8 @@ export const RatingsAndReviewsContext = createContext(initialState);
 export const RatingsAndReviewsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-
   function get(id, sortBy) {
-    sortBy = sortBy || 'relevant';
+    sortBy = sortBy || 'relevant'
     return axios.get(`http://localhost:3000/reviews/?product_id=${id}&sort=${sortBy}`)
   }
 
@@ -28,11 +28,9 @@ export const RatingsAndReviewsProvider = ({ children }) => {
     return axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
   }
 
-  function updateReviewsState(id) {
-    Promise.all([get(id), meta(id)])
+  function updateReviewsState(id, sortBy) {
+    Promise.all([get(id, sortBy), meta(id)])
       .then((results) => {
-        console.log('these are the reuslts', results)
-
         let absolutetotal = 0;
         let totalratings = 0;
         for (var key in results[1].data.ratings) {
@@ -45,11 +43,16 @@ export const RatingsAndReviewsProvider = ({ children }) => {
           all: results[0].data.results,
           average: average,
           total: totalratings,
-          meta: results[1].data
+          meta: results[1].data,
         })
-        console.log(state)
       })
       .catch(err => console.log('THIS IS AN ERROR', err))
+  }
+  function getSort(id, sortBy) {
+    dispatch({
+      type: 'UPDATE_SORT',
+      sortBy: sortBy
+    })
   }
 
   function getMetaReviews(id) {
@@ -87,8 +90,9 @@ export const RatingsAndReviewsProvider = ({ children }) => {
     meta: state.meta,
     averageRating: state.averageRating,
     totalRatings: state.totalRatings,
+    sortBy: state.sortBy,
+    getSort,
     updateReviewsState,
-
     getMetaReviews
   }}>
     {children}

@@ -7,6 +7,11 @@ export default (state, action) => {
         averageRating: action.average,
         totalRatings: action.total,
         meta: action.meta
+      };
+    case 'UPDATE_SORT':
+      return {
+        ...state,
+        sortBy: action.sortBy
       }
     default:
       return state;
