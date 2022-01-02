@@ -4,7 +4,6 @@ import axios from 'axios';
 import './answerStyles.css';
 
 const Answer = (props) => {
-  console.log('ANSWER:', props.answer);
   const [helpful, setHelpful] = useState( () => {
     return {
       clicked: false,
@@ -68,9 +67,9 @@ const Answer = (props) => {
               && <span className='user'> - <span className='userSeller'>Seller,</span></span>}
             <span className='userDate'> {date}</span>
             <span className='helpful'>
-              Helpful? <span className='yes' id={props.answer.id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
+              Helpful? <span className='yes' id={props.answer.answer_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
             </span>
-            <span className='report' id={props.answer.id} onClick={handleReport}>
+            <span className='report' id={props.answer.answer_id} onClick={handleReport}>
               {report}
             </span>
           </div>

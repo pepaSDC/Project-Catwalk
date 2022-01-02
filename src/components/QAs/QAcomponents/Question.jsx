@@ -27,18 +27,30 @@ const Question = (props) => {
   const sellerFirst = (answers) => {
     let seller = [];
     let nonSeller = [];
-    for (var key in answers) {
-      if (answers[key].answerer_name === 'Seller') {
-        seller.push(answers[key]);
+    answers.forEach(answer => {
+      if (answer.answerer_name === 'Seller') {
+        seller.push(answer);
       } else {
-        nonSeller.push(answers[key]);
-      };
-    };
+        nonSeller.push(answer);
+      }
+    });
     return [...seller, ...nonSeller];
   };
 
   const [orderedAns, setOrderedAns] = useState( () => {
-    return sellerFirst(props.question.answers);
+    let answers = props.question.answers;
+    let initSeller = [];
+    let initNonSeller = [];
+    for (var key in answers) {
+      if (answers[key].answerer_name === 'Seller') {
+        answers[key].answer_id = key;
+        initSeller.push(answers[key]);
+      } else {
+        answers[key].answer_id = key;
+        initNonSeller.push(answers[key]);
+      };
+    };
+    return [...initSeller, ...initNonSeller];
   });
 
   const handleHelpful = (event) => {
@@ -90,6 +102,7 @@ const Question = (props) => {
           return axios.get(`/qa/questions/${event.target.id}/answers`);
         })
         .then(newData => {
+          console.log('NEW ANSWER:', newData.data.results);
           setView( (curState) => { return !curState; });
           setOrderedAns( (curState) => {
             return sellerFirst(newData.data.results);
