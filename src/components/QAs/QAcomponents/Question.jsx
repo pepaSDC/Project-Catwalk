@@ -27,18 +27,18 @@ const Question = (props) => {
   const sellerFirst = (answers) => {
     let seller = [];
     let nonSeller = [];
-    answers.forEach( ans => {
-      if (ans.answerer_name === 'Seller') {
-        seller.push(ans);
+    for (var key in answers) {
+      if (answers[key].answerer_name === 'Seller') {
+        seller.push(answers[key]);
       } else {
-        nonSeller.push(ans);
-      }
-    });
+        nonSeller.push(answers[key]);
+      };
+    };
     return [...seller, ...nonSeller];
   };
 
   const [orderedAns, setOrderedAns] = useState( () => {
-    return sellerFirst(props.answers);
+    return sellerFirst(props.question.answers);
   });
 
   const handleHelpful = (event) => {
