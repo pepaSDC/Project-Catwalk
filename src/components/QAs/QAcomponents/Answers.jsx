@@ -23,13 +23,13 @@ const Answers = (props) => {
       {view === 'all'
       ? <div>
           {props.answers.map( ans => {
-            return <Answer key={ans.answer_id} answer={ans}/>;
+            return <Answer key={ans.id} answer={ans}/>;
           })}
           <div className='loadMore' onClick={handleLoadMore}>LOAD LESS ANSWERS</div>
         </div>
       : <div>
           {defaultAns.map( ans => {
-            return <Answer key={ans.answer_id} answer={ans}/>;
+            return <Answer key={ans.id} answer={ans}/>;
           })}
           {props.answers.length > defaultAns.length
             && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
