@@ -1,25 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { SelectableStars } from './SelectableStars.jsx';
 import { CharacteristicsForm } from './CharacteristicsForm.jsx';
+import { GlobalContext } from '../../context/GlobalState.js';
 
 export const NewReview = (props) => {
-  // const [answers, useAnswers] = useState(() => {
-  //   return {
-  //     recommend: 'Yes',
-  //     summary: '',
-  //     review: '',
-  //     nickname: '',
-  //     email: '',
-  //     file: []
-  //   }
-  // })
+
+  const {currentProductId} = useContext(GlobalContext);
 
   const [recommend, useRecommend] = useState('Yes');
   const [summary, useSummary] = useState('');
   const [reviewBody, useReviewBody] = useState('');
   const [nickname, useNickname] = useState('');
   const [email, useEmail] = useState('');
-  const [file, useFile] = useState('');
+  const [file, useFile] = useState([]);
 
   const styleModal = {
     position: 'fixed',
@@ -35,7 +28,7 @@ export const NewReview = (props) => {
     display:'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
-    margin: '20% auto',
+    margin: '10% auto',
     padding: '20px',
     border: '1px solid #888',
     width: '70%',
@@ -48,7 +41,30 @@ export const NewReview = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(event);
+    let characteristicRatings = {};
+    let x = Object.keys(props.meta.characteristics).forEach(item=>{
+        for (var i = 0; i < 5; i++) {
+          if (document.getElementsByClassName(item)[i].checked) {
+            characteristicRatings[props.meta.characteristics[item].id] = Number(document.getElementsByClassName(item)[i].value);
+          }
+        }
+      }
+    )
+
+    let body = {
+      product_id: Number(currentProductId),
+      rating: 2,
+      summary: summary,
+      body: reviewBody,
+      recommend: recommend === "Yes" ? true : false,
+      name: nickname,
+      email: email,
+      photos: file,
+      characteristics: characteristicRatings
+    }
+
+
+    console.log(body);
   }
 
   return (
@@ -76,7 +92,10 @@ export const NewReview = (props) => {
         </div>
         <div>
           <p>Characteristics Ratings</p>
-          <CharacteristicsForm char={Object.keys(props.meta.characteristics)[0]}/>
+          {Object.keys(props.meta.characteristics).map( item => {
+            return <CharacteristicsForm char={item} id={item} key={props.meta.characteristics[item].id}/>
+            }
+          )}
         </div>
         <div>
           <p>Review Title</p>
