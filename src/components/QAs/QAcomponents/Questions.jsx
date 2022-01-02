@@ -22,9 +22,7 @@ const Questions = (props) => {
       {props.questions.length > 0 && questions.map( (question) => {
         return (
           <div key={question.question_id} className='oneQ'>
-            {props.answers[question.question_id]
-              && <Question question={question} answers={props.answers[question.question_id]}/>
-            }
+              <Question question={question}/>
           </div>
         );
       })}
