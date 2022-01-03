@@ -86,6 +86,6 @@
 
 .qRadio:checked + .qBody .individualAns {
   min-height: min-content;
-  max-height: 150px;
+  max-height: 50vh;
   overflow-y: auto;
 }
