@@ -18,10 +18,12 @@ const Question = (props) => {
     return false;
   });
 
-  const [errors, setErrors] = useState({
-    body: true,
-    name: true,
-    email: true
+  const [errors, setErrors] = useState( () => {
+    return {
+      body: true,
+      name: true,
+      email: true
+    }
   });
 
   const sellerFirst = (answers) => {
@@ -117,18 +119,22 @@ const Question = (props) => {
 
   return (
     <div className='question'>
-      <div className='qContainer'>
-        <span>Q:</span>
-        <div className='questionBody'>
-          {props.question.question_body}
+      <input className='qRadio' type='radio' name='accordion' id={props.question.question_id}></input>
+      <label className='qBody' htmlFor={props.question.question_id}>
+        <div className='qContainer'>
+          <span>Q:</span>
+          <div className='questionBody'>
+            {props.question.question_body}
+          </div>
+          <div className='helpContainer'>
+            <span className='helpful'>
+              Helpful? <span className='yes' id={props.question.question_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
+            </span>
+            <span className='addAnswer' onClick={handleAddAnswerView}>Add Answer</span>
+          </div>
         </div>
-        <div className='helpContainer'>
-          <span className='helpful'>
-            Helpful? <span className='yes' id={props.question.question_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
-          </span>
-          <span className='addAnswer' onClick={handleAddAnswerView}>Add Answer</span>
-        </div>
-      </div>
+        <Answers answers={orderedAns} />
+      </label>
       <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body}>
         <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
           <label>Your Answer</label>
@@ -145,7 +151,6 @@ const Question = (props) => {
           <input className='submit' type='submit' value='Answer'></input>
         </form>
       </Modal>
-      <Answers answers={orderedAns} />
     </div>
   );
 };
