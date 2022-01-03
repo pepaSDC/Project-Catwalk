@@ -25,14 +25,14 @@ const Answers = (props) => {
           {props.answers.map( ans => {
             return <Answer key={ans.answer_id} answer={ans}/>;
           })}
-          <div className='loadMore' onClick={handleLoadMore}>LOAD LESS ANSWERS</div>
+          <div className='loadMore' onClick={handleLoadMore}>Collapse Answers</div>
         </div>
       : <div>
           {defaultAns.map( ans => {
             return <Answer key={ans.answer_id} answer={ans}/>;
           })}
           {props.answers.length > defaultAns.length
-            && <div className='loadMore' onClick={handleLoadMore}>LOAD MORE ANSWERS</div>
+            && <div className='loadMore' onClick={handleLoadMore}>See More Answers</div>
           }
         </div>
       }
