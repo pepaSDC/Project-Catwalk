@@ -5,7 +5,7 @@ import Search from './QAcomponents/Search.jsx';
 import Questions from './QAcomponents/Questions.jsx';
 
 const container = {
-  border: '1px solid green',
+  padding: '5px',
   position: 'relative'
 };
 
