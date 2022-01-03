@@ -34,30 +34,3 @@ const ComparingModal = (props) => {
 
 
 export default ComparingModal;
-
-
-
-
-// <div className="comp-modal">
-//       <div>product name</div>
-//       <div>feature</div>
-//       <dic>productname</dic>
-//       <div className="comp-card">
-//       {props.comparingList.map((feat, idx) => {
-
-//         return(
-//         <div className="feat-line" key={idx}>
-//           {props.rProductFeatures.includes(feat)
-//           ?<div className="left-check">&#10004;</div>
-//           :<div></div>
-//         }
-//         <div className="feat">{feat}</div>
-//           {props.oProductFeatures.includes(feat)
-//           ?<div className="right-check">&#10004;</div>
-//           :<div></div>
-//           }
-//         </div>
-//         )
-//       })}
-//       </div>
-//     </div>

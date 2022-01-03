@@ -8,50 +8,34 @@ import './styles.css';
 const RelatedProduct = (props) => {
 
   const [modalToggle, setModalToggle] = useState(false);
-  // const [relatedFeatures, setRelatedFeatures] = useState([]);
-  // const [allFeatures, setAllFeatures] = useState([]);
 
   //sets a default image
   if (props.information[1] === null) {
     props.information[1] = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg"
   }
-  //create a total feature array along with features arrays from
-  //overveiw and related products
-    let oProductFeatures = [];
-    let rProductFeatures = [];
-    for(let i = 0; i < props.information[0].features.length; i++) {
-      let curFeat = props.information[0].features[i]
-      if(typeof curFeat.value === 'string' && typeof curFeat.feature === 'string') {
-        oProductFeatures.push(curFeat.value+' '+curFeat.feature);
-      }
+
+  let oProductFeatures = [];
+  let rProductFeatures = [];
+  for(let i = 0; i < props.information[0].features.length; i++) {
+    let curFeat = props.information[0].features[i]
+    if(typeof curFeat.value === 'string' && typeof curFeat.feature === 'string') {
+      oProductFeatures.push(curFeat.value+' '+curFeat.feature);
     }
-    for(let i = 0; i < props.currentProductInfo.length; i++) {
-      let curFeat = props.currentProductInfo[i]
-      if(typeof curFeat.value === 'string' && typeof curFeat.feature === 'string') {
-        rProductFeatures.push(curFeat.value+' '+curFeat.feature);
-      }
+  }
+  for(let i = 0; i < props.currentProductInfo.length; i++) {
+    let curFeat = props.currentProductInfo[i]
+    if(typeof curFeat.value === 'string' && typeof curFeat.feature === 'string') {
+      rProductFeatures.push(curFeat.value+' '+curFeat.feature);
     }
-    let allList = oProductFeatures.concat(rProductFeatures);
-    let comparingList = allList.filter((item, pos) => {
-      return allList.indexOf(item) == pos;
-    });
-    for(let i = 0; i < oProductFeatures.length; i++) {
+  }
+  let allList = oProductFeatures.concat(rProductFeatures);
+  let comparingList = allList.filter((item, pos) => {
+    return allList.indexOf(item) == pos;
+  });
+  for(let i = 0; i < oProductFeatures.length; i++) {
 
-    }
+  }
 
-
-
-    // useEffect(() =>{
-
-    // },[]);
-
-
-  console.log('modal toggle::', modalToggle);
-
-
-
-
-  //create render toggle button for comparing modal
   return(
    <div className={`card ${props.cardStyle}`} onMouseDown={props.handleMouseDown}>
      <button className="compare-btn" onClick={() => modalToggle === false ? setModalToggle(true) : setModalToggle(false) }>&#9734;</button>
@@ -75,7 +59,6 @@ const RelatedProduct = (props) => {
       }
   </div>
   )
-
 }
 
 export default RelatedProduct;

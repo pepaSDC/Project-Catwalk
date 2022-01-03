@@ -34,8 +34,6 @@ export const RelatedProducts = () => {
     })
   }
 
-
-
   //function to update state with an array of currentId return promises
   const updateRelatedProductInfoState = (id) => {
     const promiseArr = getRelatedIDs(id)
@@ -48,7 +46,6 @@ export const RelatedProducts = () => {
 
     return Promise.all(promiseArr);
   }
-
 
   useEffect(() =>{
     //update the related products state is called an used
@@ -67,7 +64,6 @@ export const RelatedProducts = () => {
     })
 
   },[currentProductId]);
-  // console.log('line 62 in relatedProducts' , relatedProductArray);
 
   return (
     <div>
