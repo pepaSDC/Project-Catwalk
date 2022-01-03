@@ -16,13 +16,19 @@ let styleShowcaseRowStyle = {
 export const StyleShowcase = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles, getProductInfo, productInfo, featuredStyleIndex
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex
   } = useContext(OverviewContext);
 
   let id = currentProductId;
 
   useEffect(() => {
-    getProductStyles(id);
+    getProductStyles(id)
+    return (() => {
+      resetProductValue([])
+    })
   }, [id])
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []

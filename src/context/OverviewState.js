@@ -42,6 +42,13 @@ export const OverviewProvider = ({ children }) => {
       })
   }
 
+  function resetProductValue(value) {
+    overviewDispatch({
+      type: 'RESET_PRODUCT_VALUE',
+      payload: value
+    })
+  }
+
   function updateCurrentStyle (id) {
     overviewDispatch({
       type: 'UPDATE_CURRENT_STYLE',
@@ -66,6 +73,7 @@ export const OverviewProvider = ({ children }) => {
   return(<OverviewContext.Provider value={{
     getProductInfo,
     getProductStyles,
+    resetProductValue,
     updateCurrentStyle,
     updateFeaturedPhoto,
     updateSelectedItemSku,

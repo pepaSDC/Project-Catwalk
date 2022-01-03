@@ -15,13 +15,19 @@ const originalPricingIfSale = {
 export const Pricing = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles, featuredStyleIndex
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex,
   } = useContext(OverviewContext);
 
   let id = currentProductId;
 
   useEffect(() => {
     getProductStyles(id)
+    return (() => {
+      resetProductValue([])
+    })
   }, [id])
 
   const originalPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
