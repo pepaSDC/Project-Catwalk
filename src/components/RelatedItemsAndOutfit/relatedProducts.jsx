@@ -10,6 +10,8 @@ export const RelatedProducts = () => {
 
   //local state
   const [relatedProductArray, setRelatedProductArray] = useState([]);
+  const [currentProductInfo, setCurrentProductInfo] = useState({});
+  const [currentProductName, setCurrentProductName] = useState('');
   //axios call to get products information by id
   const getProduct = (id) => {
     return axios({
@@ -32,8 +34,6 @@ export const RelatedProducts = () => {
     })
   }
 
-
-
   //function to update state with an array of currentId return promises
   const updateRelatedProductInfoState = (id) => {
     const promiseArr = getRelatedIDs(id)
@@ -47,7 +47,6 @@ export const RelatedProducts = () => {
     return Promise.all(promiseArr);
   }
 
-
   useEffect(() =>{
     //update the related products state is called an used
     updateRelatedProductInfoState(currentProductId)
@@ -58,13 +57,22 @@ export const RelatedProducts = () => {
       setRelatedProductArray(dataOnly);
     })
 
+    getProduct(currentProductId)
+    .then(proInfo => {
+      setCurrentProductInfo(proInfo.data.features);
+      setCurrentProductName(proInfo.data.name);
+    })
+
   },[currentProductId]);
-  // console.log('line 62 in relatedProducts' , relatedProductArray);
 
   return (
     <div>
       <div className="app"></div>
-      <RelatedProductsCardCarousel relatedProductArray={relatedProductArray}/>
+      <RelatedProductsCardCarousel
+        relatedProductArray={relatedProductArray}
+        currentProductInfo={currentProductInfo}
+        currentProductName={currentProductName}
+      />
     </div>
   );
 }
