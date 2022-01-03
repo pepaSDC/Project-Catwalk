@@ -70,7 +70,7 @@ export const NewReview = (props) => {
   return (
     <div style={styleModal}>
       <div style={styleForm}>
-      <span onClick={clickHandler}>&times;</span>
+      <div style={{paddingRight: '100%'}} onClick={clickHandler}>&times;</div>
       <h2 style={{margin: '5px'}}>Add Your Review</h2>
       <form onSubmit={submitHandler}>
         <SelectableStars useRating={useRating}/>
