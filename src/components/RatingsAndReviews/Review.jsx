@@ -25,7 +25,6 @@ export const Review = ({ review }) => {
 
   const clickHandlerHelp = (event) => {
     if (!helpful.clicked) {
-      console.log('axios is being sent');
       axios.put(`http://localhost:3000/reviews/${review.review_id}/helpful/?review_id=${review.review_id}`, '')
       .then( (data) => {
         setHelpful( (currState) => {
@@ -50,7 +49,7 @@ export const Review = ({ review }) => {
       <div className="reviewHeader" style={{display: 'flex', justifyContent: 'space-between'}}>
         <span><StarRating rating={review.rating}/></span>
         <div>
-          <span>{review.reviewer_name.length === 0 ? "Anonymous" : review.reviewer_name }</span>
+          <span style={{padding: '0 10px', fontWeight: 'bold'}}>{review.reviewer_name.length === 0 ? "Anonymous" : review.reviewer_name }</span>
           <PrettyDate date={review.date}/>
         </div>
       </div>

@@ -57,7 +57,7 @@ const api = {
         },
         params: {
           page: 1,
-          count: 50,
+          count: 100,
           sort: sortBy,
           product_id: id
         }

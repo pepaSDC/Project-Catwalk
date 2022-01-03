@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalState.js'
-import { RatingsAndReviewsContext } from '../../context/RatingsAndReviewsState.js'
+import { GlobalContext } from '../../context/GlobalState.js';
+import { RatingsAndReviewsContext } from '../../context/RatingsAndReviewsState.js';
 import {ReviewList} from './ReviewList.jsx';
 import {RatingBreakdown} from './RatingBreakdown.jsx';
 import {ProductBreakdown} from './ProductBreakdown.jsx';
@@ -22,25 +22,29 @@ export const RatingsAndReviews = (props) => {
 
   //establish local state
   const {currentProductId} = useContext(GlobalContext);
-  const {allReviews, meta, averageRating, totalRatings, getAllReviews, getMetaReviews} = useContext(RatingsAndReviewsContext);
+  const {updateReviewsState, meta, allReviews, averageRating, totalRatings, sortBy} = useContext(RatingsAndReviewsContext);
 
   useEffect(() => {
-    getAllReviews(currentProductId);
-    getMetaReviews(currentProductId);
-  }, [currentProductId])
+    let isAPISubsribed = true;
+    updateReviewsState(currentProductId, sortBy);
+    return () => {
+      isAPISubsribed = false;
+    }
+  }, [currentProductId, sortBy])
 
-  return (
-    <div id="ratingsAndReviews" style={{margin: '0 30px'}}>
-      RATINGS AND REVIEWS
+  return ( allReviews.length !== 0 ?
+    <div style={{margin: '30px 30px'}}>
+      <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
       <div className="reviewsModule" style={styleReviews}>
         <div className="reviewsAside" style={styleAside}>
           <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
           <ProductBreakdown characteristics={meta.characteristics}/>
         </div>
-        <ReviewList state={allReviews}/>
+        <ReviewList state={allReviews} meta={meta}/>
       </div>
 
     </div>
+    : null
   );
 };
 
