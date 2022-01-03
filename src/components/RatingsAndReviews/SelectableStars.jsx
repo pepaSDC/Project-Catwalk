@@ -44,10 +44,7 @@ export const SelectableStars = (props) => {
   const clickHandler = (e) => {
     if (!selected) {
       useSelect(true);
-      console.log('this is e.target', e.target)
       props.useRating( Number(e.target.getAttribute('value')) )
-
-      // props.useRating(Number(event.target.name));
     } else {
       useSelect(false);
       props.useRating(null);
