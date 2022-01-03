@@ -64,10 +64,8 @@
   min-height: 0;
   max-height: 0;
   overflow: hidden;
-}
-
-.question * {
   transition: all 0.5s ease;
+  transition-delay: 0;
 }
 
 .qRadio {
@@ -75,10 +73,11 @@
 }
 
 .qContainer {
-  background-color: #ffffff;
   border: 1px solid transparent;
-  border-radius: 5px;
+  border-radius: 2px;
   cursor: pointer;
+  position: relative;
+  display: block;
 }
 
 .qContainer:hover {
