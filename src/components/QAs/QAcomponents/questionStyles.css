@@ -2,6 +2,11 @@
   padding-bottom: 5px;
 }
 
+.question {
+  border-radius: 2px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
 .question .qContainer {
   display: flex;
   flex-direction: row;
@@ -57,7 +62,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: cyan;
+  background-image: url('https://wallpaper.dog/large/10708103.jpg');
+  background-size: cover;
   padding: 80px;
   z-index: 1000;
   border-radius: 5px;
@@ -66,11 +72,13 @@
 
 .modal .title {
   padding-bottom: 10px;
+  color: blanchedalmond;
 }
 
 .modal .subtitle {
   font-size: 12px;
   font-weight: 300;
+  color: blanchedalmond;
 }
 
 .form {
@@ -79,6 +87,7 @@
   align-items: flex-start;
   justify-content: center;
   align-content: center;
+  color: blanchedalmond;
 }
 
 .form textarea,
@@ -90,4 +99,10 @@
 
 .form .submit {
   size: 5%;
+}
+
+.error {
+  color: red;
+  font-size: 9px;
+  font-weight: lighter;
 }

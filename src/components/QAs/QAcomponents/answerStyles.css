@@ -52,12 +52,45 @@
 }
 
 .loadMore {
-  font-size: 9px;
+  font-size: 12px;
   padding-left: 5px;
   padding-top: 5px;
+  cursor: pointer;
 }
 
 .individualAns {
   display: flex;
   align-items: baseline;
+  min-height: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  transition-delay: 0;
 }
+
+.qRadio {
+  display: none;
+}
+
+.qContainer {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  display: block;
+}
+
+.qContainer:hover {
+  border-color: rgb(0, 175, 157);
+}
+
+.qRadio:checked + .qBody .individualAns {
+  min-height: min-content;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+/* .answer:first-child,
+.answer:nth-child(2) {
+  display: none;
+} */
