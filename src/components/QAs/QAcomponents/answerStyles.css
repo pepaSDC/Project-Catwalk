@@ -61,4 +61,32 @@
 .individualAns {
   display: flex;
   align-items: baseline;
+  min-height: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.question * {
+  transition: all 0.5s ease;
+}
+
+.qRadio {
+  display: none;
+}
+
+.qContainer {
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qContainer:hover {
+  border-color: rgb(0, 175, 157);
+}
+
+.qRadio:checked + .qBody .individualAns {
+  min-height: min-content;
+  max-height: 150px;
+  overflow-y: auto;
 }
