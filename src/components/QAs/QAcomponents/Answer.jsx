@@ -54,6 +54,11 @@ const Answer = (props) => {
           <div className='answerText'>
             {props.answer.body}
           </div>
+          {props.answer.photos.length > 0
+            && props.answer.photos.map( photo => {
+              <img src={photo} />
+            })
+          }
           <div>
             <span className='user'>
               by {props.answer.answerer_name},

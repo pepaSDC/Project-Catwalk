@@ -5,7 +5,7 @@ import Search from './QAcomponents/Search.jsx';
 import Questions from './QAcomponents/Questions.jsx';
 
 const container = {
-  border: '1px solid green',
+  padding: '5px',
   position: 'relative'
 };
 
@@ -18,38 +18,11 @@ const textStyle = {
 export const QA = () => {
   const { currentProductId } = useContext(GlobalContext);
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState({});
 
   const getQAs = () => {
     axios.get(`/qa/questions?product_id=${currentProductId}`)
       .then(response => {
         setQuestions(response.data.results);
-        return response.data.results;
-      })
-      .then(data => {
-        let promises = data.map(q => {
-          return new Promise ( (resolve, reject) => {
-            axios.get(`/qa/questions/${q.question_id}/answers`)
-              .then(response => {
-                let answer = {
-                  questionId: q.question_id,
-                  answers: response.data.results
-                }
-                resolve(answer);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-        });
-        return Promise.all(promises);
-      })
-      .then(ans => {
-        let answerState = {};
-        ans.forEach( a => {
-          answerState[a.questionId] = a.answers
-        });
-        setAnswers(answerState);
       })
       .catch(err => console.log(err));
   };
@@ -58,7 +31,6 @@ export const QA = () => {
     getQAs();
     return () => {
       setQuestions([]);
-      setAnswers({});
     };
   }, [currentProductId]);
 
@@ -67,8 +39,7 @@ export const QA = () => {
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search />
       {questions.length > 0
-        ? <Questions questions={questions} answers={answers}/>
-        : <div>No Questions Yet</div>
+        && <Questions questions={questions}/>
       }
     </div>
   );

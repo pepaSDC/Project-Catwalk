@@ -4,6 +4,7 @@ import axios from 'axios';
 import './questionStyles.css';
 import Answers from './Answers.jsx';
 import Modal from './Modal.jsx';
+import UploadPhotos from './UploadPhotos.jsx';
 
 const Question = (props) => {
   const [helpful, setHelpful] = useState( () => {
@@ -17,21 +18,41 @@ const Question = (props) => {
     return false;
   });
 
+  const [errors, setErrors] = useState( () => {
+    return {
+      body: true,
+      name: true,
+      email: true
+    }
+  });
+
   const sellerFirst = (answers) => {
     let seller = [];
     let nonSeller = [];
-    answers.forEach( ans => {
-      if (ans.answerer_name === 'Seller') {
-        seller.push(ans);
+    answers.forEach(answer => {
+      if (answer.answerer_name === 'Seller') {
+        seller.push(answer);
       } else {
-        nonSeller.push(ans);
+        nonSeller.push(answer);
       }
     });
     return [...seller, ...nonSeller];
   };
 
   const [orderedAns, setOrderedAns] = useState( () => {
-    return sellerFirst(props.answers);
+    let answers = props.question.answers;
+    let initSeller = [];
+    let initNonSeller = [];
+    for (var key in answers) {
+      if (answers[key].answerer_name === 'Seller') {
+        answers[key].answer_id = key;
+        initSeller.push(answers[key]);
+      } else {
+        answers[key].answer_id = key;
+        initNonSeller.push(answers[key]);
+      };
+    };
+    return [...initSeller, ...initNonSeller];
   });
 
   const handleHelpful = (event) => {
@@ -54,56 +75,82 @@ const Question = (props) => {
   const handleAddAnswerView = (event) => {
     event.preventDefault();
     setView( (currState) => { return !currState; });
+    setErrors( (curState) => ({body: true, name: true, email: true}));
   };
 
   const handleAnswerSubmit = (event) => {
     event.preventDefault();
+    let error = false;
     let answer = {
-      body: event.target.body.value,
-      name: event.target.username.value,
-      email: event.target.email.value
+      body: event.target.body.value || undefined,
+      name: event.target.username.value || undefined,
+      email: event.target.email.value || undefined
     };
-    axios.post(`/qa/questions/${event.target.id}/answers`, answer)
-      .then(response => {
-        return axios.get(`/qa/questions/${event.target.id}/answers`);
-      })
-      .then(newData => {
-        setView( (currState) => { return !currState; });
-        setOrderedAns( (curState) => {
-          return sellerFirst(newData.data.results);
+    for (var val in answer) {
+      if (answer[val] === undefined) {
+        error = true;
+      };
+    };
+    if (error) {
+      if (answer.email) {
+        if (!answer.email.includes('@') || !answer.email.includes('.com')) {
+          answer.email = 'wrong';
+        };
+      };
+      setErrors(answer);
+    } else {
+      axios.post(`/qa/questions/${event.target.id}/answers`, answer)
+        .then(response => {
+          return axios.get(`/qa/questions/${event.target.id}/answers`);
+        })
+        .then(newData => {
+          console.log('NEW ANSWER:', newData.data.results);
+          setView( (curState) => { return !curState; });
+          setOrderedAns( (curState) => {
+            return sellerFirst(newData.data.results);
+          });
+          setErrors( (curState) => ({body: true, name: true, email: true}));
+        })
+        .catch(error => {
+          console.log(error.message);
         });
-      })
-      .catch(error => {
-        console.log(error.message);
-      });
+    };
   };
 
   return (
     <div className='question'>
-      <div className='qContainer'>
-        <span>Q:</span>
-        <div className='questionBody'>
-          {props.question.question_body}
+      <input className='qRadio' type='radio' name='accordion' id={props.question.question_id}></input>
+      <label className='qBody' htmlFor={props.question.question_id}>
+        <div className='qContainer'>
+          <span>Q:</span>
+          <div className='questionBody'>
+            {props.question.question_body}
+          </div>
+          <div className='helpContainer'>
+            <span className='helpful'>
+              Helpful? <span className='yes' id={props.question.question_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
+            </span>
+            <span className='addAnswer' onClick={handleAddAnswerView}>Add Answer</span>
+          </div>
         </div>
-        <div className='helpContainer'>
-          <span className='helpful'>
-            Helpful? <span className='yes' id={props.question.question_id} onClick={handleHelpful}>Yes</span> ({helpful.amount})
-          </span>
-          <span className='addAnswer' onClick={handleAddAnswerView}>Add Answer</span>
-        </div>
-      </div>
+        <Answers answers={orderedAns} />
+      </label>
       <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body}>
         <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
           <label>Your Answer</label>
-          <textarea name='body' rows='8'></textarea>
+          <textarea name='body' maxLength='1000' rows='8'></textarea>
+          {!errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
           <label>What is your nickname</label>
-          <input className='username' type='text' name='username' placeholder='Example: jack543'></input>
+          <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jack543'></input>
+          {!errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
           <label>Your Email</label>
-          <input className='email' type='email' name='email' placeholder='Example: jack@email.com'></input>
+          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
+          {!errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
+          <label>Upload your photos</label>
+          <UploadPhotos />
           <input className='submit' type='submit' value='Answer'></input>
         </form>
       </Modal>
-      <Answers answers={orderedAns} />
     </div>
   );
 };
