@@ -13,6 +13,7 @@ export const NewReview = (props) => {
   const [nickname, useNickname] = useState('');
   const [email, useEmail] = useState('');
   const [file, useFile] = useState([]);
+  const [rating, useRating] = useState(null);
 
   const styleModal = {
     position: 'fixed',
@@ -27,9 +28,10 @@ export const NewReview = (props) => {
   const styleForm = {
     display:'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     backgroundColor: 'white',
     margin: '10% auto',
-    padding: '20px',
+    padding: '30px 50px',
     border: '1px solid #888',
     width: '70%',
     borderRadius: '5px'
@@ -53,7 +55,7 @@ export const NewReview = (props) => {
 
     let body = {
       product_id: Number(currentProductId),
-      rating: 2,
+      rating: rating,
       summary: summary,
       body: reviewBody,
       recommend: recommend === "Yes" ? true : false,
@@ -62,8 +64,6 @@ export const NewReview = (props) => {
       photos: file,
       characteristics: characteristicRatings
     }
-
-
     console.log(body);
   }
 
@@ -71,10 +71,10 @@ export const NewReview = (props) => {
     <div style={styleModal}>
       <div style={styleForm}>
       <span onClick={clickHandler}>&times;</span>
-      <h4>Add Your Review</h4>
+      <h2 style={{margin: '5px'}}>Add Your Review</h2>
       <form onSubmit={submitHandler}>
-        <SelectableStars />
-        <div>
+        <SelectableStars useRating={useRating}/>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <p>Do you recommend this product?</p>
           <label htmlFor="recommendYes">Yes</label>
           <input
@@ -90,28 +90,34 @@ export const NewReview = (props) => {
 
           </input>
         </div>
-        <div>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <p>Characteristics Ratings</p>
           {Object.keys(props.meta.characteristics).map( item => {
             return <CharacteristicsForm char={item} id={item} key={props.meta.characteristics[item].id}/>
             }
           )}
         </div>
-        <div>
-          <p>Review Title</p>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
+          <label>Review Summary: </label>
           <input onChange={(e) => useSummary(e.target.value)}type="text" placeholder="Example: Best purchase ever!"></input>
         </div>
-        <div>
-          <p>Review: </p>
-          <input onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?"></input>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
+          <label>Review Body: </label>
+          <input onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></input>
         </div>
-        <input onChange={(e)=>console.log(document.getElementById('myFile').files)} type="file" id="myFile" name="filename"></input>
-        {file !== '' ? <img style={{width: '50px'}} src={file}></img> : null}
-        <label htmlFor="nickname">Nickname: </label>
-        <input onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea"></input>
-        <label htmlFor="email">Email: </label>
-        <input onChange={(e) => useEmail(e.target.value)} type="email"></input>
-        <input type="submit" value="Submit!!"></input>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
+          <input onChange={(e)=>console.log(document.getElementById('myFile').files)} type="file" id="myFile" name="filename"></input>
+          {file !== '' ? <img style={{width: '50px'}} src={file}></img> : null}
+        </div>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
+          <label htmlFor="nickname">Nickname: </label>
+          <input style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" required></input>
+          <label htmlFor="email">  Email: </label>
+          <input onChange={(e) => useEmail(e.target.value)} type="email" required></input>
+        </div>
+        <div style={{padding: '10px'}}>
+          <input type="submit" value="Submit!!"></input>
+        </div>
       </form>
 
       </div>

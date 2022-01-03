@@ -19,7 +19,7 @@ export const ReviewList = (props) => {
     <div style={{width: '66%', height: '90vh', overflowY: 'auto', overflowX: 'hidden'}}>
       <SortOptions number={props.state.length}/>
       {reviews.map((review) => <Review key={review.review_id} review={review}/> )}
-      <div>
+      <div style={{margin: '10px', padding: '10px'}}>
         {props.state.length > reviews.length ? <button onClick={clickHandler}>More Reviews</button> : null}
         <button onClick={addReview}>Add A Review +</button>
         {modal ? <NewReview setModal={setModal} meta={props.meta}/> : null}

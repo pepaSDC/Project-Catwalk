@@ -36,7 +36,7 @@ export const CharacteristicsForm = (props) => {
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
         <div>
           <label>1</label>
-          <input onChange={()=>useRating(1)} type="radio" name={props.char} value='1' className={props.char}></input>
+          <input onChange={()=>useRating(1)} type="radio" name={props.char} value='1' className={props.char} required></input>
         </div>
         <div>
           <label>2</label>
