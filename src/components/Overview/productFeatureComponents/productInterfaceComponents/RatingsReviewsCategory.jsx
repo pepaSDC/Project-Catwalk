@@ -33,7 +33,7 @@ export const RatingsReviewsCategory = () => {
   }, [id])
 
     const productCategory = productInfo.data ? productInfo.data.category: ''
-    console.log('average rating', averageRating)
+    // console.log('average rating', averageRating)
 
   return (
     <div

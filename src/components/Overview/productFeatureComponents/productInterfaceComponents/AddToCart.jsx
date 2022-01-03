@@ -43,7 +43,7 @@ export const AddToCart = () => {
 
   const itemQuantities = skuObject[selectedItemSkuNumber] ? skuObject[selectedItemSkuNumber].quantity : 0
   const itemQuantitiesArray = skuObject[selectedItemSkuNumber] ? Array.from({length: itemQuantities}, (value, key) => key + 1) : []
-  console.log('line 44 in AddtoCart: ', itemQuantitiesArray);
+  // console.log('line 44 in AddtoCart: ', itemQuantitiesArray);
 
   return (
     <div
