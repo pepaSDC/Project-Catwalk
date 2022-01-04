@@ -6,8 +6,6 @@ import { OverviewContext } from '../../../../context/OverviewState.js'
 export const ProductGalleryThumbnailItem = (props) => {
   // const { currentProductId } = useContext(GlobalContext);
   const {
-    // productStyles,
-    // getProductStyles,
     updateFeaturedPhoto,
     featuredProductImageIndex
   } = useContext(OverviewContext);

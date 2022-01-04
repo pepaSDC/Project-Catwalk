@@ -10,7 +10,7 @@ export const RelatedProducts = () => {
 
   //local state
   const [relatedProductArray, setRelatedProductArray] = useState([]);
-  const [currentProductInfo, setCurrentProductInfo] = useState([]);
+  const [currentProductInfo, setCurrentProductInfo] = useState({});
   const [currentProductName, setCurrentProductName] = useState('');
   //axios call to get products information by id
   const getProduct = (id) => {

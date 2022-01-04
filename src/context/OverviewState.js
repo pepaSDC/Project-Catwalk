@@ -63,6 +63,13 @@ export const OverviewProvider = ({ children }) => {
     })
   }
 
+  function resetProductValue(value) {
+    overviewDispatch({
+      type: 'RESET_PRODUCT_VALUE',
+      payload: value
+    })
+  }
+
   function incrementFeaturedPhotoIndex (value) {
     overviewDispatch({
       type: 'INCREMENT_FEATURED_INDEX',
@@ -80,7 +87,7 @@ export const OverviewProvider = ({ children }) => {
   return(<OverviewContext.Provider value={{
     getProductInfo,
     getProductStyles,
-    updateCurrentStyle,
+    resetProductValue,
     updateFeaturedPhoto,
     updateSelectedItemSku,
     decrementFeaturedPhotoIndex,

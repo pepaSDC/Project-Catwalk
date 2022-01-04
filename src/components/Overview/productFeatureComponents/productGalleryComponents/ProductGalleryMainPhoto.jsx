@@ -8,16 +8,21 @@ import rightArrow from './arrow-gray-right.png'
 export const ProductGalleryMainPhoto = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles,
-    featuredStyleIndex, featuredProductImageIndex,
-    decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex,
+    featuredProductImageIndex,
+    decrementFeaturedPhotoIndex,
+    incrementFeaturedPhotoIndex
   } = useContext(OverviewContext);
 
-  let id = currentProductId;
-
   useEffect(() => {
-    getProductStyles(id);
-  }, [id])
+    getProductStyles(currentProductId)
+    return (() => {
+      resetProductValue([]);
+    })
+  }, [currentProductId])
 
   const ProductGalleryThumbnailsStyle = {
     position: 'relative',
