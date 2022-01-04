@@ -103,7 +103,7 @@ export const NewReview = (props) => {
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <label>Review Body: </label>
-          <input onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></input>
+          <textarea onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></textarea>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <input onChange={(e)=>console.log(document.getElementById('myFile').files)} type="file" id="myFile" name="filename"></input>
@@ -111,9 +111,9 @@ export const NewReview = (props) => {
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <label htmlFor="nickname">Nickname: </label>
-          <input style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" required></input>
+          <input style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" placeholder="Example: jackson11!" required></input>
           <label htmlFor="email">  Email: </label>
-          <input onChange={(e) => useEmail(e.target.value)} type="email" required></input>
+          <input style={{width:'250px'}} onChange={(e) => useEmail(e.target.value)} type="email" placeholder="Example: jackson11@email.com" required></input>
         </div>
         <div style={{padding: '10px'}}>
           <input type="submit" value="Submit!!"></input>
