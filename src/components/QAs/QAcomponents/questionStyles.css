@@ -62,9 +62,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url('https://wallpaper.dog/large/10708103.jpg');
-  background-size: cover;
   padding: 80px;
+  background-color: whitesmoke;
   z-index: 1000;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -72,13 +71,13 @@
 
 .modal .title {
   padding-bottom: 10px;
-  color: blanchedalmond;
+  color: black;
 }
 
 .modal .subtitle {
   font-size: 12px;
   font-weight: 300;
-  color: blanchedalmond;
+  color: black;
 }
 
 .form {
@@ -87,7 +86,7 @@
   align-items: flex-start;
   justify-content: center;
   align-content: center;
-  color: blanchedalmond;
+  color: black;
 }
 
 .form textarea,
