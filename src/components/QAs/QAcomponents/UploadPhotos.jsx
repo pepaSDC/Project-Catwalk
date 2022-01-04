@@ -1,36 +1,40 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
 import React, { useState } from 'react';
 
 const style = {
   height: '65px',
   width: '65px'
-}
+};
 
 const UploadPhotos = (props) => {
-  var counter = 0;
-  const [photos, setPhotos] = useState([]);
   const [previews, setPreviews] = useState([]);
 
   const handleSelected = (event) => {
-    counter += 1;
-    let file = event.target.files[0];
-    let reader = new FileReader();
-    reader.onload = function(e) {
-      let data = {
-        id: counter,
-        url: e.target.result
-      };
-      setPreviews([...previews, data]);
+    let len = Object.keys(event.target.files);
+
+    let files = event.target.files
+    let data = [];
+    for (let i = 0; i < len.length; i++) {
+      let url = URL.createObjectURL(files[len[i]]);
+      data.push(url);
     };
-    reader.readAsDataURL(file);
+    setPreviews([...previews, ...data]);
   };
 
   return (
-    <div>
-      <input className='uploadPhotos' type='file' onChange={handleSelected}>
-      </input>
-      {previews.length > 0 && previews.map(photo => {
-        return <img style={style} key={photo.id} className='thumbnail' src={photo.url}></img>
-      })}
+    <div className='upload'>
+      <label htmlFor='uploadPhotos' className='photoLabel'>
+        <input id='uploadPhotos' type='file' multiple accept='image/*' onChange={handleSelected} style={{display: 'none'}}/>
+        Select Images
+      </label>
+      <div>
+        {previews.length > 0
+          ? previews.map(photo => { return <img style={style} className='thumbnail' src={photo}></img>})
+          : <span>No images selected</span>
+        }
+      </div>
+      {props.error && <div>Too many pictures</div>}
     </div>
   );
 };
