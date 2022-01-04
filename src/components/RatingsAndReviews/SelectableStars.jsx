@@ -11,7 +11,7 @@ export const SelectableStars = (props) => {
     position: 'relative',
     margin: '0',
     padding: '0',
-    fontSize: '64px'
+    fontSize: '50px'
   }
   const fillRating = {
     color: '#e7711b',
