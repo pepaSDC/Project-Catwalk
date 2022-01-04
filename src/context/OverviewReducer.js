@@ -25,6 +25,16 @@ export default (state, action) => {
       ...state,
       selectedItemSkuNumber: action.payload
       }
+    case 'INCREMENT_FEATURED_INDEX':
+      return {
+        ...state,
+        featuredProductImageIndex: action.payload
+      }
+    case 'DECREMENT_FEATURED_INDEX':
+      return {
+        ...state,
+        featuredProductImageIndex: action.payload
+      }
     default:
         return state;
   }

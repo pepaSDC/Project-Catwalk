@@ -63,12 +63,28 @@ export const OverviewProvider = ({ children }) => {
     })
   }
 
+  function incrementFeaturedPhotoIndex (value) {
+    overviewDispatch({
+      type: 'INCREMENT_FEATURED_INDEX',
+      payload: value
+    })
+  }
+
+  function decrementFeaturedPhotoIndex (value) {
+    overviewDispatch({
+      type: 'DECREMENT_FEATURED_INDEX',
+      payload: value
+    })
+  }
+
   return(<OverviewContext.Provider value={{
     getProductInfo,
     getProductStyles,
     updateCurrentStyle,
     updateFeaturedPhoto,
     updateSelectedItemSku,
+    decrementFeaturedPhotoIndex,
+    incrementFeaturedPhotoIndex,
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,
     featuredStyleIndex: overviewState.featuredStyleIndex,

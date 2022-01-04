@@ -9,7 +9,8 @@ export const ProductGalleryMainPhoto = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
     getProductStyles, productStyles,
-    featuredStyleIndex, featuredProductImageIndex
+    featuredStyleIndex, featuredProductImageIndex,
+    decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex
   } = useContext(OverviewContext);
 
   let id = currentProductId;
@@ -17,10 +18,6 @@ export const ProductGalleryMainPhoto = () => {
   useEffect(() => {
     getProductStyles(id);
   }, [id])
-
-  let productStylesArray = productStyles.data ? productStyles.data.results : []
-  let featuredProductPhoto = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos[featuredProductImageIndex].url : ''
-  let productStylesArrayMaxIndex = productStyles.data ? (productStylesArray.length - 1) : 0
 
   const ProductGalleryThumbnailsStyle = {
     position: 'relative',
@@ -61,6 +58,30 @@ export const ProductGalleryMainPhoto = () => {
     width: '25px',
     position: 'relative',
     right: '53px',
+    opacity: '0'
+  }
+
+  let productStylesArray = productStyles.data ? productStyles.data.results : []
+  let featuredProductPhoto = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos[featuredProductImageIndex].url : ''
+  let productStylesArrayMaxIndex = productStyles.data ? (productStylesArray.length - 1) : 0
+  let leftButtonStyling = (featuredProductImageIndex === 0) ? concealLeftButtonStyle : leftButtonStyle
+  let rightButtonStyling = (featuredProductImageIndex === productStylesArrayMaxIndex) ? concealRightButtonStyle : rightButtonStyle
+
+  const incrementProductStylesArrayIndex = (event) => {
+    event.preventDefault();
+    if (featuredProductImageIndex !== productStylesArrayMaxIndex) {
+      let newIndex = (featuredProductImageIndex + 1)
+      incrementFeaturedPhotoIndex(newIndex);
+    }
+  }
+
+  const decrementProductStylesArrayIndex = (event) => {
+    event.preventDefault();
+    if (featuredProductImageIndex !== 0) {
+      let newIndex = (featuredProductImageIndex - 1)
+      decrementFeaturedPhotoIndex(newIndex);
+    }
+
   }
 
   return (
@@ -85,13 +106,15 @@ export const ProductGalleryMainPhoto = () => {
         >
         <img
           src={leftArrow}
-          style={leftButtonStyle}
-          className="leftButton">
+          style={leftButtonStyling}
+          className="leftButton"
+          onClick={decrementProductStylesArrayIndex}>
         </img>
         <img
           src={rightArrow}
-          style={rightButtonStyle}
-          className="rightButton">
+          style={rightButtonStyling}
+          className="rightButton"
+          onClick={incrementProductStylesArrayIndex}>
         </img>
       </div>
     </div>
