@@ -72,6 +72,28 @@ export const NewReview = (props) => {
       .catch(err => console.log(err))
   }
 
+  let widget = window.cloudinary.createUploadWidget(
+    {
+    cloudName: 'dkx7ghwza',
+    uploadPreset:'rwqy5jkq'
+    },
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        if (result.event === 'success') {
+          console.log(result.info.secure_url);
+          useFile([...file, result.info.secure_url])
+        }
+      }
+    }
+    )
+
+  const showWidget = (widget) => {
+    widget.open();
+  }
+
+
   return (
     <div style={styleModal}>
       <div style={styleForm}>
@@ -110,15 +132,14 @@ export const NewReview = (props) => {
           <textarea style={{width: '50%'}} onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></textarea>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
-          <input onChange={(e)=>console.log(document.getElementById('myFile').files)} type="file" id="myFile" name="filename"></input>
-          {file !== '' ? <img style={{width: '50px'}} src={file}></img> : null}
+          <button onClick={()=>showWidget(widget)}>Upload Photo</button>
+          {file.length !== 0 ? <img style={{width: '50px'}} src={file}></img> : null}
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px', display: 'flex', justifyContent: 'space-between'}}>
           <div>
             <label htmlFor="nickname">Nickname: </label>
             <input onFocus={() => useNicknameFocus(true)} onBlur={() => useNicknameFocus(false)} style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" placeholder="Example: jackson11!" required></input>
             <div>{nicknameFocus ? ' For privacy reasons, do not use your full name or email address': ''}</div>
-
           </div>
           <div style={{width: '50%'}}>
             <label htmlFor="email">  Email: </label>
