@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -54,11 +55,9 @@ const Answer = (props) => {
           <div className='answerText'>
             {props.answer.body}
           </div>
-          {props.answer.photos.length > 0
-            && props.answer.photos.map( photo => {
-              <img src={photo} />
-            })
-          }
+            {props.answer.photos.map(photo => {
+              return <img src={photo} style={{height: '65px', width: '65px'}}></img>;
+            })}
           <div>
             <span className='user'>
               by {props.answer.answerer_name},
