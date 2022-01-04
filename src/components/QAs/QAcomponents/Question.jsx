@@ -135,7 +135,7 @@ const Question = (props) => {
         </div>
         <Answers answers={orderedAns} />
       </label>
-      <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body}>
+      <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body} product_name={props.product_name}>
         <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
           <label>Your Answer</label>
           <textarea name='body' maxLength='1000' rows='8'></textarea>
