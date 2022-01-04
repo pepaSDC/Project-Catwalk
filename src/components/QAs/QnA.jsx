@@ -17,29 +17,64 @@ const textStyle = {
 
 export const QA = () => {
   const { currentProductId } = useContext(GlobalContext);
-  const [questions, setQuestions] = useState([]);
+  const [state, setState] = useState({});
 
-  const getQAs = () => {
-    axios.get(`/qa/questions?product_id=${currentProductId}`)
+  const getState = () => {
+    let dataState = {};
+    axios.get(`/products/${currentProductId}`)
+      .then(result => {
+        dataState.product_name = result.data.name;
+        return axios.get(`/qa/questions?product_id=${currentProductId}&page=1&count=1000`);
+      })
       .then(response => {
-        setQuestions(response.data.results);
+        dataState.questions = response.data.results;
+        return response.data.results;
+      })
+      .then(data => {
+        setState(dataState);
       })
       .catch(err => console.log(err));
   };
 
   useEffect( () => {
-    getQAs();
+    getState();
     return () => {
-      setQuestions([]);
+      setState({});
     };
   }, [currentProductId]);
+
+  const handleQuestionSubmit = (event) => {
+    event.preventDefault();
+    let answer = {
+      body: event.target.body.value,
+      name: event.target.username.value,
+      email: event.target.email.value,
+      product_id: currentProductId
+    };
+    axios.post(`/qa/questions`, answer)
+      .then(response => {
+        console.log(response);
+        // return axios.get(`/qa/questions/${event.target.id}/answers`);
+      })
+      // .then(newData => {
+      //   console.log('NEW ANSWER:', newData.data.results);
+      //   setView( (curState) => { return !curState; });
+      //   setOrderedAns( (curState) => {
+      //     return sellerFirst(newData.data.results);
+      //   });
+      //   setErrors( (curState) => ({body: true, name: true, email: true}));
+      // })
+      .catch(error => {
+        console.log(error.message);
+      });
+    };
 
   return (
     <div style={container}>
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search />
-      {questions.length > 0
-        && <Questions questions={questions}/>
+      {state.questions
+        && <Questions questions={state.questions} product_name={state.product_name} task={handleQuestionSubmit}/>
       }
     </div>
   );
