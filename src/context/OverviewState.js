@@ -88,6 +88,7 @@ export const OverviewProvider = ({ children }) => {
     getProductInfo,
     getProductStyles,
     resetProductValue,
+    updateCurrentStyle,
     updateFeaturedPhoto,
     updateSelectedItemSku,
     decrementFeaturedPhotoIndex,
