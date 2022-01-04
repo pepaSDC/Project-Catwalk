@@ -17,7 +17,7 @@ export const ProductGalleryThumbnailItem = (props) => {
   }
 
   const isFeaturedStyle = {
-    backgroundColor: 'navy',
+    backgroundColor: '#999999',
     height: '5px',
     width: '50px',
     marginRight: '3px',
@@ -26,7 +26,7 @@ export const ProductGalleryThumbnailItem = (props) => {
   }
 
   const isNotFeaturedStyle = {
-    backgroundColor: 'silver',
+    backgroundColor: '#999999',
     height: '5px',
     width: '50px',
     opacity: '0',
