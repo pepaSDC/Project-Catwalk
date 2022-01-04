@@ -43,6 +43,7 @@ export const StyleShowcase = () => {
                 thumbnail={styleOption.photos[1].thumbnail_url}
                 key={styleOption.style_id}
                 index={index}
+                featuredStyle={featuredStyleIndex}
                 />
           )}
       </div>

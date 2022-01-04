@@ -26,13 +26,9 @@ export const ProductGalleryThumbnailItem = (props) => {
   }
 
   const isNotFeaturedStyle = {
-    backgroundColor: '#999999',
     height: '5px',
     width: '50px',
     opacity: '0',
-    marginRight: '3px',
-    marginBottom: '3px',
-    boxShadow: '0px 1px 10px -3px #000000'
   }
 
   const thumbnailContainerStyle = {

@@ -62,12 +62,6 @@ export const ProductGalleryMainPhoto = () => {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         flexGrow: 4,
-        // display: 'block',
-        // marginLeft: 'auto',
-        // marginRight: 'auto',
-        // height: '370px',
-        // width: '250px',
-        // objectFit: 'cover'
       }}>
         <ProductGalleryThumbnails
           style={ProductGalleryThumbnailsStyle}/>
