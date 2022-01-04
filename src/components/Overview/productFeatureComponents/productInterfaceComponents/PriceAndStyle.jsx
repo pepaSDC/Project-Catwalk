@@ -16,26 +16,25 @@ let styleSelectorStyle = {
 export const PriceAndStyle = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    getProductStyles, productStyles, featuredStyleIndex
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex
   } = useContext(OverviewContext);
 
-  let id = currentProductId;
-
   useEffect(() => {
-    getProductStyles(id)
-  }, [id])
+    getProductStyles(currentProductId)
+    return (() => {
+      resetProductValue([])
+    })
+  }, [currentProductId])
 
-  let productPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
   let salePrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].sale_price : ''
-
-  let displayedPrice = salePrice ? (productPrice + ' ' + salePrice) : productPrice
-
-  let productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
-
+  let productPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
-
-  // console.log('line 41 in priceAndStyle: ', productStylesArray);
+  let displayedPrice = salePrice ? (productPrice + ' ' + salePrice) : productPrice
+  let productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
 
   return (
     <div
