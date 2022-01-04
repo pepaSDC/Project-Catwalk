@@ -1,5 +1,4 @@
 import { GlobalContext } from '../../context/GlobalState.js'
-import { OverviewContext } from '../../context/OverviewState.js'
 import React, { useState, useEffect, useContext } from 'react'
 
 import { HeaderBar } from './headerBarComponents/headerBar.jsx'
@@ -17,17 +16,13 @@ let featureStyle = {
 }
 
 export const Overview = () => {
-  // const { currentProductId } = useContext(GlobalContext);
-  // const { getProductInfo, productInfo } = useContext(OverviewContext);
-
-  // useEffect(() => {
-  //   getProductInfo(currentProductId)
-  // }, [currentProductId])
+  const { currentProductId } = useContext(GlobalContext);
 
 
   return (
     <div
     className="overview">
+
       <div
         style={divStyle}
         className="headerBar">
@@ -49,9 +44,9 @@ export const Overview = () => {
       <div
         style={divStyle}
         className="productDescription">
-        <ProductDescription
-          />
+        <ProductDescription />
       </div>
+
     </div>
   );
 }

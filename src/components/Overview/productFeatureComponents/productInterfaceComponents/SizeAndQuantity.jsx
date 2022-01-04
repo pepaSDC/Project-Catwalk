@@ -4,19 +4,15 @@ import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
 
 export const SizeAndQuantity = (props) => {
-  // const { currentProductId } = useContext(GlobalContext);
+  const { currentProductId } = useContext(GlobalContext);
   const {
-    // getProductStyles,
-    // productStyles,
-    // getProductInfo,
-    // productInfo,
-    // featuredStyleIndex,
-    updateSelectedItemSku,
+    productInfo, productStyles,
+    getProductInfo, getProductStyles,
+    featuredStyleIndex, updateSelectedItemSku,
   } = useContext(OverviewContext);
 
   const onSizeSelect = (event) => {
     event.preventDefault();
-    // console.log(event.target.value)
     updateSelectedItemSku(event.target.value);
   }
 

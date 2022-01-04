@@ -65,6 +65,7 @@ export const RelatedProducts = () => {
 
   },[currentProductId]);
 
+
   return (
     <div>
       <div className="app"></div>

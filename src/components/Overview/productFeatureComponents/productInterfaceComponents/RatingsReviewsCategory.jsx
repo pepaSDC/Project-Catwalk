@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
@@ -18,7 +17,7 @@ let ratingsReviewsStyle = {
   flexDirection: 'row'
 }
 
-export const RatingsReviewsCategory = (props) => {
+export const RatingsReviewsCategory = () => {
   const { currentProductId } = useContext(GlobalContext);
   const { totalRatings, averageRating, getMetaReviews } = useContext(RatingsAndReviewsContext);
 
@@ -33,7 +32,7 @@ export const RatingsReviewsCategory = (props) => {
     getMetaReviews(id)
   }, [id])
 
-    const productCategory = productInfo.data ? productInfo.data.category : ''
+    const productCategory = productInfo.data ? productInfo.data.category: ''
 
   return (
     <div
@@ -50,7 +49,7 @@ export const RatingsReviewsCategory = (props) => {
         </div>
       </div>
       <div>
-        {props.category}
+        {productCategory}
       </div>
     </div>
   );
