@@ -4,17 +4,16 @@ import { OverviewContext } from '../../../../context/OverviewState.js'
 import { ProductGalleryThumbnails } from './ProductGalleryThumbnails.jsx'
 import leftArrow from './arrow-gray-left.png'
 import rightArrow from './arrow-gray-right.png'
+import fullscreenIcon from './fullscreen-icon.png'
 
 export const ProductGalleryMainPhoto = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
-    productStyles,
-    getProductStyles,
     resetProductValue,
-    featuredStyleIndex,
-    featuredProductImageIndex,
-    decrementFeaturedPhotoIndex,
-    incrementFeaturedPhotoIndex
+    toggleView, currentView,
+    productStyles, getProductStyles,
+    featuredStyleIndex, featuredProductImageIndex,
+    decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex
   } = useContext(OverviewContext);
 
   useEffect(() => {
@@ -29,11 +28,20 @@ export const ProductGalleryMainPhoto = () => {
     top: '10px'
   }
 
+  const allButtonsContainerStyle = {
+    display: 'flex',
+    width: '100%'
+  }
+
   const leftRightButtonsContainerStyle = {
     display: 'flex',
     alignItems: 'center',
     width: '100%',
     justifyContent: 'space-between'
+  }
+
+  const fullscreenButtonContainerStyle = {
+    display: 'flex',
   }
 
   const leftButtonStyle = {
@@ -55,15 +63,22 @@ export const ProductGalleryMainPhoto = () => {
     display: 'flex',
     width: '25px',
     position: 'relative',
-    right: '53px',
+    right: '28px',
   }
 
   const concealRightButtonStyle = {
     display: 'flex',
     width: '25px',
     position: 'relative',
-    right: '53px',
+    right: '28px',
     opacity: '0'
+  }
+
+  const fullscreenIconStyle = {
+    width: '25px',
+    height: '25px',
+    position: 'relative',
+    right: '20px',
   }
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
@@ -71,6 +86,13 @@ export const ProductGalleryMainPhoto = () => {
   let productStylesArrayMaxIndex = productStyles.data ? (productStylesArray.length - 1) : 0
   let leftButtonStyling = (featuredProductImageIndex === 0) ? concealLeftButtonStyle : leftButtonStyle
   let rightButtonStyling = (featuredProductImageIndex === productStylesArrayMaxIndex) ? concealRightButtonStyle : rightButtonStyle
+
+  const handleToggle = (event) => {
+    event.preventDefault();
+    let newStatus = (currentView === 'default') ? 'expanded' : 'default'
+    toggleView(newStatus);
+    console.log('new view is now: ', currentView);
+  }
 
   const incrementProductStylesArrayIndex = (event) => {
     event.preventDefault();
@@ -86,7 +108,6 @@ export const ProductGalleryMainPhoto = () => {
       let newIndex = (featuredProductImageIndex - 1)
       decrementFeaturedPhotoIndex(newIndex);
     }
-
   }
 
   return (
@@ -103,24 +124,36 @@ export const ProductGalleryMainPhoto = () => {
         backgroundPosition: 'center',
         flexGrow: 4,
       }}>
-        <ProductGalleryThumbnails
-          style={ProductGalleryThumbnailsStyle}/>
+        <ProductGalleryThumbnails style={ProductGalleryThumbnailsStyle}/>
       <div
-        className="leftRightButtonsContainer"
-        style={leftRightButtonsContainerStyle}
-        >
-        <img
-          src={leftArrow}
-          style={leftButtonStyling}
-          className="leftButton"
-          onClick={decrementProductStylesArrayIndex}>
-        </img>
-        <img
-          src={rightArrow}
-          style={rightButtonStyling}
-          className="rightButton"
-          onClick={incrementProductStylesArrayIndex}>
-        </img>
+        className="allButtonsContainer"
+        style={allButtonsContainerStyle}>
+        <div
+          className="leftRightButtonsContainer"
+          style={leftRightButtonsContainerStyle}>
+          <img
+            src={leftArrow}
+            className="leftButton"
+            style={leftButtonStyling}
+            onClick={decrementProductStylesArrayIndex}>
+          </img>
+          <img
+            src={rightArrow}
+            className="rightButton"
+            style={rightButtonStyling}
+            onClick={incrementProductStylesArrayIndex}>
+          </img>
+        </div>
+        <div
+          className="fullscreenButtonContainer"
+          style={fullscreenButtonContainerStyle}>
+          <img
+            src={fullscreenIcon}
+            className="fullScreenIcon"
+            style={fullscreenIconStyle}
+            onClick={handleToggle}>
+          </img>
+        </div>
       </div>
     </div>
   );

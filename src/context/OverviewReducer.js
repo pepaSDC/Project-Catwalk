@@ -25,6 +25,11 @@ export default (state, action) => {
       ...state,
       selectedItemSkuNumber: action.payload
       }
+    case 'TOGGLE_CURRENT_VIEW':
+      return {
+        ...state,
+        currentView: action.payload
+      }
     case 'RESET_PRODUCT_VALUE':
       return {
         ...state,

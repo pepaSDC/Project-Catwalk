@@ -3,6 +3,7 @@ import OverviewReducer from './OverviewReducer.js';
 const axios = require('axios');
 
 const initialOverviewState = {
+  currentView: 'default',
   productInfo: {},
   productStyles: [],
   featuredStyleIndex: 0,
@@ -43,56 +44,40 @@ export const OverviewProvider = ({ children }) => {
   }
 
   function updateCurrentStyle (id) {
-    overviewDispatch({
-      type: 'UPDATE_CURRENT_STYLE',
-      payload: id
-    })
+    overviewDispatch({ type: 'UPDATE_CURRENT_STYLE', payload: id })
   }
 
   function updateFeaturedPhoto (id) {
-    overviewDispatch({
-      type: 'UPDATE_FEATURED_PHOTO',
-      payload: id
-    })
+    overviewDispatch({ type: 'UPDATE_FEATURED_PHOTO', payload: id })
   }
 
   function updateSelectedItemSku (id) {
-    overviewDispatch({
-      type: 'UPDATE_SELECTED_ITEM_SKU',
-      payload: id
-    })
+    overviewDispatch({ type: 'UPDATE_SELECTED_ITEM_SKU', payload: id })
+  }
+
+  function toggleView (status) {
+    overviewDispatch({ type: 'TOGGLE_CURRENT_VIEW', payload: status })
   }
 
   function resetProductValue(value) {
-    overviewDispatch({
-      type: 'RESET_PRODUCT_VALUE',
-      payload: value
-    })
+    overviewDispatch({ type: 'RESET_PRODUCT_VALUE', payload: value })
   }
 
   function incrementFeaturedPhotoIndex (value) {
-    overviewDispatch({
-      type: 'INCREMENT_FEATURED_INDEX',
-      payload: value
-    })
+    overviewDispatch({ type: 'INCREMENT_FEATURED_INDEX', payload: value })
   }
 
   function decrementFeaturedPhotoIndex (value) {
-    overviewDispatch({
-      type: 'DECREMENT_FEATURED_INDEX',
-      payload: value
-    })
+    overviewDispatch({ type: 'DECREMENT_FEATURED_INDEX', payload: value })
   }
 
   return(<OverviewContext.Provider value={{
-    getProductInfo,
-    getProductStyles,
-    resetProductValue,
-    updateCurrentStyle,
-    updateFeaturedPhoto,
     updateSelectedItemSku,
-    decrementFeaturedPhotoIndex,
-    incrementFeaturedPhotoIndex,
+    toggleView, resetProductValue,
+    getProductInfo, getProductStyles,
+    updateCurrentStyle, updateFeaturedPhoto,
+    decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex,
+    currentView: overviewState.currentView,
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,
     featuredStyleIndex: overviewState.featuredStyleIndex,
