@@ -3,6 +3,7 @@ import { GlobalContext } from '../../context/GlobalState.js';
 import axios from 'axios';
 import Promise from 'bluebird';
 import RelatedProductsCardCarousel from './RelatedProductsCardCarousel.jsx';
+import OutfitCarousel from './OutfitCarousel.jsx';
 
 export const RelatedProducts = () => {
   //global state import
@@ -12,6 +13,7 @@ export const RelatedProducts = () => {
   const [relatedProductArray, setRelatedProductArray] = useState([]);
   const [currentProductInfo, setCurrentProductInfo] = useState({});
   const [currentProductName, setCurrentProductName] = useState('');
+  const [yourOutfitStorage, setYourOutfitStorage] = useState([]);
   //axios call to get products information by id
   const getProduct = (id) => {
     return axios({
@@ -65,6 +67,20 @@ export const RelatedProducts = () => {
 
   },[currentProductId]);
 
+  useEffect(() =>{
+    setYourOutfitStorage(JSON.parse(window.localStorage.getItem('yourOutfitStorage')))
+  },[]);
+
+  useEffect(() => {
+    window.localStorage.setItem('yourOutfitStorage', yourOutfitStorage);
+  }, [count]);
+
+  const addOutfitItem = () => {
+    var outfitUpdate = yourOutfitStorage.concat([proInfo.data])
+      setYourOutfitStorage(outfitUpdate);
+  }
+  //deleteoutfititem
+
   return (
     <div>
       <div className="app"></div>
@@ -73,6 +89,10 @@ export const RelatedProducts = () => {
         currentProductInfo={currentProductInfo}
         currentProductName={currentProductName}
       />
+      <div className="youOutfit">
+        <button onClick={addOutfitItem()}>Add current</button>
+        <OutfitCarousel yourOutfitStorage={yourOutfitStorage} addOutfitItem={addOutfitItem}></OutfitCarousel>
+      </div>
     </div>
   );
 }
