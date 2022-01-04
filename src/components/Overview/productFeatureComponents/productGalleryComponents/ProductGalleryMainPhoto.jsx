@@ -20,6 +20,7 @@ export const ProductGalleryMainPhoto = () => {
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
   let featuredProductPhoto = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos[featuredProductImageIndex].url : ''
+  let productStylesArrayMaxIndex = productStyles.data ? (productStylesArray.length - 1) : 0
 
   const ProductGalleryThumbnailsStyle = {
     position: 'relative',
@@ -40,13 +41,26 @@ export const ProductGalleryMainPhoto = () => {
     backgroundRepeat: 'no-repeat'
   }
 
+  const concealLeftButtonStyle = {
+    display: 'flex',
+    width: '25px',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    opacity: '0'
+  }
+
   const rightButtonStyle = {
     display: 'flex',
     width: '25px',
     position: 'relative',
     right: '53px',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+  }
+
+  const concealRightButtonStyle = {
+    display: 'flex',
+    width: '25px',
+    position: 'relative',
+    right: '53px',
   }
 
   return (
