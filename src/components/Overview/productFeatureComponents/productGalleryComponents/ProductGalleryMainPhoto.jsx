@@ -25,13 +25,19 @@ export const ProductGalleryMainPhoto = () => {
       className="productGalleryPhoto"
       style={{
         display: 'flex',
-        width: '30vw',
-        height: '40vh',
+        width: '40vw',
+        height: '50vh',
         backgroundImage: `url(${featuredProductPhoto})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         flexGrow: 4,
+        // display: 'block',
+        // marginLeft: 'auto',
+        // marginRight: 'auto',
+        // height: '370px',
+        // width: '250px',
+        // objectFit: 'cover'
       }}>
         <ProductGalleryThumbnails />
     </div>

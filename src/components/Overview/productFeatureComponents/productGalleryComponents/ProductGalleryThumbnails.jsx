@@ -20,7 +20,6 @@ export const ProductGalleryThumbnails = () => {
 
   let featuredProductThumbnailsArray = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos : []
   let featuredProduct = productStyles.data ? productStyles.data.results[featuredStyleIndex] : []
-
   // console.log('line 22 in ProductGalleryThumbnails: ', featuredProductThumbnailsArray);
 
   return (
@@ -31,7 +30,8 @@ export const ProductGalleryThumbnails = () => {
             item={listItem}
             key={index}
             index={index}
-            style_id={featuredProduct.style_id}/>
+            style_id={featuredProduct.style_id}
+            featuredProduct={featuredProductImageIndex}/>
       )}
     </div>
   );
