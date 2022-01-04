@@ -65,7 +65,10 @@ export const NewReview = (props) => {
       characteristics: characteristicRatings
     }
     axios.post('http://localhost:3000/reviews', body)
-      .then(()=> props.useNewReview(body))
+      .then(()=> {
+        props.useNewReview(body);
+        props.setModal(false);
+      })
       .catch(err => console.log(err))
   }
 
