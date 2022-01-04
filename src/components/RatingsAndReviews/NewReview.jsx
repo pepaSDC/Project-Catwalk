@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { SelectableStars } from './SelectableStars.jsx';
 import { CharacteristicsForm } from './CharacteristicsForm.jsx';
 import { GlobalContext } from '../../context/GlobalState.js';
+import axios from 'axios';
 
 export const NewReview = (props) => {
 
@@ -15,6 +16,9 @@ export const NewReview = (props) => {
   const [file, useFile] = useState([]);
   const [rating, useRating] = useState(null);
 
+  const [nicknameFocus, useNicknameFocus] = useState(false);
+  const [emailFocus, useEmailFocus] = useState(false);
+
   const styleModal = {
     position: 'fixed',
     zIndex: '1',
@@ -26,11 +30,8 @@ export const NewReview = (props) => {
   }
 
   const styleForm = {
-    display:'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
     backgroundColor: 'white',
-    margin: '10% auto',
+    margin: '5% auto',
     padding: '30px 50px',
     border: '1px solid #888',
     width: '70%',
@@ -52,7 +53,6 @@ export const NewReview = (props) => {
         }
       }
     )
-
     let body = {
       product_id: Number(currentProductId),
       rating: rating,
@@ -64,14 +64,16 @@ export const NewReview = (props) => {
       photos: file,
       characteristics: characteristicRatings
     }
-    console.log(body);
+    axios.post('http://localhost:3000/reviews', body)
+      .then(()=> props.useNewReview(body))
+      .catch(err => console.log(err))
   }
 
   return (
     <div style={styleModal}>
       <div style={styleForm}>
       <div style={{paddingRight: '100%'}} onClick={clickHandler}>&times;</div>
-      <h2 style={{margin: '5px'}}>Add Your Review</h2>
+      <h2 style={{margin: '0'}}>Add Your Review</h2>
       <form onSubmit={submitHandler}>
         <SelectableStars useRating={useRating}/>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
@@ -91,7 +93,6 @@ export const NewReview = (props) => {
           </input>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
-          <p>Characteristics Ratings</p>
           {Object.keys(props.meta.characteristics).map( item => {
             return <CharacteristicsForm char={item} id={item} key={props.meta.characteristics[item].id}/>
             }
@@ -99,27 +100,33 @@ export const NewReview = (props) => {
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <label>Review Summary: </label>
-          <input onChange={(e) => useSummary(e.target.value)}type="text" placeholder="Example: Best purchase ever!"></input>
+          <input style={{width: '50%'}} onChange={(e) => useSummary(e.target.value)}type="text" placeholder="Example: Best purchase ever!"></input>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <label>Review Body: </label>
-          <textarea onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></textarea>
+          <textarea style={{width: '50%'}} onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></textarea>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <input onChange={(e)=>console.log(document.getElementById('myFile').files)} type="file" id="myFile" name="filename"></input>
           {file !== '' ? <img style={{width: '50px'}} src={file}></img> : null}
         </div>
-        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
-          <label htmlFor="nickname">Nickname: </label>
-          <input style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" placeholder="Example: jackson11!" required></input>
-          <label htmlFor="email">  Email: </label>
-          <input style={{width:'250px'}} onChange={(e) => useEmail(e.target.value)} type="email" placeholder="Example: jackson11@email.com" required></input>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px', display: 'flex', justifyContent: 'space-between'}}>
+          <div>
+            <label htmlFor="nickname">Nickname: </label>
+            <input onFocus={() => useNicknameFocus(true)} onBlur={() => useNicknameFocus(false)} style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" placeholder="Example: jackson11!" required></input>
+            <div>{nicknameFocus ? ' For privacy reasons, do not use your full name or email address': ''}</div>
+
+          </div>
+          <div style={{width: '50%'}}>
+            <label htmlFor="email">  Email: </label>
+            <input onFocus={() => useEmailFocus(true)} onBlur={() => useEmailFocus(false)} style={{width:'250px'}} onChange={(e) => useEmail(e.target.value)} type="email" placeholder="Example: jackson11@email.com" required></input>
+            <div>{emailFocus ? ' For authentication reasons, you will not be emailed': ''}</div>
+          </div>
         </div>
         <div style={{padding: '10px'}}>
-          <input type="submit" value="Submit!!"></input>
+          <input type="submit" value="Submit Review"></input>
         </div>
       </form>
-
       </div>
     </div>
   )

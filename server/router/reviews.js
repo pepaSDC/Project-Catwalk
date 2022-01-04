@@ -16,6 +16,16 @@ router.get('/', (req, res) => {
   });
 });
 
+router.post('/', (req, res) => {
+  api.addReview(req.body, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.status(201).send();
+    }
+  })
+});
+
 router.get('/meta', (req, res) => {
   const product_id = parseInt(req.query.product_id);
   api.getMetaReviews( product_id, (err, result) => {
@@ -48,6 +58,7 @@ router.put('/:review_id/report', (req, res) => {
     }
   });
 });
+
 
 
 module.exports = router;
