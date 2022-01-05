@@ -55,10 +55,6 @@ export const OverviewProvider = ({ children }) => {
     overviewDispatch({ type: 'UPDATE_SELECTED_ITEM_SKU', payload: id })
   }
 
-  function toggleView (status) {
-    overviewDispatch({ type: 'TOGGLE_CURRENT_VIEW', payload: status })
-  }
-
   function resetProductValue(value) {
     overviewDispatch({ type: 'RESET_PRODUCT_VALUE', payload: value })
   }
@@ -72,11 +68,14 @@ export const OverviewProvider = ({ children }) => {
   }
 
   return(<OverviewContext.Provider value={{
+    getProductInfo,
+    getProductStyles,
+    resetProductValue,
+    updateCurrentStyle,
+    updateFeaturedPhoto,
     updateSelectedItemSku,
-    toggleView, resetProductValue,
-    getProductInfo, getProductStyles,
-    updateCurrentStyle, updateFeaturedPhoto,
-    decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex,
+    decrementFeaturedPhotoIndex,
+    incrementFeaturedPhotoIndex,
     currentView: overviewState.currentView,
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,

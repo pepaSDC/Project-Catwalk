@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
 import { ProductGalleryThumbnails } from './ProductGalleryThumbnails.jsx'
+import { ImageModal } from './ImageModal.jsx';
 import leftArrow from './arrow-gray-left.png'
 import rightArrow from './arrow-gray-right.png'
 import fullscreenIcon from './fullscreen-icon.png'
@@ -10,11 +11,12 @@ export const ProductGalleryMainPhoto = () => {
   const { currentProductId } = useContext(GlobalContext);
   const {
     resetProductValue,
-    toggleView, currentView,
     productStyles, getProductStyles,
     featuredStyleIndex, featuredProductImageIndex,
     decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex
   } = useContext(OverviewContext);
+
+  const [displayImageModal, setDisplayImageModal] = useState(false);
 
   useEffect(() => {
     getProductStyles(currentProductId)
@@ -82,16 +84,15 @@ export const ProductGalleryMainPhoto = () => {
   }
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
-  let featuredProductPhoto = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos[featuredProductImageIndex].url : ''
   let productStylesArrayMaxIndex = productStyles.data ? (productStylesArray.length - 1) : 0
+  let featuredProductPhoto = productStyles.data ? productStyles.data.results[featuredStyleIndex].photos[featuredProductImageIndex].url : ''
   let leftButtonStyling = (featuredProductImageIndex === 0) ? concealLeftButtonStyle : leftButtonStyle
   let rightButtonStyling = (featuredProductImageIndex === productStylesArrayMaxIndex) ? concealRightButtonStyle : rightButtonStyle
 
-  const handleToggle = (event) => {
+
+  const openModal = (event) => {
     event.preventDefault();
-    let newStatus = (currentView === 'default') ? 'expanded' : 'default'
-    toggleView(newStatus);
-    console.log('new view is now: ', currentView);
+    setDisplayImageModal(true);
   }
 
   const incrementProductStylesArrayIndex = (event) => {
@@ -116,14 +117,18 @@ export const ProductGalleryMainPhoto = () => {
       style={{
         display: 'flex',
         flexDirection: 'row',
-        // width: '40vw',
-        // height: '50vh',
+        width: '100%',
         backgroundImage: `url(${featuredProductPhoto})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        flexGrow: 4,
       }}>
+        {displayImageModal && (
+        <ImageModal
+          className="ImageModal"
+          toggleImageModal={setDisplayImageModal}
+          featuredPhoto={featuredProductPhoto}/>
+        )}
         <ProductGalleryThumbnails style={ProductGalleryThumbnailsStyle}/>
       <div
         className="allButtonsContainer"
@@ -151,7 +156,8 @@ export const ProductGalleryMainPhoto = () => {
             src={fullscreenIcon}
             className="fullScreenIcon"
             style={fullscreenIconStyle}
-            onClick={handleToggle}>
+            onClick={openModal}
+            >
           </img>
         </div>
       </div>
