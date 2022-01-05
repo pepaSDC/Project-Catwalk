@@ -53,6 +53,7 @@ const Questions = (props) => {
           </div>
         );
       })}
+      {!props.found && <div>No questions found</div>}
       <div className='topBar'>
         <span className='addQuestion'>
           <button onClick={props.handleView}>Add Question</button>
