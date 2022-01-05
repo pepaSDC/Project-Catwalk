@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { SelectableStars } from './SelectableStars.jsx';
 import { CharacteristicsForm } from './CharacteristicsForm.jsx';
@@ -86,8 +87,7 @@ export const NewReview = (props) => {
           useFile([...file, result.info.secure_url])
         }
       }
-    }
-    )
+    })
 
   const showWidget = (widget) => {
     widget.open();

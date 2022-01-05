@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useState} from 'react';
 
 export const SelectableStars = (props) => {
@@ -41,6 +42,29 @@ export const SelectableStars = (props) => {
     }
   }
 
+  let ratingStatement;
+
+  switch(rating) {
+    case '20%':
+      ratingStatement = "Poor";
+      break;
+    case '40%':
+      ratingStatement = "Fair";
+      break;
+    case '60%':
+      ratingStatement = "Average";
+      break;
+    case '80%':
+      ratingStatement = "Good";
+      break;
+    case '100%':
+      ratingStatement = "Great";
+      break;
+    default:
+      ratingStatement = '';
+      break;
+  }
+
   const clickHandler = (e) => {
     if (!selected) {
       useSelect(true);
@@ -49,31 +73,35 @@ export const SelectableStars = (props) => {
       useSelect(false);
       props.useRating(null);
     }
-
   }
 
   return (
-    <div style={{display:'flex', justifyContent:'space-around'}}>
-      <div className="star-ratings" style={starRating}>
-        <div className="fill-ratings" style={fillRating}>
-          <span style={span}>
-            <span value="1" name="1" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</span>
-            <a value="2" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
-            <a value="3" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
-            <a value="4" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
-            <a value="5" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
-          </span>
-        </div>
-        <div className="empty-ratings" style={emptyRating}>
+    <div style={{height: '70px'}}>
+      <div style={{display:'flex', justifyContent:'space-around'}}>
+        <div className="star-ratings" style={starRating}>
+          <div className="fill-ratings" style={fillRating}>
+            <span style={span}>
+              <span value="1" name="1" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</span>
+              <a value="2" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
+              <a value="3" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
+              <a value="4" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
+              <a value="5" onMouseOut={mouseOutHandler} onClick={clickHandler}>★</a>
+            </span>
+          </div>
+          <div className="empty-ratings" style={emptyRating}>
 
-          <span style={span}>
-            <a value="1" onMouseOver={() => selected ? null: useRating('20%')}>★</a>
-            <a value="2" onMouseOver={() => selected ? null: useRating('40%')}>★</a>
-            <a value="3" onMouseOver={() => selected ? null: useRating('60%')}>★</a>
-            <a value="4" onMouseOver={() => selected ? null: useRating('80%')}>★</a>
-            <a value="5" onMouseOver={() => selected ? null: useRating('100%')}>★</a>
-          </span>
+            <span style={span}>
+              <a value="1" onMouseOver={() => selected ? null: useRating('20%')}>★</a>
+              <a value="2" onMouseOver={() => selected ? null: useRating('40%')}>★</a>
+              <a value="3" onMouseOver={() => selected ? null: useRating('60%')}>★</a>
+              <a value="4" onMouseOver={() => selected ? null: useRating('80%')}>★</a>
+              <a value="5" onMouseOver={() => selected ? null: useRating('100%')}>★</a>
+            </span>
+          </div>
         </div>
+      </div>
+      <div style={{display:'flex', justifyContent: 'space-around'}}>
+        <div>{ratingStatement}</div>
       </div>
     </div>
 
