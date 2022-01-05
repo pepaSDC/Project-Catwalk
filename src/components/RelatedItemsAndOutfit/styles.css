@@ -1,0 +1,143 @@
+
+.card-container {
+display: flex;
+justify-content: space-evenly;
+position: relative;
+align-self: center;
+box-shadow: inset 0px 1px 10px -3px #000000;
+padding:10px 3px;
+}
+
+.activeCard {
+  flex-direction: column;
+  left: 50%;
+  box-shadow: 0px 1px 10px -3px #000000;
+  align-self: flex-start;
+
+}
+
+.card-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 370px;
+  width: 250px;
+  object-fit: cover;
+}
+
+.arrowLeft {
+	background-color:transparent;
+	border-radius:27px;
+	border:0px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#00a2ff;
+	font-family:Arial;
+	font-size:20px;
+	padding:10px 3px;
+	text-decoration:none;
+	text-shadow:0px 14px 0px #00a2ff;
+
+  position: absolute;
+  left: 0%;
+  width: 10rem;
+  height: 22rem;
+}
+.arrowLeft:hover {
+	background-color:transparent;
+  color:#9fcfff;
+  text-shadow:0px 14px 0px #9fcfff;
+}
+.arrowLeft:active {
+	position: absolute;
+	top:1px;
+}
+
+.arrowRight {
+	background-color:transparent;
+	border-radius:27px;
+	border:0px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#00a2ff;
+	font-family:Arial;
+	font-size:20px;
+	padding:10px 3px;
+	text-decoration:none;
+	text-shadow:0px 14px 0px #00a2ff;
+
+  position: absolute;
+  right: 0%;
+  width: 10rem;
+  height: 22rem;
+}
+.arrowRight:hover {
+	background-color:transparent;
+  color:#9fcfff;
+  text-shadow:0px 14px 0px #9fcfff;
+}
+.arrowRight:active {
+	position: absolute;
+	top:1px;
+}
+
+.compare-btn {
+	position: absolute;
+	width: 22rem;
+  height: 0rem;
+	background-color:transparent;
+	border-radius:40px;
+	display:inline-block;
+	cursor:pointer;
+	color:#a1a1a1;
+	font-family:Arial;
+	font-size:23px;
+	padding:4px 4px;
+	text-decoration:none;
+	text-shadow:0px 2px 3px #3b3d5a;
+	border-color: transparent;
+}
+.compare-btn:hover {
+	background-color:transparent;
+	color:#cacaca;
+}
+.compare-btn:active {
+	color:#a3f0ff;
+}
+
+.feat-line {
+	justify-content: space-evenly;
+}
+
+.left-check {
+	color: yellowgreen;
+}
+.right-check {
+	color: yellowgreen;
+}
+.feat {
+
+}
+
+.comp-modal {
+ 	display: flex;
+	justify-content: space-evenly;
+  position: absolute;
+	z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.58); /* Black w/ opacity */
+	color: rgb(0, 0, 0);
+}
+
+.comp-card {
+ 	align-self: center;
+	background-color: rgb(255, 255, 255);
+	width: 35%; /* Full width */
+  height: 50%;
+	text-shadow:0px 2px 3px #808298;
+}

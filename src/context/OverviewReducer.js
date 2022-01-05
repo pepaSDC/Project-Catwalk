@@ -10,7 +10,37 @@ export default (state, action) => {
         ...state,
         productStyles: action.payload
       }
-      default:
+    case 'UPDATE_CURRENT_STYLE':
+      return {
+        ...state,
+        featuredStyleIndex: action.payload
+      }
+    case 'UPDATE_FEATURED_PHOTO':
+      return {
+        ...state,
+        featuredProductImageIndex: action.payload
+      }
+    case 'UPDATE_SELECTED_ITEM_SKU':
+      return {
+      ...state,
+      selectedItemSkuNumber: action.payload
+      }
+    case 'RESET_PRODUCT_VALUE':
+      return {
+        ...state,
+        productStyles: action.payload
+      }
+    case 'INCREMENT_FEATURED_INDEX':
+      return {
+        ...state,
+        featuredProductImageIndex: action.payload
+      }
+    case 'DECREMENT_FEATURED_INDEX':
+      return {
+        ...state,
+        featuredProductImageIndex: action.payload
+      }
+    default:
         return state;
   }
 }

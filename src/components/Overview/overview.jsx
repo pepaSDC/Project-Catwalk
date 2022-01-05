@@ -11,9 +11,17 @@ let divStyle = {
   // margin: '10px',
 }
 
+let featureStyle = {
+  padding: '10px',
+}
+
+let galleryInterfaceStyle = {
+  padding: '10px',
+  width: '100%'
+}
+
 export const Overview = () => {
   const { currentProductId } = useContext(GlobalContext);
-
 
   return (
     <div
@@ -32,7 +40,7 @@ export const Overview = () => {
       </div>
 
       <div
-        style={divStyle}
+        style={galleryInterfaceStyle}
         className="productFeature">
         <ProductFeature />
       </div>

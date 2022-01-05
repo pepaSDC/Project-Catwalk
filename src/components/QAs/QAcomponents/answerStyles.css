@@ -1,0 +1,100 @@
+.answerBody {
+  padding-left: 5px;
+}
+
+.answerText {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(66, 66, 66);
+}
+
+.user {
+  font-size: 12px;
+  font-weight: 300;
+  color: gray;
+}
+
+.userSeller {
+  font-size: 12px;
+  font-weight: 600;
+  color: gray;
+}
+
+.userDate{
+  border-right: 1px solid gray;
+  padding-right: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  color: gray;
+}
+
+.answer .helpful {
+  padding-left: 10px;
+  border-right: 1px solid gray;
+  padding-right: 10px;
+  font-size: 10px;
+  font-weight: 100;
+  color: rgb(92, 92, 92);
+}
+
+.answer .yes {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.answer .report {
+  padding-left: 10px;
+  font-size: 10px;
+  font-weight: 100;
+  color: rgb(92, 92, 92);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.loadMore {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.individualAns {
+  display: flex;
+  align-items: baseline;
+  min-height: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  transition-delay: 0;
+}
+
+.qRadio {
+  display: none;
+}
+
+.qContainer {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  display: block;
+}
+
+.qRadio:checked + .qBody .individualAns {
+  min-height: min-content;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.upload {
+  padding: 5px;
+}
+
+.photoLabel {
+  font-weight: 100;
+  font-size: 15px;
+}
+
+.photoLabel:hover {
+  color: blue;
+}

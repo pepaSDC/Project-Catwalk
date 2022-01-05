@@ -11,8 +11,8 @@ const Routing = () => {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Navigate replace to="/products/40344"/>}/>
-          <Route path="/products/:id" element={<ProductDetail/>}/>
+          <Route path="/" element={<Navigate replace to="/items/40344"/>}/>
+          <Route path="/items/:id" element={<ProductDetail/>}/>
         </Routes>
       </div>
     </Router>

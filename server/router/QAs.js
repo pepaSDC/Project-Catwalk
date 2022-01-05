@@ -3,8 +3,8 @@ const router = express.Router();
 const api = require('../api.js');
 
 router.get('/questions', (req, res) => {
-  const page = parseInt(req.query.page);
-  const count = parseInt(req.query.count);
+  const page = parseInt(req.query.page) || 1;
+  const count = parseInt(req.query.count) || 5;
   const id = parseInt(req.query.product_id);
   api.getQuestions(page, count, id, (err, result) => {
     if (err) {
@@ -18,7 +18,7 @@ router.get('/questions', (req, res) => {
 
 router.get('/questions/:question_id/answers', (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const count = parseInt(req.query.count) || 5;
+  const count = parseInt(req.query.count) || 100;
   const id = parseInt(req.params.question_id);
   api.getAnswers(page, count, id, (err, result) => {
     if (err) {
@@ -31,7 +31,8 @@ router.get('/questions/:question_id/answers', (req, res) => {
 });
 
 router.post('/questions', (req, res) => {
-  const { body, name, email, product_id } = req.body;
+  var { body, name, email, product_id } = req.body;
+  product_id = parseInt(product_id);
   api.addQuestion(body, name, email, product_id, (err, result) => {
     if (err) {
       console.error(err);

@@ -45,12 +45,30 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  function getAverageReview(id) {
+    axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
+      .then((results) => {
+        let absolutetotal = 0;
+        let totalratings = 0;
+        for (var key in results.data.ratings) {
+          totalratings += Number(results.data.ratings[key])
+          absolutetotal += (Number(results.data.ratings[key]) * Number(key));
+        }
+        let average = Math.round((absolutetotal/totalratings) * 4) / 4;
+        return average;
+      })
+      .catch(err => {
+        console.log(err)
+      });
+    }
+
 
   return(<GlobalContext.Provider value={{
     allProducts: state.allProducts,
     currentProductId: state.currentProductId,
     getAllProducts,
-    updateCurrentProductId
+    updateCurrentProductId,
+    getAverageReview
   }}>
     {children}
   </GlobalContext.Provider>)

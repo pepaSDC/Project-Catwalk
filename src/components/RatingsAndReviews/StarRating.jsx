@@ -1,6 +1,7 @@
 import React from 'react';
 
 export const StarRating = (props) => {
+  const rating = Math.round(props.rating * 4) / 4;
   const starRating = {
     unicodeBidi: 'bidi-override',
     color: '#ccc',
@@ -12,16 +13,17 @@ export const StarRating = (props) => {
     color: '#e7711b',
     padding: '0',
     position: 'absolute',
-    zIndex: '1',
     display: 'block',
+    zIndex: '1',
     top: '0',
     left: '0',
     overflow: 'hidden',
-    width: `${props.rating/5 * 100}%`
+    width: `${rating/5 * 100}%`
   }
 
   const span = {
-    display: 'inline-block'
+    display: 'inline-block',
+
   }
 
   const emptyRating = {

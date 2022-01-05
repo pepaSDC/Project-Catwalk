@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
+import { Pricing } from './Pricing.jsx'
 
 let priceAndStyleSelectorStyle = {
   display: 'flex',
@@ -12,27 +13,28 @@ let styleSelectorStyle = {
   flexDirection: 'row'
 }
 
-
 export const PriceAndStyle = () => {
   const { currentProductId } = useContext(GlobalContext);
-  const { getProductStyles, productStyles, getProductInfo, productInfo } = useContext(OverviewContext);
-  let id = currentProductId;
+  const {
+    productStyles,
+    getProductStyles,
+    resetProductValue,
+    featuredStyleIndex
+  } = useContext(OverviewContext);
 
   useEffect(() => {
-    getProductStyles(id)
-    getProductInfo(id)
-  }, [id])
+    getProductStyles(currentProductId)
+    return (() => {
+      resetProductValue([])
+    })
+  }, [currentProductId])
 
-  // const productStylesData = productStyles.data ? productStyles.data : ''
-  // const productInfoData = productInfo.data ? productInfo.data : ''
+  let salePrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].sale_price : ''
+  let productPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
 
-  // console.log('productStylesData: ', productStylesData);
-  // console.log('productInfoData: ', productInfoData);
-
-  let currentStyleIndex = 3;
-
-  const productPrice = productStyles.data ? productStyles.data.results[currentStyleIndex].original_price : ''
-  const productStyleName = productStyles.data ? productStyles.data.results[currentStyleIndex].name : ''
+  let productStylesArray = productStyles.data ? productStyles.data.results : []
+  let displayedPrice = salePrice ? (productPrice + ' ' + salePrice) : productPrice
+  let productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
 
   return (
     <div
@@ -40,7 +42,7 @@ export const PriceAndStyle = () => {
       style={priceAndStyleSelectorStyle}>
       <div
         className="price">
-          {productPrice}
+          <Pricing />
       </div>
       <div
         className="styleSelectorAndDropDown"
@@ -50,8 +52,9 @@ export const PriceAndStyle = () => {
           Style >
         </div>
         <div
-          className="styleSelectorDropdown">
-          {productStyleName}
+          name="Style"
+          className="styleSelected">
+            {productStyleName}
         </div>
       </div>
     </div>
