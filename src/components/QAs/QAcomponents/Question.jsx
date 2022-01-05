@@ -83,7 +83,7 @@ const Question = (props) => {
     let error = false;
     let answer = {
       body: event.target.body.value || undefined,
-      name: event.target.username.value || undefined,
+      name: event.target.name.value || undefined,
       email: event.target.email.value || undefined
     };
     for (var val in answer) {
@@ -117,6 +117,18 @@ const Question = (props) => {
     };
   };
 
+  const handleErrorReset = (event) => {
+    let name = event.target.getAttribute('name');
+    if (errors[name] === undefined) {
+      setErrors( (curState) => {
+        return {
+          ...curState,
+          [name]: true
+        }
+      });
+    };
+  };
+
   return (
     <div className='question'>
       <input className='qRadio' type='radio' name='accordion' id={props.question.question_id}></input>
@@ -138,13 +150,13 @@ const Question = (props) => {
       <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body} product_name={props.product_name}>
         <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
           <label>Your Answer <span className='asterisk'>*</span></label>
-          <textarea name='body' maxLength='1000' rows='8'></textarea>
+          <textarea name='body' maxLength='1000' rows='8' onFocus={handleErrorReset}></textarea>
           {!errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
           <label>What is your nickname <span className='asterisk'>*</span></label>
-          <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jack543'></input>
+          <input className='username' type='text' maxLength='60' name='name' placeholder='Example: jack543' onFocus={handleErrorReset}></input>
           {!errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
           <label>Your Email <span className='asterisk'>*</span></label>
-          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
+          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com' onFocus={handleErrorReset}></input>
           {!errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
           <label>Upload your photos</label>
           <UploadPhotos />
