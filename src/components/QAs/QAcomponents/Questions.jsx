@@ -6,10 +6,6 @@ import Question from './Question.jsx';
 import Answers from './Answers.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
-const styles = {
-  fontWeight: '900'
-};
-
 const Questions = (props) => {
   const [modalView , setModalView] = useState(false);
   const [count, setCount] = useState(4);
@@ -25,20 +21,21 @@ const Questions = (props) => {
     setModalView( (currState) => { return !currState; });
   };
 
+  const handleShowMore = (event) => {
+    setCount( (curCount) => {
+      return curCount + 2;
+    });
+  };
+
   return (
-    <div style={styles}>
-      <div className='topBar'>
-        <div className='addQuestion'>
-          <button onClick={handleAddQuestionView}>Add Question</button>
-        </div>
-      </div>
+    <div className='wholeQuestion'>
       <QuestionModal open={modalView} onClose={handleAddQuestionView} product_name={props.product_name}>
         <form className='form' onSubmit={props.task}>
-          <label>Your Question</label>
+          <label>Your Question <span className='asterisk'>*</span></label>
           <textarea name='body' maxLength='1000' rows='8' placeholder='Why did you like the product or not?'></textarea>
-          <label>What is your nickname</label>
+          <label>What is your nickname <span className='asterisk'>*</span></label>
           <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jackson11!'></input>
-          <label>Your Email</label>
+          <label>Your Email <span className='asterisk'>*</span></label>
           <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
           <input className='submit' type='submit' value='Answer'></input>
         </form>
@@ -50,6 +47,17 @@ const Questions = (props) => {
           </div>
         );
       })}
+      <div className='topBar'>
+        <span className='addQuestion'>
+          <button onClick={handleAddQuestionView}>Add Question</button>
+        </span>
+        {props.questions.length > count
+          && <span onClick={handleShowMore} className='qShowMore'>
+            Show More Questions
+          </span>
+        }
+
+      </div>
     </div>
   );
 };
