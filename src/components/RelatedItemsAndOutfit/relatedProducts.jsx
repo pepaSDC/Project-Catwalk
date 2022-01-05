@@ -13,7 +13,13 @@ export const RelatedProducts = () => {
   const [relatedProductArray, setRelatedProductArray] = useState([]);
   const [currentProductInfo, setCurrentProductInfo] = useState({});
   const [currentProductName, setCurrentProductName] = useState('');
-  const [yourOutfitStorage, setYourOutfitStorage] = useState([]);
+  const [yourOutfitStorage, setYourOutfitStorage] = useState([
+    {
+      'image': 'https://www.clipartmax.com/png/middle/41-410376_add-item-comments-add-icon-png-white.png',
+      'name': 'Add Current Item'
+    }
+  ]);
+  const [allCurrentProductInfo, setAllCurrentProductInfo] = useState({});
   //axios call to get products information by id
   const getProduct = (id) => {
     return axios({
@@ -63,26 +69,33 @@ export const RelatedProducts = () => {
     .then(proInfo => {
       setCurrentProductInfo(proInfo.data.features);
       setCurrentProductName(proInfo.data.name);
+      setAllCurrentProductInfo(proInfo.data);
     })
 
   },[currentProductId]);
 
-  useEffect(() =>{
-    setYourOutfitStorage(JSON.parse(window.localStorage.getItem('yourOutfitStorage')))
-  },[]);
+
 
   useEffect(() => {
-    window.localStorage.setItem('yourOutfitStorage', yourOutfitStorage);
-  }, [count]);
+    window.localStorage.setItem('yourOutfitStorage', JSON.stringify(yourOutfitStorage));
+  }, [yourOutfitStorage]);
 
-  const addOutfitItem = () => {
-    var outfitUpdate = yourOutfitStorage.concat([proInfo.data])
-      setYourOutfitStorage(outfitUpdate);
-  }
+  useEffect(() =>{
+    var string1 = JSON.parse(localStorage.getItem('yourOutfitStorage'));
+    setYourOutfitStorage(string1)
+  },[]);
+
+  // const addOutfitItem = () => {
+  //     useEffect(() =>{
+  //       var outfitUpdate = yourOutfitStorage.concat([allCurrentProductInfo])
+  //       setYourOutfitStorage(outfitUpdate);
+  //     },[]);
+  // }
   //deleteoutfititem
 
   return (
     <div>
+
       <div className="app"></div>
       <RelatedProductsCardCarousel
         relatedProductArray={relatedProductArray}
@@ -90,9 +103,10 @@ export const RelatedProducts = () => {
         currentProductName={currentProductName}
       />
       <div className="youOutfit">
-        <button onClick={addOutfitItem()}>Add current</button>
-        <OutfitCarousel yourOutfitStorage={yourOutfitStorage} addOutfitItem={addOutfitItem}></OutfitCarousel>
+        {console.log('outfit storage in RP:::',yourOutfitStorage)}
+        <OutfitCarousel yourOutfitStorage={yourOutfitStorage} ></OutfitCarousel>
       </div>
     </div>
   );
 }
+// addOutfitItem={addOutfitItem}

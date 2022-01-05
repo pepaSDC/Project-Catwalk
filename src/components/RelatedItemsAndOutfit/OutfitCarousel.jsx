@@ -5,7 +5,7 @@ import './styles.css';
 
 
 
-export const OutfitCarousel = (props) => {
+const OutfitCarousel = (props) => {
   //props.yourOutfitStorage
   //props.addOutfitItem
   const [index, setIndex] = useState(0);
@@ -22,14 +22,13 @@ export const OutfitCarousel = (props) => {
     }
   };
 
-  const handleMouseDown = (e) => {
-    console.log(e.target);
-
-  };
-  let itemDisplayAmount = 3;
+  let itemDisplayAmount = 4;
   let outfitArr = props.yourOutfitStorage.slice(index, index+itemDisplayAmount);
+
   return (
+
     <div className="bigCardContainer">
+
      <div className={'card-container'}>
        {index === 0
          ?<div></div>
@@ -43,7 +42,7 @@ export const OutfitCarousel = (props) => {
            key={idx}
            itemNum={idx}
            cardStyle={position}
-           addOutfitItem={props.addOutfitItem}
+          //  addOutfitItem={props.addOutfitItem}
          />
        })}
      {index === props.yourOutfitStorage.length - itemDisplayAmount
@@ -56,3 +55,5 @@ export const OutfitCarousel = (props) => {
    )
 
 }
+
+export default OutfitCarousel;
