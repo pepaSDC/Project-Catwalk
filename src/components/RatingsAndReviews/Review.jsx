@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { PrettyDate } from './PrettyDate.jsx';
 import { StarRating } from './StarRating.jsx';
+import { PictureModal } from './PictureModal.jsx';
 import axios from 'axios';
 
 export const Review = ({ review }) => {
@@ -13,7 +14,7 @@ export const Review = ({ review }) => {
   const anchorstyle = {
     textDecoration: 'underline'
   }
-
+  const [modal, useModal] = useState(null);
   const [helpful, setHelpful] = useState( () => {
     return ({
       clicked: false,
@@ -55,7 +56,17 @@ export const Review = ({ review }) => {
       </div>
       <h2>{review.summary}</h2>
       <p>{review.body}</p>
-      {review.photos.length > 0 ? review.photos.map((photo) => <img src={photo.url} key={photo.id} style={{width: '50px'}}></img>) : null }
+      {review.photos.length > 0
+        ? review.photos.map((photo) => {
+          return(
+            <span key={photo.id}>
+              <img onClick={ ()=>useModal(photo.url) } src={photo.url} style={{width: '50px'}}></img>
+              { modal ? <PictureModal useModal={useModal} image={modal}/> : null }
+            </span>
+
+          )
+      })
+        : null }
       {review.recommend ? <div>&#10003; I recommended this product </div> : null}
       {review.response ? <div>Response from seller: {review.response}</div> : null}
       <div>
