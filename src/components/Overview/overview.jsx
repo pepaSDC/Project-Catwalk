@@ -15,9 +15,13 @@ let featureStyle = {
   padding: '10px',
 }
 
+let galleryInterfaceStyle = {
+  padding: '10px',
+  width: '100%'
+}
+
 export const Overview = () => {
   const { currentProductId } = useContext(GlobalContext);
-
 
   return (
     <div
@@ -36,7 +40,7 @@ export const Overview = () => {
       </div>
 
       <div
-        style={featureStyle}
+        style={galleryInterfaceStyle}
         className="productFeature">
         <ProductFeature />
       </div>
