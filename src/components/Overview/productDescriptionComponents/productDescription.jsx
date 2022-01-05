@@ -12,12 +12,12 @@ const DescriptionDivStyle = {
 const SloganAndDescriptionDivStyle = {
   display: 'flex',
   flexDirection: 'column',
-  width: '50%'
+  width: '66%'
 }
 
 const CurrentProductFeaturesDivStyle = {
   display: 'flex',
-  width: '50%',
+  width: '34%',
   flexDirection: 'column',
 
 }
@@ -38,16 +38,6 @@ export const ProductDescription = (props) => {
   const productFeatures = productInfo.data ? productInfo.data.features : []
   const productDescription = productInfo.data ? productInfo.data.description : ''
 
-  // return (
-  //   <div>
-  //     <div>
-  //       {productSlogan}
-  //     </div>
-  //     <div>
-  //       {productDescription}
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div
