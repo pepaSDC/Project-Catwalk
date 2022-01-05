@@ -13,8 +13,14 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  req.body.sku_id, req.body.count
-  api.postCart (req.body.sku_id, req.body.count, (err, result) => {
+  let id = Number(req.body.sku_id)
+  let itemCount = Number(req.body.count)
+  console.log(req.body)
+  console.log(typeof id)
+  console.log(id)
+  console.log(typeof itemCount)
+  console.log(itemCount)
+  api.postCart (id, itemCount, (err, result) => {
     if (err) {
       console.error(err);
     } else {
