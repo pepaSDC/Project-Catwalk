@@ -81,18 +81,14 @@ const api = {
     },
 
     //Add a review
-    // addReview: (id, callback) => {
-    //   axios.get(`${api.address}/reviews`, {
-    //     headers: {
-    //       Authorization: API_Token
-    //     },
-    //     params: {
-    //       product_id: id
-    //     }
-    //   })
-    //     .then( (data) => callback(null, data) )
-    //     .catch( (err) => callback(err) );
-    // },
+    addReview: (body, callback) => {
+      axios.post(`${api.address}/reviews`, body, {
+        headers: {
+          Authorization: API_Token
+        }})
+        .then( (data) => callback(null, data) )
+        .catch( (err) => callback(err) );
+    },
     //Reviews Meta
     updateHelpfulness: (id, callback) => {
       axios.put(`${api.address}/reviews/${id}/helpful`,'', {
