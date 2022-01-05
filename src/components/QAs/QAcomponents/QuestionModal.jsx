@@ -8,8 +8,8 @@ const Modal = ({ open, children, onClose, qBody, product_name }) => {
       <div className='modalOverlay' onClick={onClose}></div>
       <div className='modal'>
         <div className='title'>
-          Submit your Answer
-          <div className='subtitle'>{product_name}: {qBody}</div>
+          Ask Your Question
+          <div className='subtitle'>About the {product_name}</div>
         </div>
         {children}
       </div>
