@@ -98,3 +98,10 @@
 .photoLabel:hover {
   color: blue;
 }
+
+.noAnswers {
+  padding-left: 20px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(66, 66, 66);
+}

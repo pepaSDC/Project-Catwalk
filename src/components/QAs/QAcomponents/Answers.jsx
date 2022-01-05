@@ -19,7 +19,7 @@ const Answers = (props) => {
 
   return (
     <div className='individualAns'>
-      <span>A:</span>
+      {props.answers.length > 0 ? <span>A:</span> : <span className='noAnswers'>There are no answers</span>}
       {view === 'all'
       ? <div className='whole-answer'>
           {props.answers.map( ans => {
