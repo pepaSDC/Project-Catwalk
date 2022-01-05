@@ -22,7 +22,7 @@ export const ReviewList = (props) => {
       <div style={{margin: '10px', padding: '10px'}}>
         {props.state.length > reviews.length ? <button onClick={clickHandler}>More Reviews</button> : null}
         <button onClick={addReview}>Add A Review +</button>
-        {modal ? <NewReview setModal={setModal} meta={props.meta}/> : null}
+        {modal ? <NewReview useNewReview={props.useNewReview} setModal={setModal} meta={props.meta}/> : null}
       </div>
     </div>
   );
