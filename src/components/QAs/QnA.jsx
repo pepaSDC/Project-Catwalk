@@ -24,11 +24,27 @@ export const QA = () => {
     axios.get(`/products/${currentProductId}`)
       .then(result => {
         dataState.product_name = result.data.name;
-        return axios.get(`/qa/questions?product_id=${currentProductId}&page=1&count=1000`);
+        return axios.get(`/qa/questions?product_id=${currentProductId}&page=1&count=300`);
       })
       .then(response => {
+        // let index = 0;
+        // let helpful = [];
+        // for (let i = 0; i < response.data.results.length; i++) {
+        //   let currentQ = response.data.results[i];
+        //   if (currentQ.question_helpfulness === 0) {
+        //     index = i - 1;
+        //     break;
+        //   } else {
+        //     helpful.push(currentQ);
+        //   };
+        // };
+        // let unsorted = response.data.results.slice(index);
+        // let sorted = unsorted.sort( (a, b) => {
+        //   return new Date(b.question_date) - new Date(a.question_date);
+        // });
+        // dataState.questions = [...helpful, ...sorted];
         dataState.questions = response.data.results;
-        return response.data.results;
+        return;
       })
       .then(data => {
         setState(dataState);
