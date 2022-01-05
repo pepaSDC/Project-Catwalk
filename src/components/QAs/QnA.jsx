@@ -19,7 +19,13 @@ export const QA = () => {
   const { currentProductId } = useContext(GlobalContext);
   const [state, setState] = useState({});
   const [modalView , setModalView] = useState(false);
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState( () => {
+    return {
+      questions: [],
+      searching: false,
+      found: true
+    };
+  });
 
   const [errors, setErrors] = useState( () => {
     return {
@@ -119,15 +125,43 @@ export const QA = () => {
 
   const handleSearch = (event) => {
     if (event.target.value.length > 2) {
+      if (!filtered.searching) {
+        setFiltered( curState => {
+          return {
+            questions: [],
+            searching: true,
+            found: true
+          };
+        });
+      };
       let filt = state.questions.filter(q => {
         return q.question_body.includes(event.target.value);
       });
       if (filt.length > 0) {
-        setFiltered(filt);
-      };
-    } else if (event.target.value.length <= 2 && filtered.length > 0) {
-      console.log('RESET STATE');
-      setFiltered([]);
+        setFiltered( curState => {
+          return {
+            questions: filt,
+            searching: true,
+            found: true
+          };
+        });
+      } else if (filt.length === 0 && filtered.questions.length > 0) {
+        setFiltered( curState => {
+          return {
+            questions: [],
+            searching: true,
+            found: false
+          };
+        });
+      }
+    } else if (event.target.value.length <= 2 && filtered.questions.length > 0) {
+      setFiltered( curState => {
+        return {
+          questions: [],
+          searching: false,
+          found: true
+        };
+      });
     };
   };
 
@@ -136,7 +170,7 @@ export const QA = () => {
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search task={handleSearch}/>
       {state.questions
-        && <Questions questions={filtered.length > 0 ? filtered : state.questions} product_name={state.product_name} task={handleQuestionSubmit} errors={errors} view={modalView} handleView={handleAddQuestionView}/>
+        && <Questions found={filtered.found} questions={filtered.searching ? filtered.questions : state.questions} product_name={state.product_name} task={handleQuestionSubmit} errors={errors} view={modalView} handleView={handleAddQuestionView}/>
       }
     </div>
   );
