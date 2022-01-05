@@ -89,7 +89,7 @@ export const QA = () => {
     let error = false;
     let question = {
       body: event.target.body.value || undefined,
-      name: event.target.username.value || undefined,
+      name: event.target.name.value || undefined,
       email: event.target.email.value || undefined
     };
     for (var val in question) {
@@ -165,12 +165,24 @@ export const QA = () => {
     };
   };
 
+  const handleErrorReset = (event) => {
+    let name = event.target.getAttribute('name');
+    if (errors[name] === undefined) {
+      setErrors( (curState) => {
+        return {
+          ...curState,
+          [name]: true
+        }
+      });
+    };
+  };
+
   return (
     <div style={container}>
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search task={handleSearch}/>
       {state.questions
-        && <Questions found={filtered.found} questions={filtered.searching ? filtered.questions : state.questions} product_name={state.product_name} task={handleQuestionSubmit} errors={errors} view={modalView} handleView={handleAddQuestionView}/>
+        && <Questions found={filtered.found} questions={filtered.searching ? filtered.questions : state.questions} product_name={state.product_name} task={handleQuestionSubmit} errors={errors} view={modalView} handleView={handleAddQuestionView} handleError={handleErrorReset}/>
       }
     </div>
   );

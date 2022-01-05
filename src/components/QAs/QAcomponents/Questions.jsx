@@ -15,15 +15,6 @@ const Questions = (props) => {
     })
   }, [count, props.questions.length]);
 
-  const [errors, setErrors] = useState( () => {
-    return {
-      body: true,
-      name: true,
-      email: true
-    }
-  });
-
-
   const handleShowMore = (event) => {
     setCount( (curCount) => {
       return curCount + 2;
@@ -35,13 +26,13 @@ const Questions = (props) => {
       <QuestionModal open={props.view} onClose={props.handleView} product_name={props.product_name}>
         <form className='form' onSubmit={props.task}>
           <label>Your Question <span className='asterisk'>*</span></label>
-          <textarea name='body' maxLength='1000' rows='8' placeholder='Why did you like the product or not?'></textarea>
+          <textarea name='body' maxLength='1000' rows='8' placeholder='Why did you like the product or not?' onFocus={props.handleError}></textarea>
           {!props.errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
           <label>What is your nickname <span className='asterisk'>*</span></label>
-          <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jackson11!'></input>
+          <input className='username' type='text' maxLength='60' name='name' placeholder='Example: jackson11!' onFocus={props.handleError}></input>
           {!props.errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
           <label>Your Email <span className='asterisk'>*</span></label>
-          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
+          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com' onFocus={props.handleError}></input>
           {!props.errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : props.errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
           <input className='submit' type='submit' value='Answer'></input>
         </form>
@@ -63,7 +54,6 @@ const Questions = (props) => {
             Show More Questions
           </span>
         }
-
       </div>
     </div>
   );
