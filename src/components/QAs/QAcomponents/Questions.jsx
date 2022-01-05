@@ -7,19 +7,22 @@ import Answers from './Answers.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 const Questions = (props) => {
-  const [modalView , setModalView] = useState(false);
   const [count, setCount] = useState(4);
   const [questions, setQuestions] = useState([]);
   useEffect( () => {
     setQuestions( () => {
       return props.questions.slice(0, count);
     })
-  }, [count]);
+  }, [count, props.questions.length]);
 
-  const handleAddQuestionView = (event) => {
-    event.preventDefault();
-    setModalView( (currState) => { return !currState; });
-  };
+  const [errors, setErrors] = useState( () => {
+    return {
+      body: true,
+      name: true,
+      email: true
+    }
+  });
+
 
   const handleShowMore = (event) => {
     setCount( (curCount) => {
@@ -29,14 +32,17 @@ const Questions = (props) => {
 
   return (
     <div className='wholeQuestion'>
-      <QuestionModal open={modalView} onClose={handleAddQuestionView} product_name={props.product_name}>
+      <QuestionModal open={props.view} onClose={props.handleView} product_name={props.product_name}>
         <form className='form' onSubmit={props.task}>
           <label>Your Question <span className='asterisk'>*</span></label>
           <textarea name='body' maxLength='1000' rows='8' placeholder='Why did you like the product or not?'></textarea>
+          {!props.errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
           <label>What is your nickname <span className='asterisk'>*</span></label>
           <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jackson11!'></input>
+          {!props.errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
           <label>Your Email <span className='asterisk'>*</span></label>
           <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
+          {!props.errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : props.errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
           <input className='submit' type='submit' value='Answer'></input>
         </form>
       </QuestionModal>
@@ -49,7 +55,7 @@ const Questions = (props) => {
       })}
       <div className='topBar'>
         <span className='addQuestion'>
-          <button onClick={handleAddQuestionView}>Add Question</button>
+          <button onClick={props.handleView}>Add Question</button>
         </span>
         {props.questions.length > count
           && <span onClick={handleShowMore} className='qShowMore'>
