@@ -24,6 +24,12 @@ export const RatingsAndReviews = (props) => {
   const {currentProductId} = useContext(GlobalContext);
   const {updateReviewsState, meta, allReviews, averageRating, totalRatings, sortBy} = useContext(RatingsAndReviewsContext);
   const [newReview, useNewReview] = useState(null);
+  const [sorting, useSorting] = useState([]);
+
+  const filterReviews = (array, sorting) => {
+    return array.filter(item => sorting.includes(item.rating));
+  }
+  let currentReviews = sorting.length > 0 ? filterReviews(allReviews, sorting) : allReviews;
 
   useEffect(() => {
     let isAPISubscribed = true;
@@ -40,10 +46,10 @@ export const RatingsAndReviews = (props) => {
         <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
         <div style={styleReviews}>
           <div className="reviewsAside" style={styleAside}>
-            <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
+            <RatingBreakdown sorting={sorting} useSorting={useSorting} meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
             <ProductBreakdown characteristics={meta.characteristics}/>
           </div>
-          <ReviewList state={allReviews} meta={meta} useNewReview={useNewReview}/>
+          <ReviewList state={currentReviews} meta={meta} useNewReview={useNewReview}/>
         </div>
       </div>
     </div>

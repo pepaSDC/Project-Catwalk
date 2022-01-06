@@ -6,3 +6,12 @@ button {
   margin: 10px;
   background-color: white
 }
+
+.sortingButton {
+  text-decoration: underline;
+}
+
+.sortingButton:hover {
+  text-decoration: underline;
+  background-color: lightgray
+}
