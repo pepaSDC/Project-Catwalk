@@ -12,7 +12,7 @@ export const SelectableStars = (props) => {
     position: 'relative',
     margin: '0',
     padding: '0',
-    fontSize: '50px'
+    fontSize: '45px'
   }
   const fillRating = {
     color: '#e7711b',
@@ -101,7 +101,7 @@ export const SelectableStars = (props) => {
         </div>
       </div>
       <div style={{display:'flex', justifyContent: 'space-around'}}>
-        <div>{ratingStatement}</div>
+        <div style={{fontSize: '12px'}}>{ratingStatement}</div>
       </div>
     </div>
 

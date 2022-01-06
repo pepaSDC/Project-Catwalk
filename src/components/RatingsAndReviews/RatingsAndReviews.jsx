@@ -35,9 +35,9 @@ export const RatingsAndReviews = (props) => {
 
 
   return ( allReviews.length !== 0 ?
-    <div style={{margin: '30px 30px'}}>
+    <div className="reviewsModule" style={{margin: '30px'}}>
       <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
-      <div className="reviewsModule" style={styleReviews}>
+      <div style={styleReviews}>
         <div className="reviewsAside" style={styleAside}>
           <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
           <ProductBreakdown characteristics={meta.characteristics}/>
