@@ -13,7 +13,6 @@ const RelatedProduct = (props) => {
   if (props.information[1] === null) {
     props.information[1] = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg"
   }
-
   let oProductFeatures = [];
   let rProductFeatures = [];
   for(let i = 0; i < props.information[0].features.length; i++) {

@@ -23,6 +23,7 @@ padding:10px 3px;
   height: 370px;
   width: 250px;
   object-fit: cover;
+	background-color:white;
 }
 
 .arrowLeft {
