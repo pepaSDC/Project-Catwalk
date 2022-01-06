@@ -8,14 +8,14 @@ export const SelectableStars = (props) => {
 
   const starRating = {
     unicodeBidi: 'bidi-override',
-    color: '#ccc',
+    color: '#F5F5F5',
     position: 'relative',
     margin: '0',
     padding: '0',
     fontSize: '45px'
   }
   const fillRating = {
-    color: '#e7711b',
+    color: '#77ff2e',
     padding: '0',
     position: 'absolute',
     display: 'block',
