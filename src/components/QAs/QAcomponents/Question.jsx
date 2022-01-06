@@ -52,6 +52,12 @@ const Question = (props) => {
         initNonSeller.push(answers[key]);
       };
     };
+    initSeller = initSeller.sort( (a, b) => {
+      return b.helpfulness - a.helpfulness;
+    });
+    initNonSeller = initNonSeller.sort( (a, b) => {
+      return b.helpfulness - a.helpfulness;
+    });
     return [...initSeller, ...initNonSeller];
   });
 
@@ -76,6 +82,7 @@ const Question = (props) => {
     event.preventDefault();
     setView( (currState) => { return !currState; });
     setErrors( (curState) => ({body: true, name: true, email: true}));
+    setPhotos([]);
   };
 
   const handleAnswerSubmit = (event) => {
@@ -99,6 +106,7 @@ const Question = (props) => {
       };
       setErrors(answer);
     } else {
+      answer.photos = photos;
       axios.post(`/qa/questions/${event.target.id}/answers`, answer)
         .then(response => {
           return axios.get(`/qa/questions/${event.target.id}/answers`);
@@ -126,6 +134,40 @@ const Question = (props) => {
           [name]: true
         }
       });
+    };
+  };
+
+  const [photos, setPhotos] = useState([]);
+
+  const handleSelected = (event) => {
+    if (photos.length < 5) {
+      let len = Object.keys(event.target.files);
+      if (len.length < 5) {
+        if (((photos.length - 1) + len.length) < 5) {
+          let files = event.target.files
+          let promises = [];
+          for (let i = 0; i < len.length; i++) {
+            let file = files[len[i]];
+            // let url = URL.createObjectURL(file);
+            let promise = new Promise( (resolve, reject) => {
+              let reader = new FileReader();
+              reader.onload = () => {
+                resolve(reader.result);
+              };
+              reader.onerror = () => {
+                reject('error');
+              };
+              reader.readAsDataURL(file);
+            });
+            promises.push(promise);
+          };
+          Promise.all(promises)
+            .then(data => {
+              setPhotos([...photos, ...data]);
+            })
+            .catch(err => console.log(err));
+        };
+      };
     };
   };
 
@@ -159,7 +201,7 @@ const Question = (props) => {
           <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com' onFocus={handleErrorReset}></input>
           {!errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
           <label>Upload your photos</label>
-          <UploadPhotos />
+          <UploadPhotos previews={photos} task={handleSelected}/>
           <input className='submit' type='submit' value='Answer'></input>
         </form>
       </Modal>
