@@ -39,12 +39,12 @@ export const RatingsReviewsCategory = () => {
       style={ratingsReviewsCategoryStyle}
       className="ratingsReviewsCategory">
     <div
-      style={ratingsReviewsStyle}
       className="ratingsReviewsCategory">
         <div>
           <StarRating rating={averageRating}/>
         </div>
-        <div>
+        <div
+          className="ratingsReviewsContainer">
           <a href="#ratingsAndReviews">See All Reviews</a>
         </div>
       </div>
