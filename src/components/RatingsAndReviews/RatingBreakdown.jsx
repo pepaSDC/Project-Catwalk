@@ -2,7 +2,18 @@
 import React from 'react';
 import {StarRating} from './StarRating.jsx';
 import {ProgressBar} from './ProgressBar.jsx';
-export const RatingBreakdown = ({meta, averageRating, totalRatings}) => {
+export const RatingBreakdown = ({meta, averageRating, totalRatings, useSorting, sorting}) => {
+
+  const clickHandler = (e) => {
+    let value = Number(e.target.getAttribute('value'));
+    let index = sorting.indexOf(value);
+    if (index === -1) {
+      useSorting([...sorting, value]);
+    } else {
+      useSorting(sorting.filter(item => item !== value))
+    }
+  }
+
   return (
     <div>
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
@@ -15,7 +26,7 @@ export const RatingBreakdown = ({meta, averageRating, totalRatings}) => {
         let rating = meta.ratings[item] || 0;
         return (
           <div key={item} style={{display: 'flex', justifyContent:"space-between", padding: '5px 0'}}>
-            <a>{item} stars</a>
+            <a value={item} onClick={clickHandler}>{item} stars</a>
             <ProgressBar percent={rating/totalRatings * 100} />
           </div>
         );

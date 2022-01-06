@@ -24,6 +24,7 @@ export const RatingsAndReviews = (props) => {
   const {currentProductId} = useContext(GlobalContext);
   const {updateReviewsState, meta, allReviews, averageRating, totalRatings, sortBy} = useContext(RatingsAndReviewsContext);
   const [newReview, useNewReview] = useState(null);
+  const [sorting, useSorting] = useState([]);
 
   useEffect(() => {
     let isAPISubsribed = true;
@@ -40,7 +41,7 @@ export const RatingsAndReviews = (props) => {
         <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
         <div style={styleReviews}>
           <div className="reviewsAside" style={styleAside}>
-            <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
+            <RatingBreakdown sorting={sorting} useSorting={useSorting} meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
             <ProductBreakdown characteristics={meta.characteristics}/>
           </div>
           <ReviewList state={allReviews} meta={meta} useNewReview={useNewReview}/>
