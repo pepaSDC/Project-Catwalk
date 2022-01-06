@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 export const StarRating = (props) => {
@@ -33,12 +34,14 @@ export const StarRating = (props) => {
   }
 
   return (
-    <div className="star-ratings" style={starRating}>
-      <div className="fill-ratings" style={fillRating}>
-        <span style={span}>★★★★★</span>
-      </div>
-      <div className="empty-ratings" style={emptyRating}>
-        <span style={span}>★★★★★</span>
+    <div style={{display: 'flex', justifyContent: 'space-around'}}>
+      <div className="star-ratings" style={starRating}>
+        <div className="fill-ratings" style={fillRating}>
+          <span style={span}>★★★★★</span>
+        </div>
+        <div className="empty-ratings" style={emptyRating}>
+          <span style={span}>★★★★★</span>
+        </div>
       </div>
     </div>
   );
