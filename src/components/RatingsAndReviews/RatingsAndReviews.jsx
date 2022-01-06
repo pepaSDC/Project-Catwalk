@@ -34,7 +34,7 @@ export const RatingsAndReviews = (props) => {
   }, [currentProductId, sortBy, newReview])
 
 
-  return ( allReviews.length !== 0 ?
+  return (
     <div className="reviewsModule" style={{margin: '30px'}}>
       <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
       <div style={styleReviews}>
@@ -44,9 +44,8 @@ export const RatingsAndReviews = (props) => {
         </div>
         <ReviewList state={allReviews} meta={meta} useNewReview={useNewReview}/>
       </div>
-
     </div>
-    : null
+
   );
 };
 
