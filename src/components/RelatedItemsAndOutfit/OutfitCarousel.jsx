@@ -49,7 +49,7 @@ const OutfitCarousel = (props) => {
            addClickHandler={props.addClickHandler}
          />
        })}
-     {index === props.outfitProductArray.length - itemDisplayAmount || props.outfitProductArray.length === 0
+     {index === outfitArr.length - itemDisplayAmount || outfitArr.length
          ?<div></div>
          :<button className="arrowRight" onClick={slideRight}>&#8649;</button>
        }

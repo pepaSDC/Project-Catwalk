@@ -109,8 +109,11 @@ export const RelatedProducts = () => {
   },[yourOutfitStorage]);
 
   const addOutfitItem = () => {
-    var outfitUpdate = yourOutfitStorage.concat([currentProductId]);
-    setYourOutfitStorage(outfitUpdate);
+
+    if(yourOutfitStorage.includes(currentProductId) === false){
+     var outfitUpdate = yourOutfitStorage.concat([currentProductId]);
+      setYourOutfitStorage(outfitUpdate);
+    }
   }
 
   const deleteOutfitItem = (id) => {
