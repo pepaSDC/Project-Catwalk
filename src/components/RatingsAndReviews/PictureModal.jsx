@@ -6,7 +6,7 @@ export const PictureModal = (props) => {
     display: 'flex',
     justifyContent: 'space-around',
     position: 'fixed',
-    zIndex: '5',
+    zIndex: '100',
     left: '0',
     top: '0',
     width: '100%',
