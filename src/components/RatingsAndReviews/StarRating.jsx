@@ -43,3 +43,5 @@ export const StarRating = (props) => {
     </div>
   );
 }
+
+export default StarRating;

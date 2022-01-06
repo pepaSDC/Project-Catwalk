@@ -131,7 +131,7 @@ export const RelatedProducts = () => {
 
 
   return (
-    <div>
+    <div id='Related_Products'>
 
       <div className="app"></div>
       <RelatedProductsCardCarousel
