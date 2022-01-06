@@ -46,14 +46,12 @@ const Questions = (props) => {
       })}
       {!props.found && <div>No questions found</div>}
       <div className='topBar'>
-        <span className='addQuestion'>
-          <button onClick={props.handleView}>Add Question</button>
-        </span>
         {props.questions.length > count
-          && <span onClick={handleShowMore} className='qShowMore'>
+          && <button onClick={handleShowMore} className='qShowMore'>
             Show More Questions
-          </span>
+          </button>
         }
+        <button className='addQuestion' onClick={props.handleView}>Add Question</button>
       </div>
     </div>
   );
