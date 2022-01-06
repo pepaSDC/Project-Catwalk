@@ -93,6 +93,7 @@
 .photoLabel {
   font-weight: 100;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .photoLabel:hover {
