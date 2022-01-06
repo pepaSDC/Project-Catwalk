@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalState.js';
+import Promise from 'bluebird';
 import { Link } from 'react-router-dom';
 import ComparingModal from './ComparingModal.jsx';
 import './styles.css';
@@ -8,6 +10,10 @@ import './styles.css';
 const RelatedProduct = (props) => {
 
   const [modalToggle, setModalToggle] = useState(false);
+
+  const { getAverageReview } = useContext(GlobalContext);
+
+  const [reviewRating, setReviewRating] = useState(0);
 
   //sets a default image
   if (props.information[1] === null) {
@@ -34,6 +40,12 @@ const RelatedProduct = (props) => {
   for(let i = 0; i < oProductFeatures.length; i++) {
 
   }
+  useEffect(() =>{
+    getAverageReview(props.information[0].id)
+    .then(rating => {
+      setReviewRating(rating);
+    })
+  },[])
 
   return(
    <div className={`card ${props.cardStyle}`} onMouseDown={props.handleMouseDown}>
@@ -41,7 +53,7 @@ const RelatedProduct = (props) => {
      <Link to={`/items/${props.information[0].id}`}><img className="card-image" src={props.information[1]}/></Link>
     <div>{props.information[0].category}</div>
     <div>{props.information[0].name}</div>
-    <div>reviews ******</div>
+    <div>{reviewRating}</div>
 
     {modalToggle
         ?<ComparingModal
