@@ -135,15 +135,15 @@ const Question = (props) => {
         </div>
         <Answers answers={orderedAns} />
       </label>
-      <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body}>
+      <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body} product_name={props.product_name}>
         <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
-          <label>Your Answer</label>
+          <label>Your Answer <span className='asterisk'>*</span></label>
           <textarea name='body' maxLength='1000' rows='8'></textarea>
           {!errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
-          <label>What is your nickname</label>
+          <label>What is your nickname <span className='asterisk'>*</span></label>
           <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jack543'></input>
           {!errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
-          <label>Your Email</label>
+          <label>Your Email <span className='asterisk'>*</span></label>
           <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
           {!errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
           <label>Upload your photos</label>

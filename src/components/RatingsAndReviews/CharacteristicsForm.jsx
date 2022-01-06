@@ -31,8 +31,8 @@ export const CharacteristicsForm = (props) => {
 
 
   return (
-    <div>
-      <p style={{margin: '0'}}>{props.char}</p>
+    <div style={{margin: '15px 0'}}>
+      <span style={{margin: '0'}}>{props.char}: </span>
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
         <div>
           <label>1</label>

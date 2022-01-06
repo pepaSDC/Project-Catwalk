@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../context/GlobalState.js'
+import { OverviewContext } from '../../../context/OverviewState.js'
 
 import { RatingsReviewsCategory } from './productInterfaceComponents/RatingsReviewsCategory.jsx'
 import { ProductName } from './productInterfaceComponents/ProductName.jsx'
@@ -12,11 +13,11 @@ import { RatingsAndReviewsProvider } from '../../../context/RatingsAndReviewsSta
 const productInterfaceStyle = {
   display: 'flex',
   flexDirection: 'column',
-  flexGrow: 1
 }
 
 export const ProductInterface = () => {
   const { currentProductId } = useContext(GlobalContext);
+  const { currentView } = useContext(OverviewContext);
 
   return (
     <div
@@ -32,18 +33,3 @@ export const ProductInterface = () => {
     </div>
   );
 }
-
-/*
-
-RatingsReviewsCategory
-
-ProductName
-
-PriceAndStyle
-
-StyleShowcase
-
-AddToCart
-
-
-*/

@@ -81,6 +81,7 @@ export const RelatedProducts = () => {
 
 
 
+
   useEffect(() => {
     window.localStorage.setItem('yourOutfitStorage', JSON.stringify(yourOutfitStorage));
   }, [yourOutfitStorage]);
@@ -127,6 +128,7 @@ export const RelatedProducts = () => {
   const addClickHandler = () => {
     addOutfitItem();
   }
+
 
   return (
     <div>

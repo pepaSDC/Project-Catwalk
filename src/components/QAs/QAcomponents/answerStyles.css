@@ -80,17 +80,21 @@
   display: block;
 }
 
-.qContainer:hover {
-  border-color: rgb(0, 175, 157);
-}
-
 .qRadio:checked + .qBody .individualAns {
   min-height: min-content;
   max-height: 50vh;
   overflow-y: auto;
 }
 
-/* .answer:first-child,
-.answer:nth-child(2) {
-  display: none;
-} */
+.upload {
+  padding: 5px;
+}
+
+.photoLabel {
+  font-weight: 100;
+  font-size: 15px;
+}
+
+.photoLabel:hover {
+  color: blue;
+}

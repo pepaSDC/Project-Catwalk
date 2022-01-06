@@ -31,7 +31,8 @@ router.get('/questions/:question_id/answers', (req, res) => {
 });
 
 router.post('/questions', (req, res) => {
-  const { body, name, email, product_id } = req.body;
+  var { body, name, email, product_id } = req.body;
+  product_id = parseInt(product_id);
   api.addQuestion(body, name, email, product_id, (err, result) => {
     if (err) {
       console.error(err);

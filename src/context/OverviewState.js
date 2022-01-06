@@ -3,6 +3,7 @@ import OverviewReducer from './OverviewReducer.js';
 const axios = require('axios');
 
 const initialOverviewState = {
+  currentView: 'default',
   productInfo: {},
   productStyles: [],
   featuredStyleIndex: 0,
@@ -42,32 +43,28 @@ export const OverviewProvider = ({ children }) => {
       })
   }
 
-  function resetProductValue(value) {
-    overviewDispatch({
-      type: 'RESET_PRODUCT_VALUE',
-      payload: value
-    })
-  }
-
   function updateCurrentStyle (id) {
-    overviewDispatch({
-      type: 'UPDATE_CURRENT_STYLE',
-      payload: id
-    })
+    overviewDispatch({ type: 'UPDATE_CURRENT_STYLE', payload: id })
   }
 
   function updateFeaturedPhoto (id) {
-    overviewDispatch({
-      type: 'UPDATE_FEATURED_PHOTO',
-      payload: id
-    })
+    overviewDispatch({ type: 'UPDATE_FEATURED_PHOTO', payload: id })
   }
 
   function updateSelectedItemSku (id) {
-    overviewDispatch({
-      type: 'UPDATE_SELECTED_ITEM_SKU',
-      payload: id
-    })
+    overviewDispatch({ type: 'UPDATE_SELECTED_ITEM_SKU', payload: id })
+  }
+
+  function resetProductValue(value) {
+    overviewDispatch({ type: 'RESET_PRODUCT_VALUE', payload: value })
+  }
+
+  function incrementFeaturedPhotoIndex (value) {
+    overviewDispatch({ type: 'INCREMENT_FEATURED_INDEX', payload: value })
+  }
+
+  function decrementFeaturedPhotoIndex (value) {
+    overviewDispatch({ type: 'DECREMENT_FEATURED_INDEX', payload: value })
   }
 
   return(<OverviewContext.Provider value={{
@@ -77,6 +74,9 @@ export const OverviewProvider = ({ children }) => {
     updateCurrentStyle,
     updateFeaturedPhoto,
     updateSelectedItemSku,
+    decrementFeaturedPhotoIndex,
+    incrementFeaturedPhotoIndex,
+    currentView: overviewState.currentView,
     productInfo: overviewState.productInfo,
     productStyles: overviewState.productStyles,
     featuredStyleIndex: overviewState.featuredStyleIndex,

@@ -21,14 +21,12 @@ export const Pricing = () => {
     featuredStyleIndex,
   } = useContext(OverviewContext);
 
-  let id = currentProductId;
-
   useEffect(() => {
-    getProductStyles(id)
+    getProductStyles(currentProductId)
     return (() => {
       resetProductValue([])
     })
-  }, [id])
+  }, [currentProductId])
 
   const originalPrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].original_price : ''
   const salePrice = productStyles.data ? productStyles.data.results[featuredStyleIndex].sale_price : ''
