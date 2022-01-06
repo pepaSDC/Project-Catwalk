@@ -30,8 +30,6 @@ export const StyleShowcase = () => {
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
 
-  // console.log('line 30 in styleShowcase: ', productStylesArray);
-
   return (
     <div
       style={StyleShowcaseStyle}

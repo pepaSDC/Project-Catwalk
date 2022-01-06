@@ -35,15 +35,15 @@ export const ProductGalleryMainPhoto = () => {
     width: '100%'
   }
 
+  const fullscreenButtonContainerStyle = {
+    display: 'flex',
+  }
+
   const leftRightButtonsContainerStyle = {
     display: 'flex',
     alignItems: 'center',
     width: '100%',
     justifyContent: 'space-between'
-  }
-
-  const fullscreenButtonContainerStyle = {
-    display: 'flex',
   }
 
   const leftButtonStyle = {
@@ -111,10 +111,31 @@ export const ProductGalleryMainPhoto = () => {
     }
   }
 
+  const handleArrow = (event) => {
+    console.log(event.key)
+    event.preventDefault();
+    if (event.key === 'ArrowLeft') {
+      if (featuredProductImageIndex !== 0) {
+        let newIndex = (featuredProductImageIndex - 1)
+        decrementFeaturedPhotoIndex(newIndex);
+      }
+    }
+    if (event.key === 'ArrowRight') {
+      if (featuredProductImageIndex !== productStylesArrayMaxIndex) {
+        let newIndex = (featuredProductImageIndex + 1)
+        incrementFeaturedPhotoIndex(newIndex);
+      }
+    }
+  }
+
+
   return (
     <div
+    tabIndex={-1}
+    onKeyDown={handleArrow}
       className="productGalleryPhoto"
       style={{
+        outline: 'none',
         display: 'flex',
         flexDirection: 'row',
         width: '100%',
@@ -126,6 +147,8 @@ export const ProductGalleryMainPhoto = () => {
         {displayImageModal && (
         <ImageModal
           className="ImageModal"
+          index={featuredProductImageIndex}
+          max={productStylesArrayMaxIndex}
           toggleImageModal={setDisplayImageModal}
           featuredPhoto={featuredProductPhoto}/>
         )}

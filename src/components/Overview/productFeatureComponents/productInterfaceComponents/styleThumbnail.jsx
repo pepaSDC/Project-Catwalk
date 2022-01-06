@@ -34,6 +34,8 @@ export const StyleThumbnail = (props) => {
 
   let featuredStyleIndicator = (props.featuredStyle === props.index) ? blackIndicatorCircleStyle : isNotFeaturedStyleThumbnail
 
+  let img = props.thumbnail ? props.thumbnail : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'
+
   return (
     <div
       className="styleThumbnail"

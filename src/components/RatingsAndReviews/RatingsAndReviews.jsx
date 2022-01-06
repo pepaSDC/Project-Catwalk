@@ -26,10 +26,10 @@ export const RatingsAndReviews = (props) => {
   const [newReview, useNewReview] = useState(null);
 
   useEffect(() => {
-    let isAPISubsribed = true;
+    let isAPISubscribed = true;
     updateReviewsState(currentProductId, sortBy);
     return () => {
-      isAPISubsribed = false;
+      isAPISubscribed = false;
     }
   }, [currentProductId, sortBy, newReview])
 

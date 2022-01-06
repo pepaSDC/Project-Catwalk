@@ -64,15 +64,6 @@ export const AddToCart = () => {
         <div
           className="addToBagOrShare"
           style={addToBagOrShareStyle}>
-            <div
-              className="addToBag"
-              style={addToBagButtonStyle}>
-              AddToBag
-            </div>
-            <div
-              style={shareButtonStyle}>
-              Share
-            </div>
         </div>
     </div>
   );
