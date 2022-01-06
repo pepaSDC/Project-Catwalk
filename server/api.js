@@ -193,10 +193,29 @@ const api = {
         .catch( (err) => callback(err) );
     },
 
-    // Cart Info
-    postCart: () => {},
-    getCart: () => {}
+    getCart: (callback) => {
+      axios.get(`${api.address}/cart`, {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
 
+    postCart: (sku, quantity, callback) => {
+      let data = {
+        sku_id: sku,
+        count: quantity
+      }
+      axios.post (`${api.address}/cart`, data, {
+        headers: {
+          Authorization: API_Token
+        }
+      })
+        .then( (response) => callback(null, response) )
+        .catch( (err) => callback(err) );
+    },
 }
 
 module.exports = api;

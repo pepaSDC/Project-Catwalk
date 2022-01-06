@@ -4,6 +4,7 @@ const api = require('./api.js');
 const reviews = require('./router/reviews.js');
 const QA = require('./router/QAs.js');
 const products = require('./router/products.js');
+const cart = require('./router/cart.js');
 
 
 const app = express();
@@ -16,6 +17,8 @@ app.use('/products', products);
 app.use('/reviews', reviews);
 
 app.use('/qa', QA);
+
+app.use('/cart', cart);
 
 
 let port = 3000;
