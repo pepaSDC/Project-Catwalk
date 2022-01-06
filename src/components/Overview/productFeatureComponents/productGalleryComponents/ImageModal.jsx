@@ -6,30 +6,7 @@ import rightArrow from './arrow-gray-right.png'
 import closeIcon from './close-icon.png'
 import './modalImageStyles.css'
 
-const modalPictureContainerStyling = {
-  display:'flex',
-  flexDirection: 'row',
-  backgroundImage: `url(${props.featuredPhoto})`,
-  height: '75vh',
-  alignItems: 'center',
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center 0% 0%'
-}
-
-handleMouseMove = e => {
-  const { left, top, width, height } = e.target.getBoundingClientRect()
-  const x = (e.pageX - left) / width * 100
-  const y = (e.pageY - top) / height * 100
-  this.setState({ backgroundPosition: `${x}% ${y}%` })
-}
-
-
 export const ImageModal = ( props ) => {
-  state = {
-    backgroundImage: `url(${src})`,
-    backgroundPosition: 'center 0% 0%'
-  }
   const {
     decrementFeaturedPhotoIndex, incrementFeaturedPhotoIndex
   } = useContext(OverviewContext);
@@ -86,6 +63,19 @@ export const ImageModal = ( props ) => {
     display: 'flex',
     width: '88%',
     justifyContent: 'flex-end'
+  }
+
+  const imageModalBackgroundStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    position: 'fixed',
+    zIndex: '3',
+    left: '0',
+    top: '0',
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, .7)'
   }
 
   let modalLeftButtonStyling = (props.index === 0) ? modalConcealLeftButtonStyle : modalLeftButtonStyle
