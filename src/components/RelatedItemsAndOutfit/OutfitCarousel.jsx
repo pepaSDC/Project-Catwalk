@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Outfit from './Outfit.jsx';
 import './styles.css';
+import leftArrow from './arrow-gray-left.png'
+import rightArrow from './arrow-gray-right.png'
 
 
 
@@ -35,7 +37,12 @@ const OutfitCarousel = (props) => {
      <div className={'card-container'}>
        {index === 0
          ?<div></div>
-         :<button className="arrowLeft" onClick={slideLeft}>&#8647;</button>
+
+         :<img
+         src={leftArrow}
+         className="arrowLeft"
+         onClick={slideLeft}>
+       </img>
        }
 
        {outfitArr.map((ele, idx) => {
@@ -51,7 +58,11 @@ const OutfitCarousel = (props) => {
        })}
      {index === outfitArr.length - itemDisplayAmount || outfitArr.length
          ?<div></div>
-         :<button className="arrowRight" onClick={slideRight}>&#8649;</button>
+         :<img
+         src={rightArrow}
+         className="arrowRight"
+         onClick={slideRight}>
+       </img>
        }
 
      </div>
@@ -59,5 +70,5 @@ const OutfitCarousel = (props) => {
    )
 
 }
-
+// :<button className="arrowLeft" onClick={slideLeft}>&#8647;</button>
 export default OutfitCarousel;

@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import RelatedProduct from './RelatedProduct.jsx';
 import './styles.css';
+import leftArrow from './arrow-gray-left.png'
+import rightArrow from './arrow-gray-right.png'
 
 
 
@@ -32,7 +34,11 @@ const RelatedProductsCardCarousel = (props) => {
     <div className={'card-container'}>
       {index === 0
         ?<div></div>
-        :<button className="arrowLeft" onClick={slideLeft}>&#8647;</button>
+        :<img
+        src={leftArrow}
+        className="arrowLeft"
+        onClick={slideLeft}>
+      </img>
       }
 
       {productArr.map((ele, idx) => {
@@ -48,7 +54,11 @@ const RelatedProductsCardCarousel = (props) => {
       })}
     {index === props.relatedProductArray.length - itemDisplayAmount
         ?<div></div>
-        :<button className="arrowRight" onClick={slideRight}>&#8649;</button>
+        :<img
+        src={rightArrow}
+        className="arrowRight"
+        onClick={slideRight}>
+      </img>
       }
 
     </div>
@@ -56,4 +66,6 @@ const RelatedProductsCardCarousel = (props) => {
   )
 }
 
+{/* <button className="arrowLeft" onClick={slideLeft}>&#8647;</button> */}
+{/* <button className="arrowRight" onClick={slideRight}>&#8649;</button> */}
 export default RelatedProductsCardCarousel;

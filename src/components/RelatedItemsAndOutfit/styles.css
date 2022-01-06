@@ -41,8 +41,9 @@ padding:10px 3px;
 
   position: absolute;
   left: 0%;
-  width: 10rem;
-  height: 22rem;
+  top: 43%;
+  height: 65px;
+  width: 35px;
 }
 .arrowLeft:hover {
 	background-color:transparent;
@@ -51,7 +52,6 @@ padding:10px 3px;
 }
 .arrowLeft:active {
 	position: absolute;
-	top:1px;
 }
 
 .arrowRight {
@@ -69,8 +69,9 @@ padding:10px 3px;
 
   position: absolute;
   right: 0%;
-  width: 10rem;
-  height: 22rem;
+  top: 43%;
+  height: 65px;
+  width: 35px;
 }
 .arrowRight:hover {
 	background-color:transparent;
@@ -79,7 +80,7 @@ padding:10px 3px;
 }
 .arrowRight:active {
 	position: absolute;
-	top:1px;
+
 }
 
 .compare-btn {

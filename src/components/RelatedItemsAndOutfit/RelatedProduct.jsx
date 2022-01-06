@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalState.js';
+import Promise from 'bluebird';
 import { Link } from 'react-router-dom';
 import ComparingModal from './ComparingModal.jsx';
 import './styles.css';
+import axios from 'axios';
+import StarRating from '../RatingsAndReviews/StarRating.jsx';
 
 
 const RelatedProduct = (props) => {
 
   const [modalToggle, setModalToggle] = useState(false);
+
+  // const { getAverageReview } = useContext(GlobalContext);
+
+  const [reviewRating, setReviewRating] = useState(0);
 
   //sets a default image
   if (props.information[1] === null) {
@@ -35,13 +43,37 @@ const RelatedProduct = (props) => {
 
   }
 
+  //ratings function
+  const getReviewMeta = (id) => {
+    return axios({
+      method: 'GET',
+      url: `http://localhost:3000/reviews/meta/?product_id=${id}`
+    })
+  }
+
+  useEffect(() =>{
+    getReviewMeta(props.information[0].id)
+    .then((results) => {
+      let absolutetotal = 0;
+      let totalratings = 0;
+      for (var key in results.data.ratings) {
+        totalratings += Number(results.data.ratings[key])
+        absolutetotal += (Number(results.data.ratings[key]) * Number(key));
+      }
+      let average = Math.round((absolutetotal/totalratings) * 4) / 4;
+       setReviewRating(average);
+    })
+  },[])
+  ///////////////////
+
   return(
    <div className={`card ${props.cardStyle}`} onMouseDown={props.handleMouseDown}>
+
      <button className="compare-btn" onClick={() => modalToggle === false ? setModalToggle(true) : setModalToggle(false) }>&#9734;</button>
      <Link to={`/items/${props.information[0].id}`}><img className="card-image" src={props.information[1]}/></Link>
     <div>{props.information[0].category}</div>
     <div>{props.information[0].name}</div>
-    <div>reviews ******</div>
+    <StarRating rating={reviewRating}/>
 
     {modalToggle
         ?<ComparingModal

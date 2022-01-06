@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useState} from 'react';
 
 export const CharacteristicsForm = (props) => {
@@ -32,8 +33,9 @@ export const CharacteristicsForm = (props) => {
 
   return (
     <div style={{margin: '15px 0'}}>
-      <span style={{margin: '0'}}>{props.char}: </span>
+
       <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <div style={{margin: '0', width: '8%'}}>{props.char}: </div>
         <div>
           <label>1</label>
           <input onChange={()=>useRating(1)} type="radio" name={props.char} value='1' className={props.char} required></input>
@@ -54,7 +56,7 @@ export const CharacteristicsForm = (props) => {
           <label>5</label>
           <input onChange={()=>useRating(5)} type="radio" name={props.char} value='5' className={props.char}></input>
         </div>
-        <span style={{width: '30%'}}>{rating ? selection[rating]: 'None Selected'}</span>
+        <span style={{width: '30%', fontSize:'12px'}}>{rating ? selection[rating]: 'None Selected'}</span>
       </div>
     </div>
   );
