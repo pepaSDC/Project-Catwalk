@@ -3,7 +3,9 @@ import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
 import {StarRating} from '../../../RatingsAndReviews/StarRating.jsx';
 import { RatingsAndReviewsContext } from '../../../../context/RatingsAndReviewsState.js'
-import { axios } from 'axios'
+import axios from 'axios'
+import Promise from 'bluebird';
+
 // import { RatingsAndReviewsProvider } from '../../../../context/RatingsAndReviewsState.js';
 
 
