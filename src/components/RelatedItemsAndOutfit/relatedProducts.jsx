@@ -13,13 +13,10 @@ export const RelatedProducts = () => {
   const [relatedProductArray, setRelatedProductArray] = useState([]);
   const [currentProductInfo, setCurrentProductInfo] = useState({});
   const [currentProductName, setCurrentProductName] = useState('');
-  const [yourOutfitStorage, setYourOutfitStorage] = useState([
-    {
-      'image': 'https://www.clipartmax.com/png/middle/41-410376_add-item-comments-add-icon-png-white.png',
-      'name': 'Add Current Item'
-    }
-  ]);
-  const [allCurrentProductInfo, setAllCurrentProductInfo] = useState({});
+  const [yourOutfitStorage, setYourOutfitStorage] = useState([]); //outfit id's
+  const [outfitProductArray, setOutfitProductArray] = useState([]);//outfit output to the carousel
+
+
   //axios call to get products information by id
   const getProduct = (id) => {
     return axios({
@@ -55,6 +52,15 @@ export const RelatedProducts = () => {
     return Promise.all(promiseArr);
   }
 
+  const updateYourOutfitInfoState = () => {
+    const promiseArr = yourOutfitStorage.map(curId => {
+        return axios
+                .all([getProduct(curId), getProductStyles(curId)])
+      })
+    return Promise.all(promiseArr);
+  }
+
+
   useEffect(() =>{
     //update the related products state is called an used
     updateRelatedProductInfoState(currentProductId)
@@ -69,7 +75,6 @@ export const RelatedProducts = () => {
     .then(proInfo => {
       setCurrentProductInfo(proInfo.data.features);
       setCurrentProductName(proInfo.data.name);
-      setAllCurrentProductInfo(proInfo.data);
     })
 
   },[currentProductId]);
@@ -85,13 +90,40 @@ export const RelatedProducts = () => {
     setYourOutfitStorage(string1)
   },[]);
 
-  // const addOutfitItem = () => {
-  //     useEffect(() =>{
-  //       var outfitUpdate = yourOutfitStorage.concat([allCurrentProductInfo])
-  //       setYourOutfitStorage(outfitUpdate);
-  //     },[]);
-  // }
-  //deleteoutfititem
+
+  useEffect(() =>{
+
+    if(yourOutfitStorage.length > 0) {
+      updateYourOutfitInfoState()
+        .then(pInfoStyles => {
+        var dataOnly = pInfoStyles.map((cur) => {
+        return [cur[0].data, cur[1].data.results[0].photos[0].thumbnail_url];
+        })
+
+        setOutfitProductArray(dataOnly);
+      })
+    }
+    if(yourOutfitStorage.length === 0) {
+      return setOutfitProductArray([])
+    }
+  },[yourOutfitStorage]);
+
+  const addOutfitItem = () => {
+    var outfitUpdate = yourOutfitStorage.concat([currentProductId]);
+    setYourOutfitStorage(outfitUpdate);
+  }
+
+  const deleteOutfitItem = (id) => {
+    setYourOutfitStorage(yourOutfitStorage => yourOutfitStorage.filter(x => x !== id.toString()));
+   }
+
+  const deleteClickHandler = (id) => {
+    deleteOutfitItem(id);
+  }
+
+  const addClickHandler = () => {
+    addOutfitItem();
+  }
 
   return (
     <div>
@@ -103,10 +135,11 @@ export const RelatedProducts = () => {
         currentProductName={currentProductName}
       />
       <div className="youOutfit">
-        {console.log('outfit storage in RP:::',yourOutfitStorage)}
-        <OutfitCarousel yourOutfitStorage={yourOutfitStorage} ></OutfitCarousel>
+        <OutfitCarousel outfitProductArray={outfitProductArray}
+                        deleteClickHandler={deleteClickHandler}
+                        addClickHandler={addClickHandler}></OutfitCarousel>
       </div>
     </div>
   );
 }
-// addOutfitItem={addOutfitItem}
+//

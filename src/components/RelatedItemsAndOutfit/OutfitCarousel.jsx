@@ -6,8 +6,6 @@ import './styles.css';
 
 
 const OutfitCarousel = (props) => {
-  //props.yourOutfitStorage
-  //props.addOutfitItem
   const [index, setIndex] = useState(0);
 
   const slideLeft = () => {
@@ -17,18 +15,23 @@ const OutfitCarousel = (props) => {
   };
 
   const slideRight = () => {
-    if (index + 1 <= props.yourOutfitStorage.length - 1) {
+    if (index + 1 <= props.outfitProductArray.length - 1) {
       setIndex(index + 1);
     }
   };
+  let card = {
+    'image': 'https://pic.onlinewebfonts.com/svg/img_255634.png',
+    'name': 'Add Current Item'
+  }
 
+  let outfitArr =  [card].concat(props.outfitProductArray);
+  console.log('outfit arr::',outfitArr)
   let itemDisplayAmount = 4;
-  let outfitArr = props.yourOutfitStorage.slice(index, index+itemDisplayAmount);
+  outfitArr = outfitArr.slice(index, index+itemDisplayAmount);
 
   return (
 
     <div className="bigCardContainer">
-
      <div className={'card-container'}>
        {index === 0
          ?<div></div>
@@ -42,10 +45,11 @@ const OutfitCarousel = (props) => {
            key={idx}
            itemNum={idx}
            cardStyle={position}
-          //  addOutfitItem={props.addOutfitItem}
+           deleteClickHandler={props.deleteClickHandler}
+           addClickHandler={props.addClickHandler}
          />
        })}
-     {index === props.yourOutfitStorage.length - itemDisplayAmount
+     {index === props.outfitProductArray.length - itemDisplayAmount || props.outfitProductArray.length === 0
          ?<div></div>
          :<button className="arrowRight" onClick={slideRight}>&#8649;</button>
        }
