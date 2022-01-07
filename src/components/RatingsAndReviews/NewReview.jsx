@@ -140,9 +140,7 @@ export const NewReview = (props) => {
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px', height: '100px'}}>
           {file.length < 5 ? <button className="normalButton" onClick={()=>showWidget(widget)}>Upload Photo</button> : null}
-          <div>
-            {file.length !== 0 ? file.map(item => <img style={{height: '50px', margin: '10px'}} src={item} key={item}></img>) : null}
-          </div>
+          {file.length !== 0 ? file.map(item => <img style={{height: '50px', margin: '10px'}} src={item} key={item}></img>) : null}
         </div>
         <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between', height: '50px'}}>
           <div style={{width: '50%'}}>
