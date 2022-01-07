@@ -20,7 +20,7 @@ export const GlobalProvider = ({ children }) => {
 
   //actions/functions
   function getAllProducts() {
-    axios.get('http://localhost:3000/products')
+    axios.get('/products')
       .then((productsPayload) => {
         dispatch({
           type: 'GET_ALL_PRODUCTS',
@@ -33,7 +33,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   function updateCurrentProductId(id) {
-    axios.get(`http://localhost:3000/products/${id}`)
+    axios.get(`/products/${id}`)
     .then((currentProductPayload) => {
       dispatch({
         type: 'UPDATE_CURRENT_ID',
@@ -46,7 +46,7 @@ export const GlobalProvider = ({ children }) => {
   }
 
   function getAverageReview(id) {
-    axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
+    axios.get(`/reviews/meta/?product_id=${id}`)
       .then((results) => {
         let absolutetotal = 0;
         let totalratings = 0;
