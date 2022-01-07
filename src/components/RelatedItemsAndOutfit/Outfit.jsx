@@ -44,7 +44,7 @@ useEffect(() =>{
       {props.information.name === "Add Current Item"
 
       ?<div className={`card ${props.cardStyle}`} onClick={() => props.addClickHandler()} >
-        {console.log("this should render")}
+        {/* {console.log("this should render")} */}
         <img className="card-image" src={props.information.image} />
         <div>{props.information.name}</div>
       </div>
