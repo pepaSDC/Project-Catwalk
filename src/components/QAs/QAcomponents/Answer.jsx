@@ -61,6 +61,9 @@ const Answer = (props) => {
             {props.answer.body}
           </div>
             {props.answer.photos.map(photo => {
+              if (typeof photo === 'object') {
+                photo = photo.url;
+              };
               return <img key={random(dateInt)} src={photo} style={{height: '65px', width: '65px'}}></img>;
             })}
           <div>
