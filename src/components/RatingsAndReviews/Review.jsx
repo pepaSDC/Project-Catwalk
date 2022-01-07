@@ -30,7 +30,7 @@ export const Review = ({ review }) => {
 
   const clickHandlerHelp = (event) => {
     if (!helpful.clicked) {
-      axios.put(`http://localhost:3000/reviews/${review.review_id}/helpful/?review_id=${review.review_id}`, '')
+      axios.put(`/reviews/${review.review_id}/helpful/?review_id=${review.review_id}`, '')
       .then( (data) => {
         setHelpful( (currState) => {
           return {
@@ -44,7 +44,7 @@ export const Review = ({ review }) => {
   }
 
   const clickHandlerReport = (event) => {
-    axios.put(`http://localhost:3000/reviews/${review.review_id}/report/?review_id=${review.review_id}`)
+    axios.put(`/reviews/${review.review_id}/report/?review_id=${review.review_id}`)
       .then ( (data) => {
         setReport(true);
       })

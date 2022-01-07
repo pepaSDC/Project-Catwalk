@@ -70,7 +70,7 @@ export const NewReview = (props) => {
       photos: file,
       characteristics: characteristicRatings
     }
-    axios.post('http://localhost:3000/reviews', body)
+    axios.post('/reviews', body)
       .then(()=> {
         props.useNewReview(body);
         props.setModal(false);

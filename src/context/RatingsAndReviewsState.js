@@ -21,11 +21,11 @@ export const RatingsAndReviewsProvider = ({ children }) => {
 
   function get(id, sortBy) {
     sortBy = sortBy || 'relevant'
-    return axios.get(`http://localhost:3000/reviews/?product_id=${id}&sort=${sortBy}`)
+    return axios.get(`/reviews/?product_id=${id}&sort=${sortBy}`)
   }
 
   function meta(id) {
-    return axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
+    return axios.get(`/reviews/meta/?product_id=${id}`)
   }
 
   function updateReviewsState(id, sortBy) {
@@ -56,7 +56,7 @@ export const RatingsAndReviewsProvider = ({ children }) => {
   }
 
   function getMetaReviews(id) {
-    axios.get(`http://localhost:3000/reviews/meta/?product_id=${id}`)
+    axios.get(`/reviews/meta/?product_id=${id}`)
       .then((results) => {
 
         dispatch({
