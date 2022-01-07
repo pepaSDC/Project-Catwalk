@@ -18,7 +18,6 @@ export const OverviewProvider = ({ children }) => {
 
   //actions/functions
   function getProductInfo(id) {
-    // axios.get(`http://localhost:3000/products/${id}`)
     axios.get(`/products/${id}`)
       .then((productInfoPayload) => {
         overviewDispatch({
@@ -32,7 +31,6 @@ export const OverviewProvider = ({ children }) => {
   }
 
   function getProductStyles(id) {
-    // axios.get(`http://localhost:3000/products/${id}/styles`)
     axios.get(`/products/${id}/styles`)
       .then((productStylesPayload) => {
         overviewDispatch({
