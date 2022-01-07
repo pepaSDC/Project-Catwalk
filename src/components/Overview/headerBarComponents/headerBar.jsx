@@ -12,11 +12,10 @@ export const HeaderBar = () => {
       style={headerStyle}>
       <div
         className="logo">
-        Logo
+        SpaceWalk
       </div>
       <div
         className="searchBar">
-        Search Bar
       </div>
     </div>
   );
