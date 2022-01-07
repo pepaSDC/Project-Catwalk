@@ -5,7 +5,6 @@ import Search from './QAcomponents/Search.jsx';
 import Questions from './QAcomponents/Questions.jsx';
 
 const container = {
-  padding: '5px',
   position: 'relative'
 };
 
@@ -142,7 +141,9 @@ export const QA = () => {
         });
       };
       let filt = state.questions.filter(q => {
-        return q.question_body.includes(event.target.value);
+        let body = q.question_body.toLowerCase();
+        let target = event.target.value.toLowerCase();
+        return body.includes(target);
       });
       if (filt.length > 0) {
         setFiltered( curState => {
