@@ -1,220 +1,239 @@
 const API_Token = require('../config.js');
 const axios = require('axios');
+//import Promise from 'bluebird';
 
 const api = {
     address: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp',
 
     // Products Info
     getAllProducts: (store) => {
-      axios.get(`${api.address}/products`, {
-        headers: {
-          Authorization: API_Token
-        },
-        params: {
-          page: 1,
-          count: 2000
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/products`,
+          params: {
+            page: 1,
+            count: 2000
+          }
       })
-        .then((results) => store(null, results))
-        .catch((err) => store(err));
+      .then((results) => store(null, results))
     },
 
     getProductInfo: (id, callback) => {
-      axios.get(`${api.address}/products/${id}`, {
-        headers: {
-          Authorization: API_Token
-        }
+      axios({
+        method: 'GET',
+          url: `${api.address}/products/${id}`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     getProductStyles: (id, callback) => {
-      axios.get(`${api.address}/products/${id}/styles`, {
-        headers: {
-          Authorization: API_Token
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/products/${id}/styles`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     getRelatedProducts: (id, callback) => {
-      axios.get(`${api.address}/products/${id}/related`, {
-        headers: {
-          Authorization: API_Token
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/products/${id}/related`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     // Reviews Info
     getReviews: (id, sortBy, callback) => {
-      axios.get(`${api.address}/reviews`, {
-        headers: {
-          Authorization: API_Token
-        },
-        params: {
-          page: 1,
-          count: 100,
-          sort: sortBy,
-          product_id: id
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/reviews`,
+          headers: {
+            Authorization: API_Token
+          },
+          params: {
+            page: 1,
+            count: 100,
+            sort: sortBy,
+            product_id: id
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     //Reviews Meta
     getMetaReviews: (id, callback) => {
-      axios.get(`${api.address}/reviews/meta`, {
-        headers: {
-          Authorization: API_Token
-        },
-        params: {
-          product_id: id
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/reviews/meta`,
+          headers: {
+            Authorization: API_Token
+          },
+          params: {
+            product_id: id
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     //Add a review
     addReview: (body, callback) => {
-      axios.post(`${api.address}/reviews`, body, {
-        headers: {
-          Authorization: API_Token
-        }})
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      return axios({
+        method: 'POST',
+          url: `${api.address}/reviews`,
+          headers: {
+            Authorization: API_Token
+          }
+      })
+      .then( (data) => callback(null, data) )
     },
     //Reviews Meta
     updateHelpfulness: (id, callback) => {
-      axios.put(`${api.address}/reviews/${id}/helpful`,'', {
-        headers: {
-          Authorization: API_Token
-        },
-        params: {
-          review_id: id
-        }
+      return axios({
+        method: 'PUT',
+          url: `${api.address}/reviews/${id}/helpful`,
+          headers: {
+            Authorization: API_Token
+          },
+          params: {
+            review_id: id
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
     //
     updateReport: (id, callback) => {
-      axios.put(`${api.address}/reviews/${id}/report`,'', {
-        headers: {
-          Authorization: API_Token
-        },
-        params: {
-          review_id: id
-        }
+      return axios({
+        method: 'PUT',
+          url: `${api.address}/reviews/${id}/report`,
+          headers: {
+            Authorization: API_Token
+          },
+          params: {
+            review_id: id
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
     // Questions and Answers Info
     getQuestions: (pge, cnt, id, callback) => {
-      axios.get(`${api.address}/qa/questions`, {
-        headers: {
-          Authorization: API_Token
-        },
-        params: {
-          page: pge,
-          count: cnt,
-          product_id: id
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/qa/questions`,
+          headers: {
+            Authorization: API_Token
+          },
+          params: {
+            page: pge,
+            count: cnt,
+            product_id: id
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     getAnswers: (pge, cnt, id, callback) => {
-      axios.get(`${api.address}/qa/questions/${id}/answers?page=${pge}&count=${cnt}`, {
-        headers: {
-          Authorization: API_Token
-        }
+      return axios({
+        method: 'GET',
+          url: `${api.address}/qa/questions/${id}/answers?page=${pge}&count=${cnt}`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (data) => callback(null, data) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     addQuestion: (bodyText, nameText, emailText, id, callback) => {
-      let data = {
-        body: bodyText,
-        name: nameText,
-        email: emailText,
-        product_id: id
-      };
-      axios.post(`${api.address}/qa/questions`, data, {
-        headers: {
-          Authorization: API_Token
-        }
+
+      return axios({
+        method: 'POST',
+          url: `${api.address}/qa/questions`,
+          headers: {
+            Authorization: API_Token
+          },
+          data: {
+            body: bodyText,
+            name: nameText,
+            email: emailText,
+            product_id: id
+          }
+
       })
-        .then( (response) => callback(null, response) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     addAnswer: (bodyText, nameText, emailText, photoLinks, id, callback) => {
-      let data = {
-        body: bodyText,
-        name: nameText,
-        email: emailText,
-        photos: photoLinks
-      };
-      axios.post(`${api.address}/qa/questions/${id}/answers`, data, {
-        headers: {
-          Authorization: API_Token
-        }
+      return axios({
+          method: 'POST',
+          url: `${api.address}/qa/questions`,
+          headers: {
+            Authorization: API_Token
+          },
+          data: {
+            body: bodyText,
+            name: nameText,
+            email: emailText,
+            photos: photoLinks
+          }
       })
-        .then( (response) => callback(null, response) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
+
     markQuestion: (type, id, callback) => {
-      axios.put(`${api.address}/qa/questions/${id}/${type}`, '', {
-        headers: {
-          Authorization: API_Token
-        }
+      return axios({
+        method: 'PUT',
+          url: `${api.address}/qa/questions/${id}/${type}`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (response) => callback(null, response) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     markAnswer: (type, id, callback) => {
-      axios.put(`${api.address}/qa/answers/${id}/${type}`, '', {
-        headers: {
-          Authorization: API_Token
-        }
+      return axios({
+        method: 'PUT',
+          url: `${api.address}/qa/answers/${id}/${type}`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (response) => callback(null, response) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
-    getCart: (callback) => {
-      axios.get(`${api.address}/cart`, {
-        headers: {
-          Authorization: API_Token
-        }
+    getCart: () => {
+      return axios({
+        method: 'GET',
+          url: `${api.address}/cart`,
+          headers: {
+            Authorization: API_Token
+          }
       })
-        .then( (response) => callback(null, response) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 
     postCart: (sku, quantity, callback) => {
-      let data = {
-        sku_id: sku,
-        count: quantity
-      }
-      axios.post (`${api.address}/cart`, data, {
+      return axios({
+        method: 'POST',
+        url: `${api.address}/cart`,
         headers: {
           Authorization: API_Token
+        },
+        data: {
+          sku_id: sku,
+          count: quantity
         }
       })
-        .then( (response) => callback(null, response) )
-        .catch( (err) => callback(err) );
+      .then( (data) => callback(null, data) )
     },
 }
 
