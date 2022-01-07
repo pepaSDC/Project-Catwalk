@@ -27,7 +27,7 @@ const OutfitCarousel = (props) => {
   }
 
   let outfitArr =  [card].concat(props.outfitProductArray);
-  console.log('outfit arr::',outfitArr)
+  // console.log('outfit arr::',outfitArr)
   let itemDisplayAmount = 4;
   outfitArr = outfitArr.slice(index, index+itemDisplayAmount);
 

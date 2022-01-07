@@ -41,7 +41,7 @@ export const RatingsAndReviews = (props) => {
 
 
   return (
-    <div id="RatingsAndReviews">
+    <div id="RatingsAndReviews" style={{padding: '5px'}}>
       <div className="reviewsModule">
         <h4 style={{fontSize: '2vmin'}}>RATINGS AND REVIEWS</h4>
         <div style={styleReviews}>

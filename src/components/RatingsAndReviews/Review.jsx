@@ -67,7 +67,7 @@ export const Review = ({ review }) => {
         ? review.photos.map((photo) => {
           return(
             <span key={photo.id}>
-              <img onClick={ ()=>useModal(photo.url) } src={photo.url} style={{width: '50px'}}></img>
+              <img onClick={ ()=>useModal(photo.url) } src={photo.url} style={{maxWidth: '50px', maxHeight: '100px', width: '100%', height: '100%', objectFit:'cover' }}></img>
               { modal ? <PictureModal useModal={useModal} image={modal}/> : null }
             </span>
 

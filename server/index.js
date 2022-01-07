@@ -1,5 +1,6 @@
 const express = require('express');
 const api = require('./api.js');
+const compression = require('compression');
 
 const reviews = require('./router/reviews.js');
 const QA = require('./router/QAs.js');
@@ -10,6 +11,7 @@ const cart = require('./router/cart.js');
 const app = express();
 
 app.use(express.json());
+app.use(compression());
 app.use(express.static('public'));
 
 app.use('/products', products);
