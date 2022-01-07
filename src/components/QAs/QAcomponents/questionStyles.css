@@ -17,7 +17,7 @@
 
 .wholeQuestion {
   font-weight: 900;
-  max-height: 50vh;
+  max-height: 75vh;
   overflow: hidden;
   overflow-y: auto;
 }
