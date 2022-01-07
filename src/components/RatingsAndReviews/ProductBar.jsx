@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 export const ProductBar = (props) => {
@@ -11,7 +12,8 @@ export const ProductBar = (props) => {
   const marker = {
     position: 'absolute',
     left: `${props.breakdown.value/5 * 100}%`,
-    color: 'gray'
+    color: 'black',
+    top: '-8px'
   }
 
   let min, max;

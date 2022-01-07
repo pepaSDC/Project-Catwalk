@@ -1,0 +1,21 @@
+.normalButton {
+  border-radius: 0;
+  border: 1px solid black;
+  font-size: 15px;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: white
+}
+
+.normalButton:hover{
+  box-shadow: rgba(42, 169, 27, 0.4) 5px 5px, rgba(42, 169, 27, 0.3) 10px 10px, rgba(42, 169, 27, 0.2) 15px 15px, rgba(42, 169, 27, 0.1) 20px 20px, rgba(42, 169, 27, 0.05) 25px 25px;
+}
+
+.sortingButton {
+  text-decoration: underline;
+}
+
+.sortingButton:hover {
+  text-decoration: underline;
+  background-color: lightgray
+}

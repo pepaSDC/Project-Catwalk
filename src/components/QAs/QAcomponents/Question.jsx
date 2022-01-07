@@ -7,6 +7,8 @@ import Modal from './Modal.jsx';
 import UploadPhotos from './UploadPhotos.jsx';
 
 const Question = (props) => {
+  const API_URL = "https://api.cloudinary.com/v1_1/demo/image/upload";
+
   const [helpful, setHelpful] = useState( () => {
     return {
       clicked: false,
@@ -24,6 +26,13 @@ const Question = (props) => {
       name: true,
       email: true
     }
+  });
+
+  const [focus, setFocus] = useState( () => {
+    return {
+      name: false,
+      email: false
+    };
   });
 
   const sellerFirst = (answers) => {
@@ -52,6 +61,12 @@ const Question = (props) => {
         initNonSeller.push(answers[key]);
       };
     };
+    initSeller = initSeller.sort( (a, b) => {
+      return b.helpfulness - a.helpfulness;
+    });
+    initNonSeller = initNonSeller.sort( (a, b) => {
+      return b.helpfulness - a.helpfulness;
+    });
     return [...initSeller, ...initNonSeller];
   });
 
@@ -76,6 +91,32 @@ const Question = (props) => {
     event.preventDefault();
     setView( (currState) => { return !currState; });
     setErrors( (curState) => ({body: true, name: true, email: true}));
+    setPhotos([]);
+  };
+
+  const uploadPhotosAPI = (files, callback) => {
+    let promises = files.map( file => {
+      let formData = new FormData();
+      formData.append('file', file);
+      formData.append("upload_preset", "docs_upload_example_us_preset");
+      return new Promise( (resolve, reject) => {
+        axios({
+          method: 'post',
+          url: API_URL,
+          data: formData,
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+          .then(response => resolve(response.data.secure_url))
+          .catch(error => reject(error));
+      });
+    });
+    Promise.all(promises)
+      .then(urls => {
+        callback(null, urls);
+      })
+      .catch(error => {
+        callback(error);
+      });
   };
 
   const handleAnswerSubmit = (event) => {
@@ -83,7 +124,7 @@ const Question = (props) => {
     let error = false;
     let answer = {
       body: event.target.body.value || undefined,
-      name: event.target.username.value || undefined,
+      name: event.target.name.value || undefined,
       email: event.target.email.value || undefined
     };
     for (var val in answer) {
@@ -99,21 +140,98 @@ const Question = (props) => {
       };
       setErrors(answer);
     } else {
+      answer.photos = photos;
       axios.post(`/qa/questions/${event.target.id}/answers`, answer)
-        .then(response => {
-          return axios.get(`/qa/questions/${event.target.id}/answers`);
-        })
-        .then(newData => {
-          console.log('NEW ANSWER:', newData.data.results);
-          setView( (curState) => { return !curState; });
-          setOrderedAns( (curState) => {
-            return sellerFirst(newData.data.results);
-          });
-          setErrors( (curState) => ({body: true, name: true, email: true}));
-        })
-        .catch(error => {
-          console.log(error.message);
+      .then(response => {
+        return axios.get(`/qa/questions/${event.target.id}/answers`);
+      })
+      .then(newData => {
+        setView( (curState) => { return !curState; });
+        setOrderedAns( (curState) => {
+          return sellerFirst(newData.data.results);
         });
+        setErrors( (curState) => ({body: true, name: true, email: true}));
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+    };
+  };
+
+  const handleErrorReset = (event) => {
+    let name = event.target.getAttribute('name');
+    if (errors[name] === undefined) {
+      setErrors( (curState) => {
+        return {
+          ...curState,
+          [name]: true
+        }
+      });
+    };
+    if (name !== 'body') {
+      handleFocus(name);
+    };
+  };
+
+  const handleFocus = (name) => {
+    if (!focus[name]) {
+      setFocus( () => {
+        return {
+          ...focus,
+          [name]: true
+        };
+      });
+    };
+  };
+
+  const handleBlur = (event) => {
+    let name = event.target.getAttribute('name');
+    if (focus[name]) {
+      setFocus( () => {
+        return {
+          ...focus,
+          [name]: false
+        };
+      });
+    };
+  };
+
+  const [photos, setPhotos] = useState([]);
+
+  const handleSelected = (event) => {
+    if (photos.length < 5) {
+      let len = Object.keys(event.target.files);
+      if (len.length < 5) {
+        if (((photos.length - 1) + len.length) < 5) {
+          let files = event.target.files;
+          let promises = [];
+          for (let i = 0; i < len.length; i++) {
+            let file = files[len[i]];
+            let promise = new Promise( (resolve, reject) => {
+              let reader = new FileReader();
+              reader.onload = () => {
+                resolve(reader.result);
+              };
+              reader.onerror = () => {
+                reject('error');
+              };
+              reader.readAsDataURL(file);
+            });
+            promises.push(promise);
+          };
+          Promise.all(promises)
+            .then(data => {
+              uploadPhotosAPI(data, (err, result) => {
+                if (err) {
+                  console.log(error);
+                } else {
+                  setPhotos([...photos, ...result]);
+                }
+              });
+            })
+            .catch(err => console.log(err));
+        };
+      };
     };
   };
 
@@ -136,18 +254,20 @@ const Question = (props) => {
         <Answers answers={orderedAns} />
       </label>
       <Modal open={view} onClose={handleAddAnswerView} qBody={props.question.question_body} product_name={props.product_name}>
-        <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit}>
+        <form className='form' id={props.question.question_id} onSubmit={handleAnswerSubmit} autoComplete='off'>
           <label>Your Answer <span className='asterisk'>*</span></label>
-          <textarea name='body' maxLength='1000' rows='8'></textarea>
+          <textarea name='body' maxLength='1000' rows='8' onFocus={handleErrorReset}></textarea>
           {!errors.body && <div className='error'>Please enter valid answer (max 1000 characters)</div>}
           <label>What is your nickname <span className='asterisk'>*</span></label>
-          <input className='username' type='text' maxLength='60' name='username' placeholder='Example: jack543'></input>
+          <input className='username' type='text' maxLength='60' name='name' placeholder='Example: jack543' onFocus={handleErrorReset} onBlur={handleBlur}></input>
+          {focus.name && <div className='privacy'>For privacy reasons, do not use your full name or email address</div>}
           {!errors.name && <div className='error'>Please enter valid name (max 60 characters)</div>}
           <label>Your Email <span className='asterisk'>*</span></label>
-          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com'></input>
+          <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com' onFocus={handleErrorReset} onBlur={handleBlur}></input>
+          {focus.email && <div className='privacy'>For authentication reasons, you will not be emailed</div>}
           {!errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
           <label>Upload your photos</label>
-          <UploadPhotos />
+          <UploadPhotos previews={photos} task={handleSelected}/>
           <input className='submit' type='submit' value='Answer'></input>
         </form>
       </Modal>

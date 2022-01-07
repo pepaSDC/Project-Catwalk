@@ -15,7 +15,12 @@ const Answer = (props) => {
     return 'Report';
   });
 
+  const random = (number) => {
+    return Math.floor(Math.random() * number);
+  }
+
   let date = new Date(props.answer.date);
+  let dateInt = Date.parse(date);
   let dateFormat = {month: 'short', day: 'numeric', year: 'numeric'};
   date = date.toLocaleDateString('en-US', dateFormat);
 
@@ -56,7 +61,10 @@ const Answer = (props) => {
             {props.answer.body}
           </div>
             {props.answer.photos.map(photo => {
-              return <img src={photo} style={{height: '65px', width: '65px'}}></img>;
+              if (typeof photo === 'object') {
+                photo = photo.url;
+              };
+              return <img key={random(dateInt)} src={photo} style={{height: '65px', width: '65px'}}></img>;
             })}
           <div>
             <span className='user'>

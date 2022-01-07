@@ -12,7 +12,8 @@ const DescriptionDivStyle = {
 const SloganAndDescriptionDivStyle = {
   display: 'flex',
   flexDirection: 'column',
-  width: '66%'
+  width: '66%',
+  height: '200px'
 }
 
 const CurrentProductFeaturesDivStyle = {
@@ -22,6 +23,20 @@ const CurrentProductFeaturesDivStyle = {
 
 }
 
+const sloganDivStyle = {
+  fontSize: '21px',
+  marginBottom: '21px'
+}
+
+const descriptionDivStyle = {
+  fontSize: '18px',
+  marginBottom: '18px'
+}
+
+const featureItemStyling = {
+  fontSize: '12px',
+  marginBottom: '12px'
+}
 
 export const ProductDescription = (props) => {
   const { currentProductId } = useContext(GlobalContext);
@@ -46,10 +61,12 @@ export const ProductDescription = (props) => {
       <div
         className="SloganAndDescription"
         style={SloganAndDescriptionDivStyle}>
-        <div>
+        <div
+          style={sloganDivStyle}>
           {productSlogan}
         </div>
-        <div>
+        <div
+          style={descriptionDivStyle}>
           {productDescription}
         </div>
       </div>
@@ -58,6 +75,7 @@ export const ProductDescription = (props) => {
         style={CurrentProductFeaturesDivStyle}>
           {productFeatures.map((featureItem, index) =>
             <div
+              style={featureItemStyling}
               key={index}>
                 {featureItem.feature}: {featureItem.value}
             </div>

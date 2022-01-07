@@ -10,13 +10,12 @@ export const HeaderBar = () => {
   return (
     <div
       style={headerStyle}>
-      <div
+      <div style={{fontSize: '30px'}}
         className="logo">
-        Logo
+        SpaceWalk	&#128125;
       </div>
       <div
         className="searchBar">
-        Search Bar
       </div>
     </div>
   );

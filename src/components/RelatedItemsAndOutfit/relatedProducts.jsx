@@ -3,6 +3,7 @@ import { GlobalContext } from '../../context/GlobalState.js';
 import axios from 'axios';
 import Promise from 'bluebird';
 import RelatedProductsCardCarousel from './RelatedProductsCardCarousel.jsx';
+import OutfitCarousel from './OutfitCarousel.jsx';
 
 export const RelatedProducts = () => {
   //global state import
@@ -12,6 +13,10 @@ export const RelatedProducts = () => {
   const [relatedProductArray, setRelatedProductArray] = useState([]);
   const [currentProductInfo, setCurrentProductInfo] = useState({});
   const [currentProductName, setCurrentProductName] = useState('');
+  const [yourOutfitStorage, setYourOutfitStorage] = useState([]); //outfit id's
+  const [outfitProductArray, setOutfitProductArray] = useState([]);//outfit output to the carousel
+
+
   //axios call to get products information by id
   const getProduct = (id) => {
     return axios({
@@ -47,6 +52,15 @@ export const RelatedProducts = () => {
     return Promise.all(promiseArr);
   }
 
+  const updateYourOutfitInfoState = () => {
+    const promiseArr = yourOutfitStorage.map(curId => {
+        return axios
+                .all([getProduct(curId), getProductStyles(curId)])
+      })
+    return Promise.all(promiseArr);
+  }
+
+
   useEffect(() =>{
     //update the related products state is called an used
     updateRelatedProductInfoState(currentProductId)
@@ -66,14 +80,71 @@ export const RelatedProducts = () => {
   },[currentProductId]);
 
 
+
+
+  useEffect(() => {
+    window.localStorage.setItem('yourOutfitStorage', JSON.stringify(yourOutfitStorage));
+  }, [yourOutfitStorage]);
+
+  useEffect(() =>{
+    var string1 = JSON.parse(localStorage.getItem('yourOutfitStorage'));
+    setYourOutfitStorage(string1)
+  },[]);
+
+
+  useEffect(() =>{
+
+    if(yourOutfitStorage.length > 0) {
+      updateYourOutfitInfoState()
+        .then(pInfoStyles => {
+        var dataOnly = pInfoStyles.map((cur) => {
+        return [cur[0].data, cur[1].data.results[0].photos[0].thumbnail_url];
+        })
+
+        setOutfitProductArray(dataOnly);
+      })
+    }
+    if(yourOutfitStorage.length === 0) {
+      return setOutfitProductArray([])
+    }
+  },[yourOutfitStorage]);
+
+  const addOutfitItem = () => {
+
+    if(yourOutfitStorage.includes(currentProductId) === false){
+     var outfitUpdate = yourOutfitStorage.concat([currentProductId]);
+      setYourOutfitStorage(outfitUpdate);
+    }
+  }
+
+  const deleteOutfitItem = (id) => {
+    setYourOutfitStorage(yourOutfitStorage => yourOutfitStorage.filter(x => x !== id.toString()));
+   }
+
+  const deleteClickHandler = (id) => {
+    deleteOutfitItem(id);
+  }
+
+  const addClickHandler = () => {
+    addOutfitItem();
+  }
+
+
   return (
-    <div>
+    <div id='Related_Products'>
+
       <div className="app"></div>
       <RelatedProductsCardCarousel
         relatedProductArray={relatedProductArray}
         currentProductInfo={currentProductInfo}
         currentProductName={currentProductName}
       />
+      <div className="youOutfit">
+        <OutfitCarousel outfitProductArray={outfitProductArray}
+                        deleteClickHandler={deleteClickHandler}
+                        addClickHandler={addClickHandler}></OutfitCarousel>
+      </div>
     </div>
   );
 }
+//

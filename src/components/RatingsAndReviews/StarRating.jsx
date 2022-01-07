@@ -1,16 +1,17 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 export const StarRating = (props) => {
   const rating = Math.round(props.rating * 4) / 4;
   const starRating = {
     unicodeBidi: 'bidi-override',
-    color: '#ccc',
+    color: '#F5F5F5',
     position: 'relative',
     margin: '0',
     padding: '0'
   }
   const fillRating = {
-    color: '#e7711b',
+    color: '#77ff2e',
     padding: '0',
     position: 'absolute',
     display: 'block',
@@ -33,13 +34,17 @@ export const StarRating = (props) => {
   }
 
   return (
-    <div className="star-ratings" style={starRating}>
-      <div className="fill-ratings" style={fillRating}>
-        <span style={span}>★★★★★</span>
-      </div>
-      <div className="empty-ratings" style={emptyRating}>
-        <span style={span}>★★★★★</span>
+    <div style={{display: 'flex', justifyContent: 'space-around'}}>
+      <div className="star-ratings" style={starRating}>
+        <div className="fill-ratings" style={fillRating}>
+          <span style={span}>★★★★★</span>
+        </div>
+        <div className="empty-ratings" style={emptyRating}>
+          <span style={span}>★★★★★</span>
+        </div>
       </div>
     </div>
   );
 }
+
+export default StarRating;

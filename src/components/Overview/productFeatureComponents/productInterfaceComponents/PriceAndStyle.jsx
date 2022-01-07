@@ -35,7 +35,7 @@ export const PriceAndStyle = () => {
   let productStylesArray = productStyles.data ? productStyles.data.results : []
   let displayedPrice = salePrice ? (productPrice + ' ' + salePrice) : productPrice
   let productStyleName = productStyles.data ? productStyles.data.results[featuredStyleIndex].name : ''
-
+  let styleString = 'Style > '
   return (
     <div
       className="priceAndStyleSelector"
@@ -49,7 +49,7 @@ export const PriceAndStyle = () => {
         style={styleSelectorStyle}>
         <div
           className="currentProductStyle">
-          Style >
+          {styleString}
         </div>
         <div
           name="Style"

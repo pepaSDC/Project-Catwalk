@@ -11,10 +11,15 @@ export const ProductName = () => {
     getProductInfo(id)
   }, [id])
 
+  const productNameStyling = {
+    fontSize: '30px'
+  }
+
   const productName = productInfo.data ? productInfo.data.name: ''
 
   return (
     <div
+      style={productNameStyling}
       className="productName">
         {productName}
     </div>

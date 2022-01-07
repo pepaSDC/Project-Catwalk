@@ -10,7 +10,10 @@ let StyleShowcaseStyle = {
 
 let styleShowcaseRowStyle = {
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  marginTop: '9px',
+  marginBottom: '9px',
+  height: '60px'
 }
 
 export const StyleShowcase = () => {
@@ -29,8 +32,6 @@ export const StyleShowcase = () => {
   }, [currentProductId])
 
   let productStylesArray = productStyles.data ? productStyles.data.results : []
-
-  // console.log('line 30 in styleShowcase: ', productStylesArray);
 
   return (
     <div

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 const formStyle = {
@@ -17,10 +18,10 @@ const inputStyles = {
   minHeight: '30px'
 };
 
-const Search = () => {
+const Search = (props) => {
   return (
     <form style={formStyle}>
-      <input style={inputStyles} type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." name="answer"></input>
+      <input style={inputStyles} type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." name="answer" onChange={props.task}></input>
       <i style={iconStyle} className="fas fa-search"></i>
     </form>
   );

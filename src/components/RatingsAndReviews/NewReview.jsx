@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { SelectableStars } from './SelectableStars.jsx';
 import { CharacteristicsForm } from './CharacteristicsForm.jsx';
@@ -31,11 +32,16 @@ export const NewReview = (props) => {
 
   const styleForm = {
     backgroundColor: 'white',
-    margin: '5% auto',
-    padding: '30px 50px',
-    border: '1px solid #888',
-    width: '70%',
-    borderRadius: '5px'
+    margin: '2% auto',
+    padding: '30px 100px',
+    paddingBottom: '50px',
+    border: '1px solid black',
+    maxWidth: '800px',
+    width: '90vh',
+    borderRadius: '5px',
+    maxHeight: '95vh',
+    boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)',
+    zIndex: '100'
   }
 
   const clickHandler = (event) => {
@@ -82,27 +88,27 @@ export const NewReview = (props) => {
         console.log(err)
       } else {
         if (result.event === 'success') {
-          console.log(result.info.secure_url);
+          widget.close();
           useFile([...file, result.info.secure_url])
         }
       }
-    }
-    )
+    })
 
   const showWidget = (widget) => {
     widget.open();
   }
 
-
   return (
     <div style={styleModal}>
       <div style={styleForm}>
-      <div style={{paddingRight: '100%'}} onClick={clickHandler}>&times;</div>
-      <h2 style={{margin: '0'}}>Add Your Review</h2>
+        <div style={{paddingRight: '100%'}} onClick={clickHandler}>&times;</div>
+      <div style={{display: 'flex', justifyContent: 'space-around'}}>
+        <h4 style={{margin: '0', padding: '0 auto'}}>Write Your Review</h4>
+      </div>
       <form onSubmit={submitHandler}>
         <SelectableStars useRating={useRating}/>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
-          <p>Do you recommend this product?</p>
+          <p style={{margin: '5px 0 '}}>Do you recommend this product?</p>
           <label htmlFor="recommendYes">Yes</label>
           <input
             onChange={(event)=>useRecommend(event.target.value)}
@@ -114,10 +120,10 @@ export const NewReview = (props) => {
           <label htmlFor="recommendNo">No</label>
           <input
             onChange={(event)=>useRecommend(event.target.value)}type="radio" name="recommend" id="recommendNo" value="No">
-
           </input>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
+          <div>Characteristics:</div>
           {Object.keys(props.meta.characteristics).map( item => {
             return <CharacteristicsForm char={item} id={item} key={props.meta.characteristics[item].id}/>
             }
@@ -125,30 +131,33 @@ export const NewReview = (props) => {
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
           <label>Review Summary: </label>
-          <input style={{width: '50%'}} onChange={(e) => useSummary(e.target.value)}type="text" placeholder="Example: Best purchase ever!"></input>
+          <input style={{width: '50%', border: 'none', borderBottom: '1px solid lightgray'}} onChange={(e) => useSummary(e.target.value)}type="text" placeholder="Example: Best purchase ever!" maxLength="60"></input>
         </div>
-        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
-          <label>Review Body: </label>
-          <textarea style={{width: '50%'}} onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" required></textarea>
+        <div style={{padding: '10px'}}>
+          <label >Review Body:</label>
+          <textarea style={{width: '100%', border: '1px solid lightgray'}} onChange={(e) => useReviewBody(e.target.value)}type="textarea" placeholder="Why did you like the product or not?" maxLength="1000" minLength="50" required></textarea>
+          <div style={{float: 'right', fontSize: '12px'}}>{reviewBody.length >= 50 ? 'Minimum Reached' : `Minimum required characters left: ${50 - reviewBody.length}`} </div>
         </div>
-        <div style={{borderBottom: '1px solid lightgray', padding: '10px'}}>
-          <button onClick={()=>showWidget(widget)}>Upload Photo</button>
-          {file.length !== 0 ? <img style={{width: '50px'}} src={file}></img> : null}
-        </div>
-        <div style={{borderBottom: '1px solid lightgray', padding: '10px', display: 'flex', justifyContent: 'space-between'}}>
+        <div style={{borderBottom: '1px solid lightgray', padding: '10px', height: '100px'}}>
+          {file.length < 5 ? <button className="normalButton" onClick={()=>showWidget(widget)}>Upload Photo</button> : null}
           <div>
+            {file.length !== 0 ? file.map(item => <img style={{height: '50px', margin: '10px'}} src={item} key={item}></img>) : null}
+          </div>
+        </div>
+        <div style={{ padding: '10px', display: 'flex', justifyContent: 'space-between', height: '50px'}}>
+          <div style={{width: '50%'}}>
             <label htmlFor="nickname">Nickname: </label>
-            <input onFocus={() => useNicknameFocus(true)} onBlur={() => useNicknameFocus(false)} style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" placeholder="Example: jackson11!" required></input>
-            <div>{nicknameFocus ? ' For privacy reasons, do not use your full name or email address': ''}</div>
+            <input onFocus={() => useNicknameFocus(true)} onBlur={() => useNicknameFocus(false)} style={{width: 'auto'}} onChange={(e) => useNickname(e.target.value)} id="nickname" type="textarea" placeholder="Example: jackson11!" maxLength="60" required></input>
+            <div style={{fontSize: '12px'}}>{nicknameFocus ? ' For privacy reasons, do not use your full name or email address': ''}</div>
           </div>
           <div style={{width: '50%'}}>
             <label htmlFor="email">  Email: </label>
-            <input onFocus={() => useEmailFocus(true)} onBlur={() => useEmailFocus(false)} style={{width:'250px'}} onChange={(e) => useEmail(e.target.value)} type="email" placeholder="Example: jackson11@email.com" required></input>
-            <div>{emailFocus ? ' For authentication reasons, you will not be emailed': ''}</div>
+            <input onFocus={() => useEmailFocus(true)} onBlur={() => useEmailFocus(false)} style={{width:'202px'}} onChange={(e) => useEmail(e.target.value)} type="email" placeholder="Example: jackson11@email.com" required></input>
+            <div style={{fontSize: '12px'}}>{emailFocus ? ' For authentication reasons, you will not be emailed': ''}</div>
           </div>
         </div>
         <div style={{padding: '10px'}}>
-          <input type="submit" value="Submit Review"></input>
+          <button className="normalButton" type="submit" value="Submit Review">Submit Review</button>
         </div>
       </form>
       </div>

@@ -11,8 +11,8 @@ export const RatingsAndReviews = (props) => {
   let styleReviews = {
     width: 'auto',
     display: 'flex',
-    justifyContent: 'space-evenly',
-    margin: '0 20px'
+    justifyContent: 'space-between',
+    margin: '0'
   }
   let styleAside = {
     width: '30%',
@@ -24,29 +24,35 @@ export const RatingsAndReviews = (props) => {
   const {currentProductId} = useContext(GlobalContext);
   const {updateReviewsState, meta, allReviews, averageRating, totalRatings, sortBy} = useContext(RatingsAndReviewsContext);
   const [newReview, useNewReview] = useState(null);
+  const [sorting, useSorting] = useState([]);
+
+  const filterReviews = (array, sorting) => {
+    return array.filter(item => sorting.includes(item.rating));
+  }
+  let currentReviews = sorting.length > 0 ? filterReviews(allReviews, sorting) : allReviews;
 
   useEffect(() => {
-    let isAPISubsribed = true;
+    let isAPISubscribed = true;
     updateReviewsState(currentProductId, sortBy);
     return () => {
-      isAPISubsribed = false;
+      isAPISubscribed = false;
     }
   }, [currentProductId, sortBy, newReview])
 
 
-  return ( allReviews.length !== 0 ?
-    <div style={{margin: '30px 30px'}}>
-      <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
-      <div className="reviewsModule" style={styleReviews}>
-        <div className="reviewsAside" style={styleAside}>
-          <RatingBreakdown meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
-          <ProductBreakdown characteristics={meta.characteristics}/>
+  return (
+    <div id="RatingsAndReviews">
+      <div className="reviewsModule">
+        <h4 style={{fontSize: '2vmin'}}>RATINGS AND REVIEWS</h4>
+        <div style={styleReviews}>
+          <div className="reviewsAside" style={styleAside}>
+            <RatingBreakdown sorting={sorting} useSorting={useSorting} meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>
+            <ProductBreakdown characteristics={meta.characteristics}/>
+          </div>
+          <ReviewList state={currentReviews} meta={meta} useNewReview={useNewReview}/>
         </div>
-        <ReviewList state={allReviews} meta={meta} useNewReview={useNewReview}/>
       </div>
-
     </div>
-    : null
   );
 };
 

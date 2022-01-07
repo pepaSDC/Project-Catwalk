@@ -11,6 +11,13 @@ let divStyle = {
   // margin: '10px',
 }
 
+let subheaderStyle = {
+  display: 'flex',
+  padding: '10px',
+  justifyContent: 'space-around'
+  // margin: '10px',
+}
+
 let featureStyle = {
   padding: '10px',
 }
@@ -25,8 +32,8 @@ export const Overview = () => {
 
   return (
     <div
+    id="Overview"
     className="overview">
-
       <div
         style={divStyle}
         className="headerBar">
@@ -34,9 +41,9 @@ export const Overview = () => {
       </div>
 
       <div
-        style={divStyle}
+        style={subheaderStyle}
         className="subHeaderBar">
-        subHeaderBar Text
+        BUY ONE GET ONE HALF OFF ON ALL SELECT STYLES!
       </div>
 
       <div

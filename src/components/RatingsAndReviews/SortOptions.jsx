@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useContext} from 'react';
 import { RatingsAndReviewsContext } from '../../context/RatingsAndReviewsState.js';
 import { GlobalContext } from '../../context/GlobalState.js';
