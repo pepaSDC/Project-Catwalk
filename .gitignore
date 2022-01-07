@@ -4,3 +4,4 @@ config.js
 public/app.js
 test.http
 localhost_2022-01-06_15-02-28.report.html
+spacewalk-key.pem
