@@ -36,7 +36,7 @@ const Questions = (props) => {
           <input className='email' type='text' maxLength='60' name='email' placeholder='Example: jack@email.com' onFocus={props.handleError} onBlur={props.handleBlur}></input>
           {props.focus.email && <div className='privacy'>For authentication reasons, you will not be emailed</div>}
           {!props.errors.email ? <div className='error'>Please enter an email (max 60 characters)</div> : props.errors.email === 'wrong' && <div className='error'>Please enter a valid email</div>}
-          <input className='submit' type='submit' value='Answer'></input>
+          <input className='questionSubmit' type='submit' value='Answer'></input>
         </form>
       </QuestionModal>
       {questions.map( (question) => {

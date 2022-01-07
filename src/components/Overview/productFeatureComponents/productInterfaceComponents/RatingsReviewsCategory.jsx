@@ -11,7 +11,8 @@ import Promise from 'bluebird';
 
 let ratingsReviewsCategoryStyle = {
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  // marginBottom: 'px'
 }
 
 let ratingsReviewsStyle = {

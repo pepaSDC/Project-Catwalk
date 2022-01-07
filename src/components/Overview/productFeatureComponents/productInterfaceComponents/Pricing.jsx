@@ -4,7 +4,8 @@ import { OverviewContext } from '../../../../context/OverviewState.js'
 
 const pricingDisplayStyle = {
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  fontSize: '21px'
 }
 
 const originalPricingIfSale = {

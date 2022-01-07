@@ -46,8 +46,8 @@ export const StyleThumbnail = (props) => {
           borderRadius: '50%',
           backgroundImage: `url(${props.thumbnail})`,
           backgroundSize: 'cover',
-          height: '40px',
-          width: '40px',
+          height: '60px',
+          width: '60px',
           marginRight: '3px',
           marginBottom: '3px'
         }}>

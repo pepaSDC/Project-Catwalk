@@ -25,6 +25,12 @@ export const ProductGalleryMainPhoto = () => {
     })
   }, [currentProductId])
 
+  const productGalleryThumbnailContainerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  }
+
   const ProductGalleryThumbnailsStyle = {
     position: 'relative',
     top: '10px'
@@ -152,7 +158,11 @@ export const ProductGalleryMainPhoto = () => {
           toggleImageModal={setDisplayImageModal}
           featuredPhoto={featuredProductPhoto}/>
         )}
-        <ProductGalleryThumbnails style={ProductGalleryThumbnailsStyle}/>
+        <div
+          style={productGalleryThumbnailContainerStyle}
+          >
+          <ProductGalleryThumbnails style={ProductGalleryThumbnailsStyle}/>
+        </div>
       <div
         className="allButtonsContainer"
         style={allButtonsContainerStyle}>

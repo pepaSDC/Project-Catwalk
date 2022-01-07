@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../../../../context/GlobalState.js'
 import { OverviewContext } from '../../../../context/OverviewState.js'
 import axios from 'axios'
+import './addtocartstyle.css'
 
 export const SizeAndQuantity = (props) => {
   const { currentProductId } = useContext(GlobalContext);
@@ -71,6 +72,7 @@ export const SizeAndQuantity = (props) => {
       <div
         className="addToCartButton">
         <button
+          className="buyButton"
           onClick={handleAddToCart}
           type="submit"
           disabled={quantityOfItem === 0}

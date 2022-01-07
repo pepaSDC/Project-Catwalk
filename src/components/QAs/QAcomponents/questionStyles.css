@@ -2,6 +2,19 @@
   padding-bottom: 5px;
 }
 
+.fas::before,
+.fas::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
 .wholeQuestion {
   font-weight: 900;
   max-height: 50vh;
@@ -13,6 +26,7 @@
   border-radius: 2px;
   border: 1px solid rgba(0,0,0,0.5);
   box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  padding: 10px 0px 10px 10px;
 }
 
 .question .qContainer {
@@ -138,7 +152,8 @@
   background-color: white
 }
 
-.qShowMore {
+.qShowMore,
+.submit {
   cursor: pointer;
   border-radius: 0;
   border: 1px solid rgba(0,0,0,0.5);
@@ -147,7 +162,19 @@
   background-color: white
 }
 
+.questionSubmit {
+  cursor: pointer;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,0.5);
+  font-size: 15px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: white
+}
+
 .qShowMore:hover,
-.addQuestion:hover {
+.addQuestion:hover,
+.submit:hover,
+.questionSubmit:hover {
   box-shadow: rgba(42, 169, 27, 0.4) 5px 5px, rgba(42, 169, 27, 0.3) 10px 10px, rgba(42, 169, 27, 0.2) 15px 15px, rgba(42, 169, 27, 0.1) 20px 20px, rgba(42, 169, 27, 0.05) 25px 25px;
 }

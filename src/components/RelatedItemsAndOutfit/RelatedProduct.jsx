@@ -71,8 +71,8 @@ const RelatedProduct = (props) => {
 
      <button className="compare-btn" onClick={() => modalToggle === false ? setModalToggle(true) : setModalToggle(false) }>&#9734;</button>
      <Link to={`/items/${props.information[0].id}`}><img className="card-image" src={props.information[1]}/></Link>
-    <div>{props.information[0].category}</div>
-    <div>{props.information[0].name}</div>
+    <div style={{padding:'0 5px'}}>{props.information[0].category}</div>
+    <div style={{padding:'0 5px'}}> {props.information[0].name}</div>
     <StarRating rating={reviewRating}/>
 
     {modalToggle

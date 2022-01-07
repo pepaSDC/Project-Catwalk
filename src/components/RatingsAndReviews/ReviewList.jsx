@@ -24,8 +24,8 @@ export const ReviewList = (props) => {
       <SortOptions number={props.state.length}/>
       {reviews.map((review) => <Review key={review.review_id} review={review}/> )}
       <div>
-        {props.state.length > reviews.length ? <button onClick={clickHandler}>More Reviews</button> : null}
-        <button onClick={addReview}>Add A Review +</button>
+        {props.state.length > reviews.length ? <button className="normalButton" onClick={clickHandler}>More Reviews</button> : null}
+        <button className="normalButton" onClick={addReview}>Add A Review +</button>
         {modal ? <NewReview useNewReview={props.useNewReview} setModal={setModal} meta={props.meta}/> : null}
       </div>
     </div>

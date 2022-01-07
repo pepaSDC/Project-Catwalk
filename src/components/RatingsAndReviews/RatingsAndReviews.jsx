@@ -11,8 +11,8 @@ export const RatingsAndReviews = (props) => {
   let styleReviews = {
     width: 'auto',
     display: 'flex',
-    justifyContent: 'space-evenly',
-    margin: '0 20px'
+    justifyContent: 'space-between',
+    margin: '0'
   }
   let styleAside = {
     width: '30%',
@@ -42,8 +42,8 @@ export const RatingsAndReviews = (props) => {
 
   return (
     <div id="RatingsAndReviews">
-      <div className="reviewsModule" style={{margin: '30px'}}>
-        <h4 style={{paddingLeft: '30px'}}>RATINGS AND REVIEWS</h4>
+      <div className="reviewsModule">
+        <h4 style={{fontSize: '2vmin'}}>RATINGS AND REVIEWS</h4>
         <div style={styleReviews}>
           <div className="reviewsAside" style={styleAside}>
             <RatingBreakdown sorting={sorting} useSorting={useSorting} meta={meta} averageRating={averageRating} totalRatings={totalRatings}/>

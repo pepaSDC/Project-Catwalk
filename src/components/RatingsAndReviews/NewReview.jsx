@@ -39,7 +39,7 @@ export const NewReview = (props) => {
     maxWidth: '800px',
     width: '90vh',
     borderRadius: '5px',
-    maxHeight: '90vh',
+    maxHeight: '95vh',
     boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)',
     zIndex: '100'
   }
@@ -139,7 +139,7 @@ export const NewReview = (props) => {
           <div style={{float: 'right', fontSize: '12px'}}>{reviewBody.length >= 50 ? 'Minimum Reached' : `Minimum required characters left: ${50 - reviewBody.length}`} </div>
         </div>
         <div style={{borderBottom: '1px solid lightgray', padding: '10px', height: '100px'}}>
-          {file.length < 5 ? <button onClick={()=>showWidget(widget)}>Upload Photo</button> : null}
+          {file.length < 5 ? <button className="normalButton" onClick={()=>showWidget(widget)}>Upload Photo</button> : null}
           <div>
             {file.length !== 0 ? file.map(item => <img style={{height: '50px', margin: '10px'}} src={item} key={item}></img>) : null}
           </div>
@@ -157,7 +157,7 @@ export const NewReview = (props) => {
           </div>
         </div>
         <div style={{padding: '10px'}}>
-          <input type="submit" value="Submit Review"></input>
+          <button className="normalButton" type="submit" value="Submit Review">Submit Review</button>
         </div>
       </form>
       </div>

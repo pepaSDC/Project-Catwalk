@@ -10,7 +10,10 @@ let StyleShowcaseStyle = {
 
 let styleShowcaseRowStyle = {
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  marginTop: '9px',
+  marginBottom: '9px',
+  height: '60px'
 }
 
 export const StyleShowcase = () => {
