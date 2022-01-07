@@ -7,6 +7,7 @@ import axios from 'axios';
 
 export const Review = ({ review }) => {
   const MAX_LENGTH = 250;
+  const alt_image = 'https://www.sedistudio.com.au/wp-content/themes/sedi/assets/images/placeholder/placeholder.png';
 
   const style = {
     margin: '10px',
@@ -67,7 +68,7 @@ export const Review = ({ review }) => {
         ? review.photos.map((photo) => {
           return(
             <span key={photo.id}>
-              <img onClick={ ()=>useModal(photo.url) } src={photo.url} style={{maxWidth: '50px', maxHeight: '100px', width: '100%', height: '100%', objectFit:'cover' }}></img>
+              <img onClick={ ()=>useModal(photo.url) } src={photo.url} alt={alt_image} style={{maxWidth: '50px', maxHeight: '100px', width: '100%', height: '100%', objectFit:'cover' }}></img>
               { modal ? <PictureModal useModal={useModal} image={modal}/> : null }
             </span>
 

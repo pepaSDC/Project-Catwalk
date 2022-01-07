@@ -12,8 +12,8 @@ export const SortOptions = (props) => {
   const {getSort} = useContext(RatingsAndReviewsContext);
 
   const changeHandler = (event) => {
-    console.log(event.target.value);
     getSort(currentProductId, event.target.value);
+    props.setTiles(2);
   }
 
   return (

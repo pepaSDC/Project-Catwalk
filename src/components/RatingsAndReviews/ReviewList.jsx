@@ -21,7 +21,7 @@ export const ReviewList = (props) => {
 
   return (
     <div style={{width: '66%', height: '90vh', overflowY: 'auto', overflowX: 'hidden'}}>
-      <SortOptions number={props.state.length}/>
+      <SortOptions number={props.state.length} setTiles={setTiles} />
       {reviews.map((review) => <Review key={review.review_id} review={review}/> )}
       <div>
         {props.state.length > reviews.length ? <button className="normalButton" onClick={clickHandler}>More Reviews</button> : null}
