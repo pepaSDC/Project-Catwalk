@@ -10,12 +10,13 @@ const formStyle = {
 
 const iconStyle = {
   position: 'absolute',
-  right: '1%'
+  right: '2%'
 };
 
 const inputStyles = {
   minWidth: '100%',
-  minHeight: '30px'
+  minHeight: '50px',
+  fontSize: '15px'
 };
 
 const Search = (props) => {
