@@ -35,6 +35,13 @@ export const QA = () => {
     }
   });
 
+  const [focus, setFocus] = useState( () => {
+    return {
+      name: false,
+      email: false
+    };
+  });
+
   const sortQuestions = (response) => {
     let index = 0;
     let helpful = [];
@@ -114,8 +121,8 @@ export const QA = () => {
         .then(newData => {
           dataState.questions = newData.data.results;
           setState(dataState);
-          setModalView( (curState) => { return !curState; });
           setErrors( (curState) => ({body: true, name: true, email: true}));
+          setModalView(false);
         })
         .catch(error => {
           console.log(error.message);
@@ -175,14 +182,40 @@ export const QA = () => {
         }
       });
     };
+    if (name !== 'body') {
+      handleFocus(name);
+    };
+  };
+
+  const handleFocus = (name) => {
+    if (!focus[name]) {
+      setFocus( () => {
+        return {
+          ...focus,
+          [name]: true
+        };
+      });
+    };
+  };
+
+  const handleBlur = (event) => {
+    let name = event.target.getAttribute('name');
+    if (focus[name]) {
+      setFocus( () => {
+        return {
+          ...focus,
+          [name]: false
+        };
+      });
+    };
   };
 
   return (
-    <div style={container}>
+    <div style={container} id='QAs'>
       <div style={textStyle}>QUESTIONS & ANSWERS</div>
       <Search task={handleSearch}/>
       {state.questions
-        && <Questions found={filtered.found} questions={filtered.searching ? filtered.questions : state.questions} product_name={state.product_name} task={handleQuestionSubmit} errors={errors} view={modalView} handleView={handleAddQuestionView} handleError={handleErrorReset}/>
+        && <Questions found={filtered.found} questions={filtered.searching ? filtered.questions : state.questions} product_name={state.product_name} task={handleQuestionSubmit} errors={errors} view={modalView} handleView={handleAddQuestionView} handleError={handleErrorReset} handleBlur={handleBlur}focus={focus}/>
       }
     </div>
   );
