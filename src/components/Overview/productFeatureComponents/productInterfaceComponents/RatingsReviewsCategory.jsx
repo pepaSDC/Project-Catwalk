@@ -35,7 +35,7 @@ export const RatingsReviewsCategory = () => {
   const getReviewMeta = (id) => {
     return axios({
       method: 'GET',
-      url: `http://localhost:3000/reviews/meta/?product_id=${id}`
+      url: `/reviews/meta/?product_id=${id}`
     })
   }
 
