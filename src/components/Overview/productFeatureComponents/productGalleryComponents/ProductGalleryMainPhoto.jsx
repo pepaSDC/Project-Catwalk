@@ -55,6 +55,7 @@ export const ProductGalleryMainPhoto = () => {
   const leftButtonStyle = {
     display: 'flex',
     width: '25px',
+    height: '25px',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
   }
@@ -62,6 +63,7 @@ export const ProductGalleryMainPhoto = () => {
   const concealLeftButtonStyle = {
     display: 'flex',
     width: '25px',
+    height: '25px',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     opacity: '0'
@@ -70,6 +72,7 @@ export const ProductGalleryMainPhoto = () => {
   const rightButtonStyle = {
     display: 'flex',
     width: '25px',
+    height: '25px',
     position: 'relative',
     right: '28px',
   }
@@ -77,6 +80,7 @@ export const ProductGalleryMainPhoto = () => {
   const concealRightButtonStyle = {
     display: 'flex',
     width: '25px',
+    height: '25px',
     position: 'relative',
     right: '28px',
     opacity: '0'

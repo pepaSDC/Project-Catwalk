@@ -21,6 +21,7 @@ export const ImageModal = ( props ) => {
   const modalLeftButtonStyle = {
     display: 'flex',
     width: '50px',
+    height: '50px',
     // backgroundSize: 'cover',
     // backgroundRepeat: 'no-repeat'
   }
@@ -36,6 +37,7 @@ export const ImageModal = ( props ) => {
   const modalRightButtonStyle = {
     display: 'flex',
     width: '50px',
+    height: '50px',
     // position: 'relative',
     // right: '25px'
   }
