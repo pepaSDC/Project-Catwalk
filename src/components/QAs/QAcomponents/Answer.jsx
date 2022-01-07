@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './answerStyles.css';
+import ImageModal from './ImageModal.jsx';
 
 const Answer = (props) => {
   const [helpful, setHelpful] = useState( () => {
@@ -18,6 +19,13 @@ const Answer = (props) => {
   const random = (number) => {
     return Math.floor(Math.random() * number);
   }
+
+  const [imageModal, setImageModal] = useState( () => {
+    return {
+      view: false,
+      source: ''
+    };
+  });
 
   let date = new Date(props.answer.date);
   let dateInt = Date.parse(date);
@@ -53,6 +61,24 @@ const Answer = (props) => {
     }
   };
 
+  const handleImageClick = (event) => {
+    if (!imageModal.view) {
+      setImageModal( (curState) => {
+        return {
+          view: true,
+          source: event.target.src
+        };
+      });
+    } else {
+      setImageModal( (curState) => {
+        return {
+          view: false,
+          source: ''
+        };
+      });
+    };
+  };
+
   return (
     <div className='answer'>
       <div>
@@ -60,12 +86,13 @@ const Answer = (props) => {
           <div className='answerText'>
             {props.answer.body}
           </div>
-            {props.answer.photos.map(photo => {
-              if (typeof photo === 'object') {
-                photo = photo.url;
-              };
-              return <img key={random(dateInt)} src={photo} style={{height: '65px', width: '65px'}}></img>;
-            })}
+          {props.answer.photos.map(photo => {
+            if (typeof photo === 'object') {
+              photo = photo.url;
+            };
+            return <img key={random(dateInt)} src={photo} style={{height: '65px', width: '65px', cursor: 'pointer'}} onClick={handleImageClick}></img>;
+          })}
+          <ImageModal open={imageModal.view} image={imageModal.source} onClose={handleImageClick} />
           <div>
             <span className='user'>
               by {props.answer.answerer_name},
