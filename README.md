@@ -2,7 +2,7 @@
 Project Catwalk is a client-facing retail web-portal.
 
 <p align="center">
-  <img alt="app demo" src="client/demo.gif">
+  <img alt="app demo" src="./demo.gif">
 </p>
 
 JSON.package Dependencies:
