@@ -6,8 +6,6 @@ Project Catwalk is a client-facing retail web-portal. Our client asked us to upd
   <img alt="app demo" src="./demo.gif">
 </p>
 
-The website is separated into four different sections, each one spearheaded by each of our team members.
-
 ## Overview
 The overview showcases the product and its important information. It allows the user to browse through the different styles and pricing for the product, add it to their cart, and purchase it. Our goal was to make it easy for a user to look at and purchase the product, so we made it very simple to navigate through and use. We wanted to provide a big view of the product, while also showing off the other styles in smaller capacities with thumbnails. The user can also expand the featured photo for an even closer look. 
 
@@ -22,6 +20,6 @@ In this section, users can provide their feedback on the product. Building on th
 
 ### Technologies used:
 
-Setup/Configuration: Git, NPM, Webpack
-Front End: React, CSS, HTML, CSS
-Back End: Node.JS, Express.JS, AWS, Ubuntu
+<p> Setup/Configuration: Git, NPM, Webpack </p>
+<p> Front End: React, CSS, HTML, CSS </p>
+<p> Back End: Node.JS, Express.JS, AWS, Ubuntu </p>
