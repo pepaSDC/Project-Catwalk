@@ -28,7 +28,7 @@ let getQ = (page, count, id, callback) => {
   let tempans = {};
   pool.connect()
   .then(client => {
-    return client.query('SELECT question_id, question_body, question_date, asker_name, question_helpfulness, reported FROM questions WHERE product_id = $1 OFFSET $2 LIMIT $3', [id, (page-1)*count, count])
+    return client.query('SELECT question_id, question_body, question_date, asker_name, question_helpfulness, reported FROM questions WHERE product_id = $1 AND reported != 1 OFFSET $2 LIMIT $3', [id, (page-1)*count, count])
     .then(result => {
       result.rows.forEach(item => {
         if (item.reported) {
@@ -45,21 +45,20 @@ let getQ = (page, count, id, callback) => {
             answers.results.forEach(ans => {
               quest.answers[quest.question_id] = ans;
             })
-            // console.log('ans: ', answers);
             resolve(answers);
           }, true)
         })
       }))
       .then(() => {
         client.release();
-        callback(temp);
+        callback(null, temp);
       })
       .catch(err => {
         client.release();
-        console.log(err)
+        callback(err);
       })
     })
-    .catch(err => console.log('error querying questions: ', err))
+    .catch(err => callback(err));
   })
 }
 
@@ -68,7 +67,7 @@ let getA = (page, count, qid, callback, parent = false) => {
   transres.question = String(qid);
   transres.page = page;
   transres.count = count;
-  let query = parent ? 'SELECT answer_id AS id, body, date, answerer_name, answerer_email, helpful FROM answers WHERE question_id = $1 OFFSET $2 LIMIT $3' : 'SELECT answer_id, body, date, answerer_name, answerer_email, helpful FROM answers WHERE question_id = $1 OFFSET $2 LIMIT $3'
+  let query = parent ? 'SELECT answer_id AS id, body, date, answerer_name, answerer_email, helpful FROM answers WHERE question_id = $1 AND reported != 1 OFFSET $2 LIMIT $3' : 'SELECT answer_id, body, date, answerer_name, answerer_email, helpful FROM answers WHERE question_id = $1 AND reported != 1 OFFSET $2 LIMIT $3'
   pool.connect()
   .then(client => {
     return client.query(query, [qid, (page-1)*count, count])
@@ -87,11 +86,12 @@ let getA = (page, count, qid, callback, parent = false) => {
           })
         })
       }))
-      .then(() => callback(transres));
+      .then(() => callback(null, transres))
+      .catch(err => callback(err))
     })
     .catch(err => {
       client.release()
-      console.log(err);
+      callback(err);
     })
   })
 }
@@ -102,10 +102,10 @@ let getAP = (aid, callback) => {
     return client.query('SELECT url FROM answers_photos WHERE answer_id = $1', [aid])
     .then(result => {
       client.release()
-      callback(result.rows)
+      callback(null, result.rows)
     })
     .catch(err => {
-      console.log(err.stack)
+      callback(err);
     })
   })
 }
@@ -117,16 +117,16 @@ let postQ = (body, name, email, product_id, callback) => {
     return client.query('INSERT INTO questions (product_id, question_body, question_date, asker_name, asker_email) VALUES ($1, $2, $3, $4, $5)', [product_id, body, date, name, email])
     .then(result => {
       client.release();
-      callback(result);
+      callback(null, result);
     })
     .catch(err => {
       client.release();
-      console.log(err);
+      callback(err);
     })
   })
 }
 
-postA = (body, name, email, photos, question_id, callback) => {
+let postA = (body, name, email, photos, question_id, callback) => {
   let date = new Date();
   pool.connect()
   .then(client => {
@@ -146,8 +146,69 @@ postA = (body, name, email, photos, question_id, callback) => {
       Promise.all(photos)
       .then(res => {
         client.release();
-        callback(res);
+        callback(null, res);
       })
+      .catch(err => callback(err));
+    })
+  })
+}
+
+let helpQ = (qid, callback) => {
+  pool.connect()
+  .then(client => {
+    return client.query('UPDATE questions SET question_helpfulness = question_helpfulness + 1 WHERE question_id = $1', [qid])
+    .then(res => {
+      client.release();
+      callback(null, res);
+    })
+    .catch(err => {
+      client.release();
+      callback(err);
+    });
+  })
+}
+
+let reportQ = (qid, callback) => {
+  pool.connect()
+  .then(client => {
+    return client.query('UPDATE questions SET reported = 1 WHERE question_id = $1 AND reported = 0', [qid])
+    .then(res => {
+      client.release()
+      callback(null, res)
+    })
+    .catch(err => {
+      client.release()
+      callback(err);
+    })
+  })
+}
+
+let helpA = (aid, callback) => {
+  pool.connect()
+  .then(client => {
+    return client.query('UPDATE answers SET answer_helpfulness = answer_helpfulness + 1 WHERE answer_id = $1', [aid])
+    .then(res => {
+      client.release();
+      callback(res);
+    })
+    .catch(err => {
+      client.release();
+      console.log(err);
+    });
+  })
+}
+
+let reportA = (aid, callback) => {
+  pool.connect()
+  .then(client => {
+    return client.query('UPDATE answers SET reported = 1 WHERE answer_id = $1 AND reported = 0', [qid])
+    .then(res => {
+      client.release()
+      callback(null, res)
+    })
+    .catch(err => {
+      client.release()
+      callback(err);
     })
   })
 }
@@ -156,7 +217,10 @@ module.exports = {
   getQ,
   getA,
   getAP,
-  postQ
+  postQ,
+  postA,
+  helpQ,
+  helpA,
+  reportQ,
+  reportA
 }
-
-postA('notgain', 'notgain', 'notgain@gain.com', ['link1', 'link2'], 1, console.log);

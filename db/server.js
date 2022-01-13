@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/questions', QA);
+app.use('/qa', QA);
 
 
 let port = 3001;
